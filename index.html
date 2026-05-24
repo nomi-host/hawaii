@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<title>2026 하와이여행 🌺</title>
+<style>
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{background:#F5F5F5;font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;font-size:14px;color:#111}
+.app{max-width:640px;margin:0 auto;min-height:100vh;background:#F5F5F5}
+/* HERO */
+.hero{background:#fff;padding:22px 20px 18px;border-bottom:1px solid #EFEFEF}
+.eyebrow{font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#0066FF;margin-bottom:5px}
+.htitle{font-size:25px;font-weight:800;letter-spacing:-0.8px;line-height:1.15}
+.hdate{font-size:11px;color:#9CA3AF;margin-top:4px}
+.hero-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.badge{background:#EEF3FF;color:#0066FF;font-size:11px;font-weight:700;padding:6px 13px;border-radius:12px;text-align:center;line-height:1.5;white-space:nowrap;flex-shrink:0}
+/* FLIGHTS */
+.flights{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+.fc{border-radius:14px;padding:11px 13px;position:relative;overflow:hidden}
+.fc.ke{background:#C4E7FF;border:1px solid #A8D8F8}
+.fc.ha{background:#DEDEDE;border:1px solid #C8C8C8}
+.fc-ci{position:absolute;top:8px;right:8px;width:30px;height:30px;border-radius:50%;overflow:hidden}
+.fc-lbl{font-size:9px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:4px;padding-right:36px}
+.fc.ke .fc-lbl{color:#0052B0}.fc.ha .fc-lbl{color:#5A3080}
+.fc-route{font-size:13px;font-weight:700}
+.fc.ke .fc-route{color:#003080}.fc.ha .fc-route{color:#2A2A2A}
+.fc-time{font-size:11px;font-weight:700;margin-top:3px}
+.fc.ke .fc-time{color:#0052B0}.fc.ha .fc-time{color:#4A1DB5}
+.fc-sub{font-size:10px;margin-top:1px}
+.fc.ke .fc-sub{color:#5A7FA0}.fc.ha .fc-sub{color:#6A6A6A}
+.fc-conf{font-size:10px;font-weight:700;margin-top:3px}
+.fc.ke .fc-conf{color:#003080}.fc.ha .fc-conf{color:#4A1DB5}
+/* TABS */
+.tabs{background:#fff;display:flex;position:sticky;top:0;z-index:200;border-bottom:1.5px solid #EFEFEF;padding:5px 6px;gap:4px}
+.tbtn{flex:1;padding:10px 0;font-size:12px;font-weight:500;color:#B8B8B8;background:none;border:none;border-radius:10px;cursor:pointer;font-family:inherit;transition:all .15s;line-height:1}
+.tbtn.on{background:#0066FF;color:#fff;font-weight:700}
+/* LAYOUT */
+.pad{padding:12px}
+.gap{display:flex;flex-direction:column;gap:8px}
+.card{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 1px 6px rgba(0,0,0,.05)}
+/* SCHEDULE */
+.todo-card{background:#fff;border-radius:18px;padding:13px 16px;box-shadow:0 1px 6px rgba(0,0,0,.05)}
+.todo-lbl{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#EF4444;margin-bottom:8px}
+.chips{display:flex;flex-wrap:wrap;gap:5px}
+.todo-add{display:flex;gap:6px;margin-top:14px}
+.chip{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;padding:5px 10px;background:#FFF5F5;color:#EF4444;border-radius:99px;border:1px solid #FED7D7}
+.chip-del{cursor:pointer;font-size:10px;color:#FCA5A5;padding:0 2px}
+.legend{background:rgba(243,244,246,.6);border-radius:10px;padding:7px 12px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.leg-item{display:flex;align-items:center;gap:5px;font-size:10px;color:#9CA3AF}
+.leg-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.isl-row{display:flex;align-items:center;gap:8px;padding:8px 4px 6px}
+.isl-pill{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;padding:4px 12px;border-radius:99px;flex-shrink:0}
+.isl-rule{flex:1;height:1px;background:#EBEBEB}
+.dh{display:flex;align-items:center;gap:11px;padding:14px 16px;cursor:pointer;user-select:none}
+.demo{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;background:#F5F5F5}
+.dm{flex:1;min-width:0}
+.dlbl{font-size:10px;color:#9CA3AF;font-weight:500}
+.dttl{font-size:14px;font-weight:700;margin-top:2px;line-height:1.3}
+.dweather{font-size:11px;color:#6B7280;margin-top:3px}
+.chev{font-size:10px;color:#CACACA;transition:transform .2s;flex-shrink:0}
+.chev.op{transform:rotate(180deg)}
+.dbody{border-top:1px solid #F5F5F5;padding:10px 16px 14px}
+.warn{background:rgba(254,243,199,.8);border:1px solid #FDE68A;border-radius:10px;padding:8px 12px;margin-bottom:8px;font-size:11px;color:#92400E;line-height:1.55}
+.act{display:flex;gap:10px;padding:6px 0;border-bottom:1px solid #F7F7F7;align-items:flex-start}
+.act:last-of-type{border-bottom:none}
+.adot{width:5px;height:5px;border-radius:50%;background:#D1D5DB;margin-top:7px;flex-shrink:0}
+.adot.blue{background:#0066FF}.adot.shop{background:#F59E0B}.adot.ret{background:#C5C5C5}
+.abody{flex:1;min-width:0}
+.atxt{font-size:13px;font-weight:500;line-height:1.45}
+.atxt.ret-txt{color:#B0B0B0;font-weight:400}
+.ainfo{font-size:10px;color:#5B8FCC;margin-top:2px;line-height:1.4;font-style:italic}
+.anote{font-size:11px;color:#9CA3AF;margin-top:2px;line-height:1.4}
+.apark{font-size:10px;color:#6B7280;margin-top:2px}
+.tran{background:#F3F4F6;margin:2px -16px;padding:7px 16px;display:flex;align-items:center;gap:6px;font-size:11px;color:#6B7280}
+.rest-box{margin-top:10px;background:#F7F8FA;border-radius:12px;padding:11px 12px;border:1px solid #EFEFEF}
+.rlbl{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#9CA3AF;margin-bottom:7px}
+.rrow{display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:1px solid #EFEFEF;gap:8px}
+.rrow:last-child{border-bottom:none}
+.rname{font-size:12px;font-weight:600}.rtype{font-size:10px;color:#9CA3AF;margin-top:1px}
+.mbtn{font-size:10px;color:#0066FF;font-weight:700;text-decoration:none;padding:4px 10px;background:#EEF3FF;border-radius:8px;white-space:nowrap;flex-shrink:0}
+/* PACKING */
+.psect{background:#fff;border-radius:18px;padding:14px 16px;box-shadow:0 1px 6px rgba(0,0,0,.05)}
+.pshd{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.psttl{font-size:13px;font-weight:700}.pcnt{font-size:11px;color:#9CA3AF}
+.pgrid{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:5px}
+.pi{display:flex;align-items:center;gap:7px;padding:8px 10px;background:#fff;border-radius:10px;cursor:pointer;border:1.5px solid #EBEBEB;transition:all .12s;user-select:none;min-width:0}
+.pi.done{background:#EFF6FF;border-color:#BFDBFE}
+.picb{width:16px;height:16px;border-radius:5px;border:1.5px solid #D1D5DB;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:9px;color:#fff}
+.pi.done .picb{background:#0066FF;border-color:#0066FF}
+.pitxt{font-size:12px;font-weight:500;color:#333;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pi.done .pitxt{color:#0066FF;text-decoration:line-through}
+.pi-del{font-size:9px;color:#D1D5DB;cursor:pointer;padding:2px;flex-shrink:0}
+.pi-del:active{color:#EF4444}
+.pack-add{display:flex;gap:6px;margin-top:8px}
+.pack-input{flex:1;font-size:12px;padding:8px 12px;border-radius:10px;border:1.5px solid #E5E7EB;background:#F7F8FA;outline:none;font-family:inherit}
+.pack-input:focus{border-color:#0066FF;background:#fff}
+.pack-addbtn{font-size:11px;font-weight:700;padding:8px 14px;background:#0066FF;color:#fff;border:none;border-radius:10px;cursor:pointer;white-space:nowrap;font-family:inherit}
+/* BUDGET */
+.bhero{background:#fff;border-radius:18px;padding:20px;box-shadow:0 1px 6px rgba(0,0,0,.05)}
+.bh-lbl{font-size:10px;color:#9CA3AF;letter-spacing:1px;text-transform:uppercase;font-weight:500;margin-bottom:6px}
+.bh-amt{font-size:28px;font-weight:800;letter-spacing:-1px;color:#0066FF}
+.bh-sub{font-size:11px;color:#9CA3AF;margin-top:3px}
+.bh-badge{background:#EEF3FF;color:#0066FF;font-size:11px;font-weight:700;padding:6px 14px;border-radius:12px;text-align:center;line-height:1.5}
+.pax2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+.pax2c{border-radius:14px;padding:13px;border:1px solid #EFEFEF}
+.p2n{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#9CA3AF;margin-bottom:4px}
+.p2a{font-size:15px;font-weight:800}
+.p2s{font-size:10px;color:#9CA3AF;margin-top:2px}
+.settle{background:#EFF6FF;border-radius:12px;padding:11px 13px;margin-top:8px;display:flex;align-items:center;gap:8px}
+.settle-txt{font-size:12px;color:#1E40AF;font-weight:500;line-height:1.5}
+.settle-amt{font-weight:800;color:#0066FF}
+.bsect{background:#fff;border-radius:18px;padding:14px 16px;box-shadow:0 1px 6px rgba(0,0,0,.05)}
+.bslbl{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#9CA3AF;margin-bottom:10px}
+.brow{display:flex;align-items:flex-start;justify-content:space-between;padding:9px 0;border-bottom:1px solid #F5F5F5;gap:8px}
+.brow:last-child{border-bottom:none}
+.brl{flex:1;min-width:0}.brname{font-size:13px;font-weight:600}
+.brsub{font-size:10px;color:#9CA3AF;margin-top:2px}
+.brr{text-align:right;flex-shrink:0}
+.bramt{font-size:13px;font-weight:700}
+.brusd{font-size:10px;color:#9CA3AF;margin-top:1px}
+.ptag{font-size:9px;font-weight:700;padding:2px 7px;border-radius:99px;margin-top:3px;display:inline-block}
+.cashcard{background:linear-gradient(135deg,#0052FF,#338AFF);border-radius:18px;padding:20px;color:#fff;box-shadow:0 4px 16px rgba(0,82,255,.25)}
+.ccl{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.55)}
+.cca{font-size:24px;font-weight:800;letter-spacing:-.5px;margin:8px 0 4px}
+.ccn{font-size:11px;color:rgba(255,255,255,.65);line-height:1.6}
+.ccrow{display:flex;justify-content:space-between;padding:6px 0;border-top:1px solid rgba(255,255,255,.12);font-size:11px;color:rgba(255,255,255,.65)}
+.ccrow span:last-child{font-weight:700;color:#fff}
+/* TIPS */
+.tip-sect{background:#fff;border-radius:18px;box-shadow:0 1px 6px rgba(0,0,0,.05);overflow:hidden}
+.tip-hd{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;cursor:pointer;user-select:none}
+.tip-hd-left{}
+.tip-ttl{font-size:13px;font-weight:700}
+.tip-sub{font-size:10px;color:#9CA3AF;margin-top:2px}
+.tip-chev{font-size:11px;color:#9CA3AF;transition:transform .2s;flex-shrink:0}
+.tip-chev.op{transform:rotate(180deg)}
+.tip-body{border-top:1px solid #F5F5F5;padding:8px 16px 14px}
+.tip-item{padding:9px 0;border-bottom:1px solid #F5F5F5}
+.tip-item:last-of-type{border-bottom:none}
+.ti-head{display:flex;align-items:flex-start;gap:8px}
+.ti-ico{font-size:13px;flex-shrink:0;margin-top:1px}
+.ti-body-inner{flex:1}
+.ti-txt{font-size:12px;color:#333;line-height:1.55}
+.ti-acts{display:flex;gap:4px;margin-top:4px}
+.ti-btn{font-size:10px;padding:3px 8px;border-radius:7px;border:1px solid #E5E7EB;background:#F7F8FA;color:#6B7280;cursor:pointer;font-family:inherit}
+.ti-btn.del{color:#EF4444;border-color:#FED7D7;background:#FFF5F5}
+.ti-ta{width:100%;font-size:12px;padding:8px 10px;border-radius:10px;border:1.5px solid #0066FF;background:#EEF3FF;outline:none;font-family:inherit;resize:vertical;min-height:64px;margin-top:6px;line-height:1.5}
+/* ENGLISH */
+.eng-sect{margin-bottom:12px}
+.eng-hd{font-size:11px;font-weight:700;color:#0066FF;margin-bottom:6px;padding-bottom:5px;border-bottom:1.5px solid #EEF3FF}
+.eng-item{padding:7px 0;border-bottom:1px solid #F5F5F5}
+.eng-item:last-child{border-bottom:none}
+.eng-phrase{font-size:12px;font-weight:700}
+.eng-tr{font-size:11px;color:#6B7280;margin-top:2px}
+.eng-note{font-size:10px;color:#0066FF;margin-top:1px;font-weight:500}
+.hawaii-word{display:flex;align-items:flex-start;gap:8px;padding:8px 10px;background:#F7F8FA;border-radius:10px;margin:4px 0}
+.hw-word{font-size:13px;font-weight:800;color:#0066FF;min-width:110px;flex-shrink:0}
+.hw-def{font-size:12px;color:#333;line-height:1.5}
+a{color:#0066FF}
+
+</style>
+</head>
+<body>
+<div class="app">
+  <noscript>
+<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:80vh;padding:40px;text-align:center;font-family:-apple-system,sans-serif;background:#F5F5F5">
+  <div style="font-size:48px;margin-bottom:20px">⚠️</div>
+  <div style="font-size:20px;font-weight:700;color:#111;margin-bottom:12px">Safari에서 열어야 합니다</div>
+  <div style="font-size:14px;color:#555;line-height:1.7;margin-bottom:24px">
+    파일 앱에서 탭하면 QuickLook으로 열려<br>JavaScript가 실행되지 않아요.
+  </div>
+  <div style="background:#fff;border-radius:16px;padding:20px 24px;text-align:left;max-width:300px;box-shadow:0 2px 12px rgba(0,0,0,.08)">
+    <div style="font-size:13px;font-weight:700;color:#0066FF;margin-bottom:10px">여는 방법</div>
+    <div style="font-size:13px;color:#333;line-height:1.9">
+      1️⃣ 화면 우측 하단 <strong>공유(↑) 버튼</strong><br>
+      2️⃣ <strong>"Safari에서 열기"</strong> 선택<br>
+      <br>
+      <span style="color:#22C55E;font-weight:700">홈 화면 아이콘으로 저장하려면:</span><br>
+      3️⃣ Safari에서 공유 버튼<br>
+      4️⃣ <strong>"홈 화면에 추가"</strong>
+    </div>
+  </div>
+</div>
+</noscript>
+  <div id="H"></div>
+  <div id="T" class="tabs"></div>
+  <div id="C" class="pad"></div>
+</div>
+<script>
+
+var R=1550;
+function u2k(d){return Math.round(d*R);}
+function fmt(n){return n.toLocaleString();}
+function krw(n){return "\u20a9"+fmt(n);}
+
+const initPack=()=>PACK_INIT.map(s=>({cat:s.cat,items:s.items.map((it,i)=>({
+  ...it, id:`b_${s.cat}_${i}`, done:false, open:true,
+  children:it.children?it.children.map((c,j)=>({...c,id:`b_${s.cat}_${i}_${j}`,done:false})):undefined,
+}))}));
+const DEF_TODOS=["유심/로밍","다이아몬드헤드 D-30 예약!","쿠알로아랜치 랩터","여행자보험"];
+const FLIGHTS=[
+  {label:"인천 출발",   route:"ICN → HNL", time:"21:05 → 10:35",   sub:"KE053 · 대한항공 · 8h 30m · 5/28",   airline:"ke", conf:"EJ35G3"},
+  {label:"코나 도착",   route:"HNL → KOA", time:"13:10 → 14:01",   sub:"AS 1108 · 하와이안항공 · 5/28",       airline:"ha", conf:"WDLXHU"},
+  {label:"오아후 이동", route:"KOA → HNL", time:"14:06 → 14:57",   sub:"AS 1087 · 하와이안항공 · 6/1",       airline:"ha", conf:"WDLXHU"},
+  {label:"귀국",       route:"HNL → ICN", time:"13:05 → 17:45+1", sub:"KE054 · 대한항공 · 9h 40m · 6/5",    airline:"ke", conf:"EJ35G3"},
+];
+const SCHED=[
+  {island:"빅아일랜드",pillBg:"#EEF3FF",pillTxt:"#0066FF",days:[
+    {emoji:"✈️",date:"5월 28일 목",title:"도착 · 코나 탐방",weather:{emoji:"⛅",desc:"29°C · 구름 개고 맑음 · 스노클링 최적"},
+     acts:[
+      {t:"10:35 HNL 도착 · 환승 준비 (AS1108 13:10 탑승)",n:"수하물 픽업 → 출국장 이동"},
+      {t:"14:01 코나 공항(KOA) 도착",n:"셔틀: 터미널 밖 'Rental Car Shuttle' 표지판 앞 (10분 간격) → SIXT 렌터카 픽업"},
+      {t:"Walmart / KTA Superstores 장보기",tran:{dist:"3km",time:"약 5분"},park:"🅿 매장 내 무료"},
+      {t:"카할루우 비치 스노클링",tran:{dist:"10km",time:"약 15분"},type:"main",info:"코나 최고 스노클링 포인트, 수심 1–3m · 거북이 다수 서식",n:"방수팩 필수",park:"🅿 비치 맞은편 무료 (20대 한정)"},
+      {t:"코나 시내 알리이 드라이브 산책",tran:{dist:"4km",time:"약 8분"},info:"코나 역사 중심지, 부두·카페·기념품 밀집",park:"🅿 공영 $1–2/hr"},
+      {t:"🛍 Kings' Shops & Queens' MarketPlace",tran:{dist:"33km",time:"약 35분"},type:"shop",info:"힐튼 와이콜로아 옆 야외 쇼핑몰 — 로컬 브랜드·레스토랑",park:"🅿 단지 내 무료"},
+      {t:"매직샌드 비치 석양 감상",tran:{dist:"34km",time:"약 35분"},type:"main",info:"코나 대표 일몰 명소 · 파도에 따라 모래가 사라졌다 나타남",park:"🅿 도로변 갓길 무료 (한정)"},
+      {t:"힐튼 와이콜로아 빌리지 체크인",tran:{dist:"2km",time:"약 5분"},type:"ret"},
+     ],
+     rests:[
+      {name:"Umeke's Fish Market",type:"포케볼 · 코나 대표 맛집",map:"https://maps.google.com/?q=Umeke%27s+Fish+Market+Kona"},
+      {name:"Daylight Mind Coffee",type:"오션뷰 브런치 카페",map:"https://maps.google.com/?q=Daylight+Mind+Coffee+Kona"},
+      {name:"Jackie Rey's Ohana Grill",type:"하와이안 아메리칸 다이닝",map:"https://maps.google.com/?q=Jackie+Rey%27s+Ohana+Grill+Kona"},
+     ]},
+    {emoji:"🔭",date:"5월 29일 금",title:"북부 드라이브 · 마우나케아",weather:{emoji:"☀️",desc:"코나 29°C · 마우나케아 정상 4°C — 방한복 필수"},
+     acts:[
+      {t:"힐튼 출발"},
+      {t:"포케·무스비 픽업 — 케아우호우 KTA 마트 or Umeke's",tran:{dist:"25km",time:"약 28분"},n:"투스텝비치 주변 식당 없음 — 이동 전 반드시 식사 준비",park:"🅿 KTA 마트 무료"},
+      {t:"투스텝 비치 스노클링",tran:{dist:"18km",time:"약 25분"},type:"main",
+       info:"호나우나우 만 용암 계단 입수 · 거북이·열대어 풍부 · 중급 이상 권장",
+       n:"⚠ 입수: 바위 계단에서 직접 · 파도 강할 때 금지 · 샤워실 없음 · 화장실 인근 주립공원 · 편의시설 없음",
+       park:"🅿 갓길 무료 (매우 한정)"},
+      {t:"폴로루 밸리 전망대",tran:{dist:"95km",time:"약 1시간 20분"},type:"main",info:"빅아일랜드 북단 절벽 전망대 · 비·안개 잦음",park:"🅿 전망대 앞 소규모 무료"},
+      {t:"와이메아 타운 점심 & 쇼핑",tran:{dist:"38km",time:"약 40분"},info:"목장 지대 마을 · 카우보이 문화"},
+      {t:"마우나케아 비지터 센터 (2,800m) — 30분 이상 휴식 필수",tran:{dist:"37km",time:"약 55분"},type:"main",
+       info:"고도 적응 필수 · 정상(4,205m)까지 4WD 필요",
+       n:"⚠ 고산병 증상(두통·구역·어지러움) 있으면 정상 포기 · 물·초콜릿 충분히",
+       park:"🅿 비지터센터 무료"},
+      {t:"마우나케아 정상 — 선셋 & 별관측",tran:{dist:"14km",time:"약 40분"},type:"main",info:"세계 최고 천문대 밀집 · 구름 위 일몰 절경",park:"🅿 정상부 무료"},
+      {t:"힐튼 와이콜로아 복귀",tran:{dist:"65km",time:"약 1시간 10분"},type:"ret"},
+     ],
+     rests:[
+      {name:"Merriman's Waimea",type:"Farm-to-table · 고급 다이닝",map:"https://maps.google.com/?q=Merriman%27s+Waimea+Hawaii"},
+      {name:"Village Burger Waimea",type:"수제버거 · 현지인 맛집",map:"https://maps.google.com/?q=Village+Burger+Waimea+Hawaii"},
+      {name:"Kohala Burger & Burritos",type:"캐주얼 · 가성비",map:"https://maps.google.com/?q=Kohala+Burger+and+Burritos+Hawaii"},
+     ]},
+    {emoji:"⚫",date:"5월 30일 토",title:"블랙샌드 · 힐로 탐방",weather:{emoji:"🌦",desc:"코나 29°C / 힐로 26°C · 동쪽 이동 시 소나기 가능 — 우비 챙길 것"},
+     warn:"⚠️ 총 주행 약 350km · 순수 운전 7시간 이상. 7:00am 이른 출발 필수. 그린샌드는 도보(왕복 8km·2.5hr) 대신 현지 지프 택시($15–20/인) 강력 권장. 시간 부족 시 아카카 폭포·오네카하카하 비치는 포기.",
+     acts:[
+      {t:"힐튼 이른 출발 (7:00 권장)"},
+      {t:"푸나루우 블랙샌드 비치",tran:{dist:"80km",time:"약 1시간 30분"},type:"main",info:"하와이 대표 검은 모래 해변 · 녹색 바다거북 낮잠 서식지",n:"거북이 6피트 이내 접근 금지 · $10,000 벌금",park:"🅿 비치 입구 무료"},
+      {t:"사우스포인트 (Ka Lae) — 미국 최남단",tran:{dist:"20km",time:"약 25분"},type:"main",info:"미국 최남단 · 강한 바람이 특징",park:"🅿 포장 끝 무료 (비포장 10km)"},
+      {t:"그린샌드 비치 (파파코레아)",tran:{dist:"8km",time:"약 30분 비포장"},info:"감람석(페리도트) 성분 올리브그린 모래 · 세계 희귀 비치",n:"⚠ 지프 택시($15–20) 권장 (도보 왕복 8km·2.5hr)"},
+      {t:"다운타운 힐로 · 힐로 파머스 마켓",tran:{dist:"82km",time:"약 1시간 15분"},type:"main",info:"토요일 7am–3pm · 하와이 최대 파머스마켓",park:"🅿 Mamo St 인근 무료 노상주차"},
+      {t:"수이산 피시 마켓",info:"1906년부터 운영 · 힐로 최고 신선 해산물·포케",park:"🅿 마켓 앞 무료"},
+      {t:"와이루쿠 리버 주립공원 — 레인보우 폭포 & 보일링 팟",tran:{dist:"4km",time:"약 8분"},type:"main",info:"오전 햇빛에 무지개 형성 · 용암 항아리 지형",park:"🅿 레인보우 폭포 앞 무료"},
+      {t:"아카카 폭포 주립공원",tran:{dist:"15km",time:"약 20분"},type:"main",info:"높이 135m 하와이 최대 단일 폭포 · 산책로 1마일",n:"입장료 $5/인 · 도보 약 20분",park:"🅿 공원 내 무료"},
+      {t:"오네카하카하 비치공원",tran:{dist:"18km",time:"약 25분"},info:"용암 방파제 보호 천연 수영장 · 수영 안전",park:"🅿 비치 앞 무료"},
+      {t:"🛍 Big Island Candies",n:"마카다미아 초콜릿 · 무료 시식",type:"shop",park:"🅿 매장 앞 무료"},
+      {t:"🛍 Sig Zane Designs",tran:{dist:"4km",time:"약 8분"},type:"shop",info:"하와이 문화 패턴 의류 · 힐로 본점",park:"🅿 도로변 무료"},
+      {t:"힐튼 와이콜로아 복귀",tran:{dist:"130km",time:"약 2시간"},type:"ret"},
+     ],
+     rests:[
+      {name:"Cafe Pesto Hilo",type:"파스타·피자 · 힐로 현지 명소",map:"https://maps.google.com/?q=Cafe+Pesto+Hilo+Hawaii"},
+      {name:"Two Ladies Kitchen",type:"모찌 · 힐로 명물 디저트",map:"https://maps.google.com/?q=Two+Ladies+Kitchen+Hilo+Hawaii"},
+      {name:"Poke to the Maxx",type:"포케볼 · 힐로 맛집",map:"https://maps.google.com/?q=Poke+to+the+Maxx+Hilo+Hawaii"},
+     ]},
+    {emoji:"🌋",date:"5월 31일 일",title:"하와이 화산국립공원 (하루종일)",weather:{emoji:"🌫",desc:"화산 지역 20–24°C · 아침 안개·구름 잦음 — 우비·방한 레이어 필수"},
+     acts:[
+      {t:"힐튼 이른 출발 (7:00 권장)"},
+      {t:"도시락·간식 픽업 — 케아우호우 KTA",tran:{dist:"25km",time:"약 28분"},n:"공원 내 식당 거의 없음 · 물·간식 충분히",park:"🅿 KTA 마트 무료"},
+      {t:"킬라우에아 이키 트레일 (도보 필수)",tran:{dist:"75km",time:"약 1시간 15분"},type:"main",
+       info:"1959년 분화한 분화구 바닥 하이킹 · 뜨거운 지열 느껴짐",
+       n:"왕복 4마일(6.4km) · 1.5–2시간 · 트레일화 필수",park:"🅿 전망대 주차장 무료"},
+      {t:"Kilauea Overlook & 할레마우마우 분화구 (차+도보)",info:"현재 활동 중인 분화구 · 야간 적광 관측 가능"},
+      {t:"Steam Vents · Sulphur Banks (차+도보 5분)",info:"지열 증기 분출 구멍 · 유황 냄새"},
+      {t:"Keanakako'i Overlook (야간 분화 포인트)",info:"일몰 후 용암빛 분화구 야경 명소"},
+      {t:"Chain of Craters Road 드라이브 (차량)",type:"main",info:"분화구→해안 19마일 하강 드라이브 · 전 구간 차로 감상"},
+      {t:"홀레이 씨아치 (차+도보 0.5마일)",info:"용암이 바다에 만든 자연 아치",park:"🅿 Chain of Craters Road 끝 무료"},
+      {t:"볼케이노 와이너리 (선택)",info:"공원 인근 · 하와이 로컬 와인 시음",park:"🅿 와이너리 앞 무료"},
+      {t:"힐튼 와이콜로아 복귀",tran:{dist:"100km",time:"약 1시간 40분"},type:"ret"},
+     ],
+     rests:[
+      {name:"Lava Rock Cafe",type:"공원 근처 브런치 카페",map:"https://maps.google.com/?q=Lava+Rock+Cafe+Volcano+Hawaii"},
+      {name:"Thai Thai Restaurant",type:"타이음식 · 볼케이노 마을",map:"https://maps.google.com/?q=Thai+Thai+Restaurant+Volcano+Hawaii"},
+      {name:"Cafe Ohia",type:"현지 카페 브런치",map:"https://maps.google.com/?q=Cafe+Ohia+Volcano+Hawaii"},
+     ]},
+  ]},
+  {island:"오아후",pillBg:"#F3F0FF",pillTxt:"#6D28D9",days:[
+    {emoji:"🏝️",date:"6월 1일 월",title:"이동일 · 와이키키 도착",weather:{emoji:"☀️",desc:"코나 29°C → 호놀룰루 30°C · 맑고 쾌청"},
+     acts:[
+      {t:"힐튼 체크아웃 → SIXT 렌터카 반납"},
+      {t:"14:06 KOA → HNL (AS 1087)",n:"14:57 도착 · 확인번호 WDLXHU"},
+      {t:"알로힐라니 리조트 체크인",n:"당일 렌터카 없음 — 도보·우버 이용"},
+      {t:"와이키키 비치 & 칼라카우아 애비뉴 산책",info:"오아후 대표 해변 · 저녁 불꽃놀이 금~토"},
+      {t:"🛍 International Market Place",type:"shop",info:"야외 쇼핑몰 · Kith·Stüssy·럭셔리 브랜드"},
+      {t:"🛍 Royal Hawaiian Center",type:"shop",info:"무료 훌라·레이 만들기 체험"},
+      {t:"🛍 DFS T Galleria Waikiki",type:"shop",info:"면세 쇼핑 · 출국 전 활용"},
+     ],
+     rests:[
+      {name:"Marukame Udon",type:"우동 · 줄서는 가성비 맛집",map:"https://maps.google.com/?q=Marukame+Udon+Waikiki"},
+      {name:"Rainbow Drive-In",type:"로컬 플레이트런치 · 현지 명물",map:"https://maps.google.com/?q=Rainbow+Drive-In+Honolulu"},
+      {name:"Duke's Waikiki",type:"오션뷰 하와이안 씨푸드",map:"https://maps.google.com/?q=Duke%27s+Waikiki+Honolulu"},
+     ]},
+    {emoji:"🗺️",date:"6월 2일 화 (렌터카 호텔 픽업)",title:"72번 국도 · 남동부 드라이브",weather:{emoji:"⛅",desc:"30°C · 무역풍 시원 · 동부 해안 간간이 구름"},
+     acts:[
+      {t:"렌터카 픽업 — 알로힐라니 호텔 (SIXT)",n:"3일간 이용 시작"},
+      {t:"라나이 전망대 → 할로나 블로우홀",tran:{dist:"18km",time:"약 25분"},type:"main",info:"라나이: 오아후 남동부 파노라마 · 블로우홀: 해수 분출 용암 구멍",park:"🅿 할로나 전망대 무료"},
+      {t:"샌디 비치 → 마카푸 등대 트레일",tran:{dist:"4km",time:"약 7분"},type:"main",info:"마카푸: 오아후 동남단 절경 · 고래 시즌 전망",n:"왕복 3.5km · 약 1시간",park:"🅿 마카푸 비치 무료"},
+      {t:"벨로우즈 필드 → 래니카이 → 카일루아 비치",tran:{dist:"8km",time:"약 12분"},type:"main",info:"래니카이: 투명도 최고 · 카일루아: 카약 명소",park:"🅿 카일루아 비치 공원 무료"},
+      {t:"호오말루히아 식물원",tran:{dist:"5km",time:"약 10분"},info:"코올라우 산맥 배경 무료 식물원",park:"🅿 식물원 내 무료"},
+      {t:"탄탈루스 전망대 선셋",tran:{dist:"25km",time:"약 35분"},type:"main",info:"와이키키·호놀룰루 야경 명소",park:"🅿 전망대 앞 소규모 무료"},
+      {t:"알로힐라니 복귀",tran:{dist:"10km",time:"약 20분"},type:"ret"},
+     ],
+     rests:[
+      {name:"Boots & Kimo's Homestyle",type:"마카다미아 팬케이크 · 카일루아 맛집",map:"https://maps.google.com/?q=Boots+and+Kimo%27s+Kailua"},
+      {name:"Kalapawai Market Kailua",type:"샌드위치·커피 · 현지인 카페",map:"https://maps.google.com/?q=Kalapawai+Market+Kailua"},
+      {name:"Agnes' Portuguese Bake",type:"로컬 베이커리 · 카일루아",map:"https://maps.google.com/?q=Agnes+Portuguese+Bake+Shop+Kailua"},
+     ]},
+    {emoji:"🌊",date:"6월 3일 수 (렌터카)",title:"83번 국도 · 노스쇼어 & 쿠알로아랜치",weather:{emoji:"☀️",desc:"30°C · 대체로 맑음 · 스노클링 최적 조건"},
+     warn:"⏱ 타이밍: 돌(8:30오픈) + 샤크스코브 2시간 + 쿠알로아 2:45 도착 목표. 권장: 7:30 출발 → 돌(8:30–9:00) → 와이메아베이 → 샤크스코브 9:50–11:50 → 점심 → 선셋비치 → Matsumoto → 라니아케아 → 쿠알로아 ~2:20 도착 ✓",
+     acts:[
+      {t:"알로힐라니 출발 (7:30 권장)"},
+      {t:"🛍 돌 파인애플 플랜테이션 (H2 경유)",tran:{dist:"40km",time:"약 40분"},type:"shop",info:"파인애플 아이스크림·기념품 · 오전 방문 필수",n:"8:30am 오픈 · 7:30 출발 시 8:10 도착, 20분 대기",park:"🅿 플랜테이션 내 무료"},
+      {t:"와이메아 베이 (Waimea Bay)",tran:{dist:"15km",time:"약 15분"},info:"노스쇼어 대표 파도 명소 · 여름 잔잔할 때 스노클링 가능",park:"🅿 베이 앞 무료 (이른 도착 필수)"},
+      {t:"샤크스코브 스노클링 (2시간 이상 예정)",tran:{dist:"3km",time:"약 5분"},type:"main",
+       info:"오아후 북부 최고 스노클링 · 열대어·바다거북 풍부",
+       n:"⚠ 여름(5–9월) 파도 잔잔 최적 · 화장실·샤워실 있음(Pupukea Beach Park) · 수심 3–9m 중급",
+       park:"🅿 Pupukea Beach Park 무료"},
+      {t:"선셋 비치 파크",tran:{dist:"5km",time:"약 8분"},info:"세계적 서핑 대회 개최지 · 여름엔 수영 가능",park:"🅿 비치 앞 갓길 무료"},
+      {t:"Matsumoto Shave Ice",tran:{dist:"5km",time:"약 8분"},info:"빙수 원조 · 70년 역사 노포",park:"🅿 할레이와 타운 무료"},
+      {t:"라니아케아 비치 — 야생 거북이",tran:{dist:"5km",time:"약 8분"},type:"main",info:"오전~정오 거북이 낮잠 · 자원봉사자 상주",park:"🅿 도로변 갓길 무료"},
+      {t:"쿠알로아 랜치 — 2:45pm 도착 필수",tran:{dist:"38km",time:"약 40분"},type:"main",info:"쥬라기 공원 촬영지 · 계곡·바다 파노라마",park:"🅿 구내 무료"},
+      {t:"쿠알로아 랜치 랩터 체험 (3:30pm, 약 90분)",type:"main",n:"klook 예약 확인 · 2:45pm까지 체크인"},
+      {t:"알로힐라니 복귀 (H3 고속도로)",tran:{dist:"50km",time:"약 45분"},type:"ret"},
+     ],
+     rests:[
+      {name:"Giovanni's Shrimp Truck",type:"새우트럭 원조 · 노스쇼어 명물",map:"https://maps.google.com/?q=Giovanni%27s+Shrimp+Truck+Haleiwa"},
+      {name:"Matsumoto Shave Ice",type:"빙수 원조 · 줄 필수",map:"https://maps.google.com/?q=Matsumoto+Shave+Ice+Haleiwa"},
+      {name:"Ted's Bakery",type:"바나나 브레드·파이 · 노스쇼어 명물",map:"https://maps.google.com/?q=Ted%27s+Bakery+Sunset+Beach+Hawaii"},
+     ]},
+    {emoji:"💎",date:"6월 4일 목 (렌터카 호텔 반납)",title:"다이아몬드헤드 & 와이키키 쇼핑",weather:{emoji:"☀️",desc:"30°C · 맑고 화창 · 트레킹은 이른 아침 권장"},
+     acts:[
+      {t:"다이아몬드헤드 트레일 ✅ 6:00–7:00am",tran:{dist:"4km",time:"약 10분"},type:"main",info:"18만 년 전 화산 분화구 · 정상 360° 와이키키 파노라마",n:"✅ 예약완료 $11.27/인 · 왕복 3km · 1.5h · 일출 직후 가장 선선",park:"🅿 공원 내 무료 (예약 포함)"},
+      {t:"호놀룰루 미술관",tran:{dist:"6km",time:"약 12분"},type:"main",info:"1927년 개관 · 하와이 최대 미술관 · 현대미술·동양미술",n:"입장료 $20/인 · 월요일 휴관",park:"🅿 미술관 옆 무료"},
+      {t:"🛍 Ala Moana Center",tran:{dist:"5km",time:"약 10분"},type:"shop",info:"미국 최대 야외 쇼핑몰 350+ 점포 · Lululemon·Chanel·Tiffany",park:"🅿 4,000대 무료"},
+      {t:"🛍 Alo Yoga Waikiki",type:"shop",info:"330 Royal Hawaiian Ave · 럭셔리 요가웨어 플래그십"},
+      {t:"🛍 Kith Honolulu",type:"shop",info:"International Market Place 내 · 하와이 한정 컬렉션"},
+      {t:"🛍 Stüssy Honolulu",type:"shop",info:"서프/스케이트 스트릿 브랜드"},
+      {t:"🛍 Reyn Spooner",type:"shop",info:"프리미엄 하와이안 셔츠 · 1956년 창립"},
+      {t:"🛍 Ward Village & Kaka'ako 벽화 거리",tran:{dist:"4km",time:"약 8분"},type:"shop",info:"트렌디 로컬 숍·카페 · 대형 벽화들",park:"🅿 Ward Village 무료 2시간"},
+      {t:"이올라니 궁전",info:"하와이 왕국 마지막 궁전 · 1882년 완공",park:"🅿 인근 유료"},
+      {t:"매직아일랜드 비치 석양",info:"알라모아나 비치 파크 끝 · 와이키키 파노라마"},
+      {t:"🛍 Longs Drugs / Target — 마지막 기념품",type:"shop"},
+      {t:"렌터카 반납 — 알로힐라니 호텔 (SIXT)",type:"ret"},
+     ],
+     rests:[
+      {name:"Eggs 'n Things",type:"팬케이크 · 와이키키 유명 맛집",map:"https://maps.google.com/?q=Eggs+n+Things+Waikiki"},
+      {name:"Liliha Bakery",type:"코코퍼프 · 현지 베이커리 명물",map:"https://maps.google.com/?q=Liliha+Bakery+Honolulu"},
+      {name:"Nico's at Pier 38",type:"항구 씨푸드 · 현지인 맛집",map:"https://maps.google.com/?q=Nico%27s+Pier+38+Honolulu"},
+     ]},
+    {emoji:"🛫",date:"6월 5일 금",title:"귀국 — 13:05 출발",weather:{emoji:"☀️",desc:"29°C · 맑음 · 공항 이동"},
+     acts:[
+      {t:"알로힐라니 체크아웃 (10:00 이전)"},
+      {t:"공항 이동 — 우버·택시",n:"13:05 출발 → 10:00 공항 도착 권장"},
+      {t:"13:05 HNL → ICN (KE054 · 대한항공)",n:"6/6 17:45 인천 도착 · 9h 40m · EJ35G3"},
+     ],
+     rests:[]},
+  ]},
+];
+const PACK_INIT=[
+  {cat:"기내 캐리", items:[
+    {t:"여권"},
+    {t:"사본", children:[{t:"호텔"},{t:"투어"},{t:"렌터카"},{t:"항공"},{t:"ESTA"}]},
+    {t:"면허증"},{t:"신용카드"},{t:"트래블월렛 카드"},{t:"현금"},
+    {t:"세안파우치"},{t:"목베개"},{t:"에어팟"},{t:"비행귀"},{t:"충전기"},{t:"보조배터리"},{t:"손풍기"},
+  ]},
+  {cat:"의류 & 신발", items:[
+    {t:"반팔티 3"},{t:"반바지 2"},{t:"긴 여름바지"},{t:"긴바지"},{t:"셔츠 2"},{t:"바람막이"},{t:"경량패딩 & 비니"},
+    {t:"캡모자"},{t:"챙 넓은 모자"},{t:"속옷 & 잠옷"},{t:"양말"},{t:"샌들"},{t:"운동화"},
+  ]},
+  {cat:"액티비티 & 수영", items:[
+    {t:"수영복 2"},{t:"래시가드"},{t:"스노클링 장비"},{t:"수영가방"},{t:"오리발"},{t:"구명조끼"},
+    {t:"비치볼"},{t:"비치타올"},{t:"돗자리"},{t:"방수 파우치"},{t:"팔토시"},{t:"헤어밴드"},{t:"아쿠아슈즈"},
+  ]},
+  {cat:"화장품 & 위생", items:[
+    {t:"기초화장품"},{t:"팩"},{t:"알로에젤"},{t:"선크림 (리프세이프)"},{t:"선크림"},
+    {t:"샴푸"},{t:"클렌징로션"},{t:"클렌징폼"},{t:"치약 & 칫솔"},{t:"컨디셔너"},
+    {t:"면봉 & 화장솜"},{t:"메이크업"},{t:"바디워시"},{t:"바디로션"},{t:"헤어오일"},{t:"헤어롤 & 빗"},
+  ]},
+  {cat:"의약품", items:[
+    {t:"영양제"},
+    {t:"개인약", children:[{t:"안약"},{t:"먹는 약"}]},
+    {t:"비상약", children:[{t:"소화제"},{t:"두통약"},{t:"반창고·후시딘"},{t:"비판텐"},{t:"입술포진연고"},{t:"고산병약"}]},
+    {t:"프리볼트 찜질팩"},{t:"파스"},
+  ]},
+  {cat:"전자기기 & 잡화", items:[
+    {t:"돼지코 (어댑터)"},{t:"유심 또는 로밍"},{t:"보냉가방"},{t:"텀블러"},{t:"선글라스"},
+    {t:"충전기"},{t:"아이패드"},{t:"안경 (은지)"},{t:"우양산"},{t:"보조가방 (큰 것)"},{t:"베개"},{t:"책"},{t:"실내용 슬리퍼"},
+  ]},
+];
+const PAID=[
+  {name:"대한항공 (국제선)",sub:"KE053/KE054 · ICN↔HNL · EJ35G3",krw:1697000,payer:"공금",pc:{bg:"#EEF3FF",tc:"#0066FF"}},
+  {name:"하와이안항공 (국내선)",sub:"AS1108/AS1087 · HNL↔KOA · WDLXHU",krw:u2k(369.90),usd:369.90,payer:"은지",pc:{bg:"#FCE7F3",tc:"#DB2777"}},
+  {name:"힐튼 와이콜로아 4박",sub:"5/28–6/1 · agoda",krw:1503680,payer:"은지",pc:{bg:"#FCE7F3",tc:"#DB2777"}},
+  {name:"알로힐라니 리조트 4박",sub:"6/1–6/5 · agoda",krw:1527193,payer:"노미",pc:{bg:"#FEF3C7",tc:"#B45309"}},
+  {name:"SIXT 빅아일랜드",sub:"렌터카 · 후불",krw:u2k(366.77),usd:366.77,payer:"은지",pc:{bg:"#FCE7F3",tc:"#DB2777"}},
+  {name:"SIXT 오아후",sub:"렌터카 · 6/2–4 · 호텔 픽업반납",krw:u2k(123.63),usd:123.63,payer:"은지",pc:{bg:"#FCE7F3",tc:"#DB2777"}},
+  {name:"비자 신청",sub:"$40.27/인",krw:u2k(40.27),usd:40.27,payer:"각자",pc:{bg:"#F0FDF4",tc:"#15803D"}},
+  {name:"다이아몬드헤드 입장권",sub:"6/4 6:00–7:00am · 2인 예약완료",krw:u2k(11.27*2),usd:22.54,payer:"은지",pc:{bg:"#FCE7F3",tc:"#DB2777"}},
+];
+const PENDING=[
+  {name:"유심/로밍",sub:"출국 전 설정 필요",amt:"미정"},
+  {name:"쿠알로아랜치 랩터",sub:"klook",amt:"미정"},
+  {name:"여행자보험",sub:"출국 전",amt:"미정"},
+];
+const ONSITE=[
+  {name:"리조트 피",sub:"빅아일랜드 ₩277,000 + 오아후 ₩400,000",amt:krw(677000),usd:"~$436"},
+  {name:"주차비",sub:"빅아일랜드 $48×5 + 알로힐라니 $50×3 + 일정 $40",amt:`~${krw(u2k(430))}`,usd:"~$430"},
+  {name:"국내선 수하물",sub:"$30 × 4개",amt:`~${krw(u2k(120))}`,usd:"~$120"},
+  {name:"식비",sub:"$120/일 × 9일",amt:`~${krw(u2k(1080))}`,usd:"~$1,080"},
+  {name:"기름값",sub:"렌터카 주유",amt:`~${krw(u2k(270))}`,usd:"~$270"},
+  {name:"입장료",sub:"화산 $35 + 미술관 $20 + 아카카 $5 (다이아 별도확정)",amt:`~${krw(u2k(60))}`,usd:"~$60"},
+  {name:"공동 쇼핑·기념품",sub:"",amt:`~${krw(u2k(200))}`,usd:"~$200"},
+];
+const TIPS_T=[
+  {id:1,ico:"⛽",txt:"주유: 셀프 주유소 신용카드 → Zip Code 입력란에 '00000'. 안 되면 카운터 현금. 주유 전 캡 위치 확인."},
+  {id:2,ico:"🚗",txt:"속도: 하이웨이 55mph(88km/h), 도심 25–35mph. 과속 카메라 많음. 교차로 정지 후 확인."},
+  {id:3,ico:"🅿️",txt:"주차: 호텔 발렛 $1–2 팁 필수. 미터기는 신용카드·앱(Honolulu Parking). 무료 주차 명소 사전 구글맵 확인."},
+  {id:5,ico:"🚌",txt:"오아후 TheBus: 현금 $3 (거스름돈 없음) · HOLO 카드 구매 권장. 구글맵 대중교통 모드로 경로 검색 가능."},
+  {id:7,ico:"🛣️",txt:"빅아일랜드 이동거리: 코나↔힐로 3시간, 코나↔화산국립공원 2.5시간. 이른 출발 필수."},
+  {id:8,ico:"🚦",txt:"오아후 정체: 출근 6:30–9:00am (H1·도심), 퇴근 3:30–6:30pm (H1·교외). 와이키키 주말 낮도 혼잡. 7:30am 전 출발 또는 9:30am 이후 권장. H3·H2가 H1보다 소통 원활."},
+];
+const TIPS_L=[
+  {id:1,ico:"💵",txt:"팁 기준: 식당 18–20%, 바·카페 10–15%, 스파·마사지 20%, 호텔 벨보이·발렛 $2–3, 투어 가이드 $10–20/인."},
+  {id:2,ico:"🐢",txt:"거북이(Honu): 연방법 보호종. 6피트(1.8m) 이내 접근·접촉 금지. 위반 시 $10,000+ 벌금. 먼저 다가와도 피할 것."},
+  {id:3,ico:"🌿",txt:"일회용 플라스틱: 비닐백·일회용 컵 사용 제한. 에코백·텀블러 지참 추천."},
+  {id:4,ico:"🕐",txt:"레스토랑 대기: 유명 맛집 1–2시간 기본. Yelp Waitlist 앱으로 원격 대기 등록 활용."},
+  {id:5,ico:"💧",txt:"수돗물: 하와이 수돗물 마실 수 있음. 보틀 지참으로 플라스틱 줄이기."},
+  {id:7,ico:"🌋",txt:"화산 분화 현황 — USGS HVO: https://www.usgs.gov/volcanoes/kilauea (실시간·웹캠) · 앱: VolcanoDiscovery (iOS/Android 무료) · SNS: @hawaiivolcanoesnps. 방문 전날 필수 확인."},
+];
+const TIPS_SNORKEL=[
+  {id:2,ico:"🌀",txt:"해류(Rip Current · 리프 컷): 리프 컷(Reef Cut)은 빠른 해류 구간. 끌려가면 해안과 평행하게 수영 후 빠져나올 것. 흰 거품 없는 틈새 구간은 특히 주의."},
+  {id:7,ico:"⚠️",txt:"투스텝비치(빅아일랜드): 바위 계단에서 직접 입수. 파도 강할 때 금지. 샤워실 없음. 편의시설 없어 식음료 필수 지참."},
+  {id:8,ico:"⚠️",txt:"샤크스코브(오아후): 여름(5–9월) 파도 잔잔 최적. 화장실·샤워실 있음(Pupukea Beach Park). 수심 3–9m 중급 이상."},
+];
+const ENG={
+  rentalcar:[
+    {p:"I'd like to pick up my reservation.",t:"예약 픽업하러 왔어요.",n:"이름·예약번호 함께 제시"},
+    {p:"Can I decline the additional insurance?",t:"추가 보험은 거절할게요.",n:"신용카드 보험 커버 시"},
+    {p:"Is there any existing damage I should note?",t:"기존 차량 손상이 있나요?"},
+    {p:"Where's the fuel door release?",t:"연료 캡 레버가 어디 있나요?"},
+    {p:"Can I get a full-to-full fuel option?",t:"풀탱크 옵션 있나요?"},
+    {p:"Can I extend the rental by one day?",t:"하루 연장 가능한가요?"},
+  ],
+  hotel:[
+    {p:"Could we get an ocean view room?",t:"오션뷰 룸으로 주실 수 있나요?"},
+    {p:"Is late checkout available?",t:"레이트 체크아웃 가능한가요?"},
+    {p:"The A/C isn't working properly.",t:"에어컨이 제대로 안 돼요."},
+    {p:"Can we get extra towels / pillows?",t:"타올/베개 더 주실 수 있나요?"},
+    {p:"Is the resort fee already included?",t:"리조트 피 포함된 금액인가요?"},
+    {p:"Any good restaurant recommendations nearby?",t:"근처 괜찮은 식당 추천해 주실 수 있나요?"},
+  ],
+  restaurant:[
+    {p:"A table for two, please.",t:"2인 자리 부탁드려요."},
+    {p:"What's your most popular dish?",t:"가장 인기 있는 메뉴가 뭔가요?"},
+    {p:"Is the tip included?",t:"팁이 포함된 가격인가요?"},
+    {p:"Can we split the check?",t:"계산서 따로 받을 수 있나요?"},
+    {p:"Could we get this to go?",t:"포장해 주실 수 있나요?"},
+    {p:"I'm allergic to shellfish / nuts.",t:"조개류/견과류 알레르기가 있어요."},
+  ],
+  activity:[
+    {p:"Where are the life jackets?",t:"구명조끼가 어디 있나요?"},
+    {p:"Is this area safe for snorkeling?",t:"이 구역 스노클링해도 안전한가요?"},
+    {p:"How difficult is this trail?",t:"이 트레일 난이도가 어떻게 되나요?"},
+    {p:"We have a reservation under Kim.",t:"Kim 이름으로 예약했어요."},
+    {p:"Is the park / trail open today?",t:"오늘 공원/트레일 개방됐나요?"},
+  ],
+  customs:[
+    {p:"What's the purpose of your visit?",          t:"방문 목적이 무엇인가요?",           n:"→ Tourism. / Sightseeing."},
+    {p:"How long will you be staying?",              t:"얼마나 체류하실 예정인가요?",         n:"→ Nine days. Leaving June 5th."},
+    {p:"Where will you be staying?",                 t:"어디에 머무실 건가요?",             n:"→ Hilton Grand Vacations in Waikoloa on the Big Island, then Alohilani Resort in Waikiki."},
+    {p:"Are you traveling alone?",                   t:"혼자 여행하시나요?",               n:"→ No, I'm traveling with a friend."},
+    {p:"Do you have anything to declare?",           t:"신고할 물품이 있나요?",             n:"→ No, I don't."},
+    {p:"Did you visit a farm or bring any food?",    t:"농장을 방문했거나 음식물을 가져왔나요?", n:"→ No."},
+    {p:"Do you have more than $10,000 in cash?",     t:"현금 $10,000 이상 소지하고 있나요?",  n:"→ No."},
+  ],
+};
+const CBP_FIELDS=[
+  {label:"Country of Citizenship",   value:"Republic of Korea"},
+  {label:"Country of Residence",     value:"Republic of Korea"},
+  {label:"Airline / Flight No.",     value:"KOREAN AIR  KE053"},
+  {label:"City where you boarded",   value:"Seoul, South Korea  (ICN)"},
+  {label:"City where CBP is checked",value:"Honolulu, Hawaii  (HNL)"},
+  {label:"U.S. Address — Hotel",     value:"Hilton Grand Vacations Club Ocean Tower"},
+  {label:"Street Address",           value:"69-425 Waikoloa Beach Drive"},
+  {label:"City / State / ZIP",       value:"Waikoloa Village,  HI  96738"},
+  {label:"(2nd stay after 6/1)",     value:"Alohilani Resort Waikiki Beach"},
+  {label:"Street Address",           value:"2490 Kalakaua Ave"},
+  {label:"City / State / ZIP",       value:"Honolulu,  HI  96815"},
+  {label:"Primary Purpose",          value:"Tourism / Vacation"},
+  {label:"Carrying > $10,000",       value:"No"},
+  {label:"Commercial merchandise",   value:"No"},
+  {label:"Food / Plants / Animals",  value:"No"},
+  {label:"Total value of goods",     value:"기념품 포함 $800 이하면 무신고 가능"},
+];
+const HAWAII_WORDS=[
+  {word:"Aloha",           def:"안녕·안녕히가세요·사랑·평화. 가장 중요한 하와이 단어."},
+  {word:"Mahalo",          def:"감사합니다. 어디서나 써도 환영 받음."},
+  {word:"Shaka 🤙",        def:"엄지·새끼 손가락을 편 손동작. 감사·긍정·여유 표현."},
+  {word:"Howzit?",         def:"How is it? = 어떻게 지내요? 현지인 일상 인사말."},
+  {word:"Pau hana",        def:"퇴근 후 happy hour. 'Pau' = 끝."},
+  {word:"'Ono grinds",     def:"완전 맛있어! ('ono = 맛있다, grinds = 음식)"},
+];
+
+/* ── helpers ── */
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function linkify(s){return esc(s).replace(/https?:\/\/[^\s<]+/g,function(u){return '<a href="'+u+'" target="_blank">'+u+'</a>';});}
+function keSVG(i){return '<svg viewBox="0 0 40 40" width="30" height="30" style="display:block"><circle cx="20" cy="20" r="20" fill="#003597"/><g transform="rotate(45 20 20)"><clipPath id="kc'+i+'"><circle cx="20" cy="20" r="17"/></clipPath><g clip-path="url(#kc'+i+')"><path fill="white" d="M20 3A17 17 0 0 1 20 37A8.5 8.5 0 0 1 20 20A8.5 8.5 0 0 0 20 3Z"/><circle cx="20" cy="11.5" r="4.2" fill="#003597"/><circle cx="20" cy="28.5" r="4.2" fill="white"/></g></g></svg>';}
+function haSVG(i){var p=[0,72,144,216,288].map(function(a){return '<g transform="rotate('+a+' 20 21)"><ellipse cx="20" cy="12.5" rx="3.8" ry="7.2" fill="white" opacity=".9"/></g>';}).join('');return '<svg viewBox="0 0 40 40" width="30" height="30" style="display:block"><defs><radialGradient id="hg'+i+'" cx="35%" cy="28%" r="75%"><stop offset="0%" stop-color="#FF1B8D"/><stop offset="55%" stop-color="#7B2FBE"/><stop offset="100%" stop-color="#2A0EA0"/></radialGradient></defs><circle cx="20" cy="20" r="20" fill="url(#hg'+i+')"/>'+p+'<circle cx="20" cy="21" r="3.8" fill="white" opacity=".95"/><circle cx="20" cy="21" r="2.2" fill="#FF3D7F"/></svg>';}
+
+/* ── packing colors ── */
+var CAT_BG={'기내 캐리':'#F9F9F9','의류 & 신발':'#EEF3FF','액티비티 & 수영':'#F0FFF4','화장품 & 위생':'#FFF0F6','의약품':'#FFFBEB','전자기기 & 잡화':'#F3F0FF'};
+
+/* ── state ── */
+var TAB=0;
+var OPEN_DAYS={};
+var OPEN_TIPS={tr:0,li:0,sn:0,en:0,cu:0,cb:0,hw:0};
+var EDIT_TIP=null;
+var todos=[].concat(DEF_TODOS);
+var sects=initPack();
+var tr=TIPS_T.map(function(x){return Object.assign({},x);});
+var li=TIPS_L.map(function(x){return Object.assign({},x);});
+var sn=TIPS_SNORKEL.map(function(x){return Object.assign({},x);});
+
+/* ── localStorage ── */
+function save(){try{localStorage.setItem('hw26',JSON.stringify({todos:todos,sects:sects,tr:tr,li:li,sn:sn}));}catch(e){}}
+function load(){
+  try{
+    var d=JSON.parse(localStorage.getItem('hw26')||'null');
+    if(!d)return;
+    if(d.todos)todos=d.todos;
+    if(d.sects)sects=d.sects;
+    if(d.tr)tr=d.tr;
+    if(d.li)li=d.li;
+    if(d.sn)sn=d.sn;
+  }catch(e){}
+}
+
+/* ── hero ── */
+function hero(){
+  var cards=FLIGHTS.map(function(f,i){
+    return '<div class="fc '+f.airline+'"><div class="fc-ci">'+(f.airline==='ke'?keSVG(i):haSVG(i))+'</div>'
+      +'<div class="fc-lbl">'+esc(f.label)+'</div>'
+      +'<div class="fc-route">'+esc(f.route)+'</div>'
+      +'<div class="fc-time">'+esc(f.time)+'</div>'
+      +'<div class="fc-sub">'+esc(f.sub)+'</div>'
+      +(f.conf?'<div class="fc-conf">#'+f.conf+'</div>':'')
+      +'</div>';
+  }).join('');
+  return '<div class="hero"><div class="hero-top">'
+    +'<div><div class="eyebrow">Travel Planner</div>'
+    +'<div class="htitle">2026<br>하와이여행</div>'
+    +'<div class="hdate">5/28 (목) — 6/5 (금) &nbsp;\u00b7&nbsp; 은지 &amp; 노미</div></div>'
+    +'<div class="badge">빅아일랜드 4박<br>오아후 4박</div></div>'
+    +'<div class="flights">'+cards+'</div></div>';
+}
+function renderTabs(){
+  var tabs=['🗓 일정','🎒 준비물','💰 예산','💡 팁'];
+  document.getElementById('T').innerHTML=tabs.map(function(t,i){
+    return '<button class="tbtn'+(TAB===i?' on':'')+'" onclick="setTab('+i+')">'+t+'</button>';
+  }).join('');
+}
+
+/* ── schedule ── */
+function scheduleHTML(){
+  var h='<div class="gap">';
+  h+='<div class="todo-card">'
+    +'<div class="todo-lbl">예약 남은 것</div>'
+    +'<div class="chips">'
+    +todos.map(function(c,i){return '<span class="chip">'+esc(c)+'<span class="chip-del" onclick="delTodo('+i+')">✕</span></span>';}).join('')
+    +'</div>'
+    +'<div class="todo-add">'
+    +'<input class="pack-input" id="tdInp" placeholder="항목 추가..." onkeydown="if(event.key===\'Enter\'){addTodo(this.value);this.value=\'\'}">'
+    +'<button class="pack-addbtn" onclick="var e=document.getElementById(\'tdInp\');addTodo(e.value);e.value=\'\'">+ 추가</button>'
+    +'</div>'
+    +'</div>';
+  h+='<div class="legend">'
+    +'<span class="leg-item"><span class="leg-dot" style="background:#0066FF"></span> 주요</span>'
+    +'<span class="leg-item"><span class="leg-dot" style="background:#F59E0B"></span> 쇼핑</span>'
+    +'<span class="leg-item"><span class="leg-dot" style="background:#C5C5C5"></span> 복귀</span>'
+    +'<span class="leg-item" style="margin-left:auto;font-size:9px">📍 이동거리</span>'
+    +'</div>';
+  SCHED.forEach(function(isle,ii){
+    h+='<div class="isl-row"><span class="isl-pill" style="background:'+isle.pillBg+';color:'+isle.pillTxt+'">'+isle.island+'</span><div class="isl-rule"></div></div>';
+    isle.days.forEach(function(day,di){
+      var key=ii+'_'+di;
+      var open=OPEN_DAYS[key]===true; /* 기본 닫힘 */
+      var wea=day.weather?'<div class="dweather">'+day.weather.emoji+' '+esc(day.weather.desc)+'</div>':'';
+      var body='';
+      if(open){
+        if(day.warn)body+='<div class="warn">'+esc(day.warn)+'</div>';
+        day.acts.forEach(function(a){
+          if(a.tran)body+='<div class="tran">📍 <span style="font-weight:500">'+esc(a.tran.dist)+' · '+esc(a.tran.time)+'</span></div>';
+          var dc=a.type==='shop'?' shop':a.type==='main'?' blue':a.type==='ret'?' ret':'';
+          body+='<div class="act"><div class="adot'+dc+'"></div><div class="abody">'
+            +'<div class="atxt'+(a.type==='ret'?' ret-txt':'')+'">' +esc(a.t)+'</div>'
+            +(a.info?'<div class="ainfo">'+esc(a.info)+'</div>':'')
+            +(a.n?'<div class="anote">'+esc(a.n)+'</div>':'')
+            +(a.park?'<div class="apark">'+esc(a.park)+'</div>':'')
+            +'</div></div>';
+        });
+        if(day.rests&&day.rests.length){
+          body+='<div class="rest-box"><div class="rlbl">근처 맛집</div>';
+          day.rests.forEach(function(r){
+            body+='<div class="rrow"><div><div class="rname">'+esc(r.name)+'</div><div class="rtype">'+esc(r.type)+'</div></div><a href="'+r.map+'" target="_blank" class="mbtn">지도 →</a></div>';
+          });
+          body+='</div>';
+        }
+      }
+      h+='<div class="card">'
+        +'<div class="dh" onclick="toggleDay(\''+key+'\')">'
+        +'<div class="demo">'+day.emoji+'</div>'
+        +'<div class="dm"><div class="dlbl">'+esc(day.date)+'</div>'
+        +'<div class="dttl">'+esc(day.title)+'</div>'+wea+'</div>'
+        +'<span class="chev'+(open?' op':'')+'">▼</span>'
+        +'</div>'
+        +(open?'<div class="dbody">'+body+'</div>':'')
+        +'</div>';
+    });
+  });
+  return h+'</div>';
+}
+
+/* ── packing ── */
+function packingHTML(){
+  var h='<div class="gap">';
+  sects.forEach(function(s){
+    var tot=0,dn=0;
+    s.items.forEach(function(it){
+      if(it.children){it.children.forEach(function(c){tot++;if(c.done)dn++;});}
+      else{tot++;if(it.done)dn++;}
+    });
+    var bg=CAT_BG[s.cat]||'#fff';
+    h+='<div class="psect" style="background:'+bg+'">'
+      +'<div class="pshd"><div class="psttl">'+esc(s.cat)+'</div><div class="pcnt">'+dn+'/'+tot+'</div></div>';
+    var grp=[];
+    function flushGrp(){if(grp.length){h+='<div class="pgrid">'+grp.join('')+'</div>';grp=[];}}
+    s.items.forEach(function(it){
+      var cc=JSON.stringify(s.cat),ck=JSON.stringify(it.id);
+      if(it.children!==undefined){
+        flushGrp();
+        var dc=it.children.filter(function(c){return c.done;}).length;
+        h+='<div style="margin-bottom:5px">'
+          +'<div style="display:flex;align-items:center;gap:8px;padding:7px 12px;background:#EEF3FF;border-radius:10px;cursor:pointer" onclick="toggleGrp('+cc+','+ck+')">'
+          +'<span style="font-size:10px;color:#0066FF;display:inline-block;transform:'+(it.open!==false?'rotate(90deg)':'rotate(0deg)')+'">▶</span>'
+          +'<span style="font-size:12px;font-weight:700;color:#0066FF;flex:1">'+esc(it.t)+'</span>'
+          +'<span style="font-size:10px;color:#9CA3AF">'+dc+'/'+it.children.length+'</span>'
+          +'</div>';
+        if(it.open!==false){
+          h+='<div style="padding-left:10px;padding-top:4px;display:flex;flex-direction:column;gap:4px">';
+          it.children.forEach(function(c){
+            var cd=JSON.stringify(c.id);
+            h+='<div class="pi'+(c.done?' done':'')+'" style="border-radius:8px" onclick="chkChild('+cc+','+ck+','+cd+')">'
+              +'<div class="picb">'+(c.done?'✓':'')+'</div>'
+              +'<div class="pitxt">'+esc(c.t)+'</div>'
+              +'<span class="pi-del" onclick="event.stopPropagation();delChild('+cc+','+ck+','+cd+')">✕</span>'
+              +'</div>';
+          });
+          h+='</div>';
+        }
+        h+='</div>';
+      } else {
+        grp.push('<div class="pi'+(it.done?' done':'')+'" onclick="chkItem('+cc+','+ck+')">'
+          +'<div class="picb">'+(it.done?'✓':'')+'</div>'
+          +'<div class="pitxt">'+esc(it.t)+'</div>'
+          +'<span class="pi-del" onclick="event.stopPropagation();delItem('+cc+','+ck+')">✕</span>'
+          +'</div>');
+      }
+    });
+    flushGrp();
+    var sid='pi_'+s.cat.replace(/\W/g,'_');
+    h+='<div class="pack-add">'
+      +'<input class="pack-input" id="'+sid+'" placeholder="항목 추가..." onkeydown="if(event.key===\'Enter\'){addItem('+JSON.stringify(s.cat)+',this.value);this.value=\'\'}">'
+      +'<button class="pack-addbtn" onclick="var el=document.getElementById(\''+sid+'\');addItem('+JSON.stringify(s.cat)+',el.value);el.value=\'\'">+ 추가</button>'
+      +'</div>';
+    h+='</div>';
+  });
+  h+='<div style="font-size:10px;color:#9CA3AF;padding:0 4px 8px">탭 = 체크/해제 · ✕ = 삭제</div>';
+  return h+'</div>';
+}
+
+/* ── budget ── */
+function budgetHTML(){
+  var eP=u2k(369.90)+1503680+u2k(366.77)+u2k(123.63);
+  var nP=1527193+u2k(22.54)+u2k(324.5),gP=1697000,tF=eP+nP+gP;
+  var tO=677000+u2k(430+120+1080+270+60+200);
+  var grand=tF+tO;
+  var h='<div class="gap">';
+  h+='<div class="bhero">'
+    +'<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px">'
+    +'<div><div class="bh-lbl">총 예상 여행 비용</div><div class="bh-amt">'+krw(grand)+'</div><div class="bh-sub">은지 · 노미 2인 기준</div></div>'
+    +'<div class="bh-badge">'+krw(Math.round(grand/2))+'<br><span style="font-size:9px;opacity:.7">인당 추정</span></div>'
+    +'</div>'
+    +'<div class="pax2">'
+    +'<div class="pax2c" style="background:#FFF0F6;border-color:#FCD7E8"><div class="p2n">은지 납부</div><div class="p2a">'+krw(eP)+'</div><div class="p2s">항공·빅아일숙박·렌터카</div></div>'
+    +'<div class="pax2c" style="background:#FFFBEB;border-color:#FDE68A"><div class="p2n">노미 납부</div><div class="p2a">'+krw(nP)+'</div><div class="p2s">오아후숙박·다이아·쿠알로아</div></div>'
+    +'</div>'
+    +'<div style="background:#EEF3FF;border-radius:12px;padding:10px 14px;margin-top:8px;display:flex;justify-content:space-between;align-items:center">'
+    +'<div><div style="font-size:9px;font-weight:700;text-transform:uppercase;color:#0066FF;margin-bottom:2px">공금 사용</div>'
+    +'<div style="font-size:12px;font-weight:600">대한항공 KE053/KE054</div>'
+    +'<div style="font-size:10px;color:#9CA3AF">ICN↔HNL · EJ35G3</div></div>'
+    +'<div style="text-align:right"><div style="font-size:15px;font-weight:800;color:#0066FF">'+krw(gP)+'</div><div style="font-size:10px;color:#9CA3AF">공동 기금</div></div>'
+    +'</div>'
+    +'</div>';
+  h+='<div class="bsect"><div class="bslbl">확정 지출 (결제 완료)</div>';
+  PAID.forEach(function(r){
+    h+='<div class="brow"><div class="brl"><div class="brname">'+esc(r.name)+'</div><div class="brsub">'+esc(r.sub)+'</div></div>'
+      +'<div class="brr"><div class="bramt">'+krw(r.krw)+'</div>'+(r.usd?'<div class="brusd">$'+r.usd.toFixed(2)+'</div>':'')
+      +'<span class="ptag" style="background:'+r.pc.bg+';color:'+r.pc.tc+'">'+r.payer+'</span></div></div>';
+  });
+  h+='</div>';
+  h+='<div class="bsect"><div class="bslbl">예약·결제 필요</div>';
+  PENDING.forEach(function(r){
+    h+='<div class="brow"><div class="brl"><div class="brname">'+esc(r.name)+'</div>'+(r.sub?'<div class="brsub">'+esc(r.sub)+'</div>':'')+'</div>'
+      +'<div class="bramt" style="color:#9CA3AF">'+r.amt+'</div></div>';
+  });
+  h+='</div>';
+  h+='<div class="bsect"><div class="bslbl">현지 예상 경비</div>';
+  ONSITE.forEach(function(r){
+    h+='<div class="brow"><div class="brl"><div class="brname">'+esc(r.name)+'</div>'+(r.sub?'<div class="brsub">'+esc(r.sub)+'</div>':'')+'</div>'
+      +'<div class="brr"><div class="bramt">'+r.amt+'</div>'+(r.usd?'<div class="brusd">'+r.usd+'</div>':'')+'</div></div>';
+  });
+  h+='</div>';
+  h+='<div class="cashcard"><div class="ccl">현금 환전 권장</div><div class="cca">$200 / 인</div>'
+    +'<div class="ccn">카드 결제 대부분 가능 · 팁·푸드트럭·주차 미터기는 현금 필요</div>'
+    +'<div style="margin-top:12px">'
+    +'<div class="ccrow"><span>식비 팁 (18–20%)</span><span>~$120</span></div>'
+    +'<div class="ccrow"><span>주차·잡비</span><span>~$30</span></div>'
+    +'<div class="ccrow"><span>푸드트럭·파머스마켓</span><span>~$50</span></div>'
+    +'<div class="ccrow"><span>권장 합계</span><span>$200</span></div>'
+    +'</div></div>';
+  h+='<div style="font-size:10px;color:#9CA3AF;padding:0 4px 8px;line-height:1.7">* 환율 $1 = ₩1,550 · 렌터카 후불·리조트피 카드 결제 예정</div>';
+  return h+'</div>';
+}
+
+/* ── tips ── */
+function tipSect(key,title,sub,bodyFn){
+  var open=OPEN_TIPS[key];
+  return '<div class="tip-sect">'
+    +'<div class="tip-hd" onclick="toggleTip(\''+key+'\')">'
+    +'<div class="tip-hd-left"><div class="tip-ttl">'+title+'</div><div class="tip-sub">'+sub+'</div></div>'
+    +'<span class="tip-chev'+(open?' op':'')+'">▼</span>'
+    +'</div>'
+    +(open?'<div class="tip-body">'+bodyFn()+'</div>':'')
+    +'</div>';
+}
+function tipItems(cat,items){
+  return items.map(function(it){
+    var isEd=EDIT_TIP&&EDIT_TIP.cat===cat&&EDIT_TIP.id===it.id;
+    var ck=JSON.stringify(cat),id=JSON.stringify(it.id);
+    return '<div class="tip-item"><div class="ti-head"><span class="ti-ico">'+esc(it.ico||'•')+'</span><div class="ti-body-inner">'
+      +(isEd?'<textarea class="ti-ta" id="tta_'+it.id+'">'+esc(it.txt)+'</textarea><div class="ti-acts"><button class="ti-btn" onclick="saveTip('+ck+','+id+')">저장</button><button class="ti-btn" onclick="cancelTip()">취소</button></div>'
+          :'<div class="ti-txt" style="white-space:pre-line">'+linkify(it.txt)+'</div><div class="ti-acts"><button class="ti-btn" onclick="editTip('+ck+','+id+')">수정</button><button class="ti-btn del" onclick="delTip('+ck+','+id+')">삭제</button></div>')
+      +'</div></div></div>';
+  }).join('');
+}
+function tipsHTML(){
+  var h='<div class="gap">';
+  h+=tipSect('tr','교통 & 렌터카','주유 · 속도 · 주차 · TheBus · 정체',function(){return tipItems('tr',tr);});
+  h+=tipSect('li','생활 & 매너','팁 문화 · 자연 예절 · 화산 현황',function(){return tipItems('li',li);});
+  h+=tipSect('sn','🤿 스노클링 가이드','리프컷 · 투스텝 · 샥스코브',function(){return tipItems('sn',sn);});
+  h+=tipSect('en','필수 영어 표현','렌터카 · 호텔 · 식당 · 액티비티',function(){
+    return [['렌터카',ENG.rentalcar],['호텔',ENG.hotel],['식당',ENG.restaurant],['액티비티',ENG.activity]].map(function(sec){
+      return '<div class="eng-sect"><div class="eng-hd">'+sec[0]+'</div>'
+        +sec[1].map(function(it){return '<div class="eng-item"><div class="eng-phrase">"'+esc(it.p)+'"</div><div class="eng-tr">'+esc(it.t)+'</div>'+(it.n?'<div class="eng-note">'+esc(it.n)+'</div>':'')+'</div>';}).join('')
+        +'</div>';
+    }).join('');
+  });
+  h+=tipSect('cu','입국심사 & 세관 Q&A','출입국 시 예상 질문·답변',function(){
+    return '<div style="padding-top:4px">'+ENG.customs.map(function(it){
+      return '<div class="eng-item"><div class="eng-phrase">"'+esc(it.p)+'"</div><div class="eng-tr">'+esc(it.t)+'</div>'+(it.n?'<div class="eng-note">'+esc(it.n)+'</div>':'')+'</div>';
+    }).join('')+'</div>';
+  });
+  h+=tipSect('cb','세관신고서 (CBP Form 6059B)','입국 시 작성 항목',function(){
+    return CBP_FIELDS.map(function(f){
+      return '<div style="display:flex;gap:10px;padding:8px 0;border-bottom:1px solid #F5F5F5"><div style="font-size:10px;color:#9CA3AF;min-width:130px;flex-shrink:0">'+esc(f.label)+'</div><div style="font-size:12px;font-weight:600;flex:1;line-height:1.4">'+esc(f.value)+'</div></div>';
+    }).join('');
+  });
+  h+=tipSect('hw','하와이에서만 쓰는 표현','Aloha · Mahalo · Shaka 외',function(){
+    return HAWAII_WORDS.map(function(w){return '<div class="hawaii-word"><div class="hw-word">'+esc(w.word)+'</div><div class="hw-def">'+esc(w.def)+'</div></div>';}).join('');
+  });
+  return h+'</div>';
+}
+
+/* ── render ── */
+function render(){
+  var c=document.getElementById('C');
+  if(TAB===0)c.innerHTML=scheduleHTML();
+  else if(TAB===1)c.innerHTML=packingHTML();
+  else if(TAB===2)c.innerHTML=budgetHTML();
+  else c.innerHTML=tipsHTML();
+  renderTabs();
+  if(EDIT_TIP){var ta=document.getElementById('tta_'+EDIT_TIP.id);if(ta)ta.focus();}
+}
+
+/* ── handlers ── */
+function setTab(i){TAB=i;EDIT_TIP=null;render();}
+function toggleDay(k){OPEN_DAYS[k]=OPEN_DAYS[k]===true?false:true;render();}
+function toggleTip(k){OPEN_TIPS[k]=OPEN_TIPS[k]?0:1;render();}
+function addTodo(v){var t=(v||'').trim();if(!t)return;todos.push(t);save();render();}
+function delTodo(i){todos.splice(i,1);save();render();}
+function chkItem(cat,id){sects=sects.map(function(s){return s.cat===cat?{cat:s.cat,items:s.items.map(function(it){return it.id===id?Object.assign({},it,{done:!it.done}):it;})}:s;});save();render();}
+function delItem(cat,id){sects=sects.map(function(s){return s.cat===cat?{cat:s.cat,items:s.items.filter(function(it){return it.id!==id;})}:s;});save();render();}
+function addItem(cat,val){var v=(val||'').trim();if(!v)return;var ni={t:v,id:'c_'+Date.now(),done:false,cust:true};sects=sects.map(function(s){return s.cat===cat?{cat:s.cat,items:s.items.concat([ni])}:s;});save();render();}
+function toggleGrp(cat,id){sects=sects.map(function(s){return s.cat===cat?{cat:s.cat,items:s.items.map(function(it){return it.id===id?Object.assign({},it,{open:it.open===false?true:false}):it;})}:s;});render();}
+function chkChild(cat,pid,cid){sects=sects.map(function(s){return s.cat===cat?{cat:s.cat,items:s.items.map(function(it){return it.id===pid?Object.assign({},it,{children:it.children.map(function(c){return c.id===cid?Object.assign({},c,{done:!c.done}):c;})}):it;})}:s;});save();render();}
+function delChild(cat,pid,cid){sects=sects.map(function(s){return s.cat===cat?{cat:s.cat,items:s.items.map(function(it){return it.id===pid?Object.assign({},it,{children:it.children.filter(function(c){return c.id!==cid;})}):it;})}:s;});save();render();}
+function editTip(cat,id){EDIT_TIP={cat:cat,id:id};render();}
+function cancelTip(){EDIT_TIP=null;render();}
+function saveTip(cat,id){var ta=document.getElementById('tta_'+id);if(!ta)return;var txt=ta.value;
+  function upd(arr){return arr.map(function(i){return i.id===id?Object.assign({},i,{txt:txt}):i;});}
+  if(cat==='tr')tr=upd(tr);else if(cat==='li')li=upd(li);else sn=upd(sn);
+  save();EDIT_TIP=null;render();}
+function delTip(cat,id){
+  function rm(arr){return arr.filter(function(i){return i.id!==id;});}
+  if(cat==='tr')tr=rm(tr);else if(cat==='li')li=rm(li);else sn=rm(sn);
+  save();render();}
+
+/* ── init ── */
+load();
+document.getElementById('H').innerHTML=hero();
+render();
+
+</script>
+</body>
+</html>
