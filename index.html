@@ -164,6 +164,11 @@ html,body{background:#F5F5F5;font-family:-apple-system,BlinkMacSystemFont,'Helve
 a{color:#5BB8D4}
 
 
+
+.pi-handle{font-size:14px;color:#C5C5C5;cursor:grab;padding:0 2px 0 4px;user-select:none;-webkit-user-select:none;flex-shrink:0;touch-action:none}
+.pi.drag-over{border:2px dashed #5BB8D4;opacity:0.6}
+.pi.dragging{opacity:0.25}
+.pgrid{display:flex;flex-direction:column;gap:4px}
 </style>
 
 </head>
@@ -407,7 +412,7 @@ const PACK_INIT=[
   ]},
 ];
 const PAID=[
-  {name:"대한항공 (국제선)",sub:"KE053/KE054 · ICN↔HNL · EJ35G3",krw:1697000,payer:"공금",pc:{bg:"#EEF3FF",tc:"#0066FF"}},
+  {name:"대한항공 (국제선)",sub:"KE053/KE054 · ICN↔HNL · EJ35G3",krw:1697000,payer:"공금",pc:{bg:"#E8F6FA",tc:"#5BB8D4"}},
   {name:"하와이안항공 (국내선)",sub:"AS1108/AS1087 · HNL↔KOA · WDLXHU",krw:u2k(369.90),usd:369.90,payer:"은지",pc:{bg:"#FCE7F3",tc:"#DB2777"}},
   {name:"힐튼 와이콜로아 4박",sub:"5/28–6/1 · agoda",krw:1503680,payer:"은지",pc:{bg:"#FCE7F3",tc:"#DB2777"}},
   {name:"알로힐라니 리조트 4박",sub:"6/1–6/5 · agoda",krw:1527193,payer:"민영",pc:{bg:"#FEF3C7",tc:"#B45309"}},
@@ -648,7 +653,7 @@ function scheduleHTML(){
 /* ── packing ── */
 function packingHTML(){
   var h='<div class="gap">';
-  sects.forEach(function(s){
+  sects.forEach(function(s,si){
     var tot=0,dn=0;
     s.items.forEach(function(it){
       if(it.children){it.children.forEach(function(c){tot++;if(c.done)dn++;});}
@@ -659,43 +664,40 @@ function packingHTML(){
       +'<div class="pshd"><div class="psttl">'+esc(s.cat)+'</div><div class="pcnt">'+dn+'/'+tot+'</div></div>';
     var grp=[];
     function flushGrp(){if(grp.length){h+='<div class="pgrid">'+grp.join('')+'</div>';grp=[];}}
-    s.items.forEach(function(it){
-      var cc=JSON.stringify(s.cat),ck=JSON.stringify(it.id);
+    s.items.forEach(function(it,itemIdx){
+      var cc="'"+s.cat+"'",ck="'"+it.id+"'";
       if(it.children!==undefined){
         flushGrp();
         var dc=it.children.filter(function(c){return c.done;}).length;
-        h+='<div style="margin-bottom:5px">'
-          +'<div style="display:flex;align-items:center;gap:8px;padding:7px 12px;background:rgba(0,0,0,0.08);border-radius:10px;cursor:pointer" onclick="toggleGrp('+cc+','+ck+')">'
-          +'<span style="font-size:10px;color:#111;display:inline-block;transform:'+(it.open!==false?'rotate(90deg)':'rotate(0deg)')+'">▶</span>'
-          +'<span style="font-size:12px;font-weight:700;color:#111;flex:1">'+esc(it.t)+'</span>'
-          +'<span style="font-size:10px;color:#9CA3AF">'+dc+'/'+it.children.length+'</span>'
-          +'</div>';
+        h+='<div style="margin-bottom:5px">'          +'<div style="display:flex;align-items:center;gap:8px;padding:7px 12px;background:rgba(0,0,0,0.08);border-radius:10px;cursor:pointer" onclick="toggleGrp('+cc+','+ck+')">'          +'<span style="font-size:10px;color:#111;display:inline-block;transform:'+(it.open!==false?'rotate(90deg)':'rotate(0deg)')+'">▶</span>'          +'<span style="font-size:12px;font-weight:700;color:#111;flex:1">'+esc(it.t)+'</span>'          +'<span style="font-size:10px;color:#9CA3AF">'+dc+'/'+it.children.length+'</span>'          +'</div>';
         if(it.open!==false){
           h+='<div style="padding-left:10px;padding-top:4px;display:flex;flex-direction:column;gap:4px">';
-          it.children.forEach(function(c){
-            var cd=JSON.stringify(c.id);
-            h+='<div class="pi'+(c.done?' done':'')+'" style="border-radius:8px" onclick="chkChild('+cc+','+ck+','+cd+')">'
+          it.children.forEach(function(c,ci){
+            var cd="'"+c.id+"'";
+            h+='<div class="pi'+(c.done?' done':'')+'" data-si="'+si+'" data-pii="'+itemIdx+'" data-cii="'+ci+'" style="border-radius:8px" onclick="chkChild('+cc+','+ck+','+cd+')">'
               +'<div class="picb">'+(c.done?'✓':'')+'</div>'
               +'<div class="pitxt">'+esc(c.t)+'</div>'
               +'<span class="pi-del" onclick="event.stopPropagation();delChild('+cc+','+ck+','+cd+')">✕</span>'
+              +'<span class="pi-handle" ontouchstart="piChildHold(event,'+si+','+itemIdx+','+ci+')">⠿</span>'
               +'</div>';
           });
+          var csid='pci_'+si+'_'+itemIdx;
+          h+='<div class="pack-add" style="margin-top:6px">'
+            +'<input class="pack-input" id="'+csid+'" placeholder="항목 추가..." onkeydown="if(event.key===\'Enter\'){addChildByIdx('+si+','+itemIdx+',this.value);this.value=\'\'}">'
+            +'<button class="pack-addbtn" onclick="var el=document.getElementById(\''+csid+'\');addChildByIdx('+si+','+itemIdx+',el.value);el.value=\'\'">+ 추가</button>'
+            +'</div>';
           h+='</div>';
         }
         h+='</div>';
       } else {
-        grp.push('<div class="pi'+(it.done?' done':'')+'" onclick="chkItem('+cc+','+ck+')">'
-          +'<div class="picb">'+(it.done?'✓':'')+'</div>'
-          +'<div class="pitxt">'+esc(it.t)+'</div>'
-          +'<span class="pi-del" onclick="event.stopPropagation();delItem('+cc+','+ck+')">✕</span>'
-          +'</div>');
+        grp.push('<div class="pi'+(it.done?' done':'')+'" data-si="'+si+'" data-ii="'+itemIdx+'" onclick="chkItem('+cc+','+ck+')">'          +'<div class="picb">'+(it.done?'✓':'')+'</div>'          +'<div class="pitxt">'+esc(it.t)+'</div>'          +'<span class="pi-del" onclick="event.stopPropagation();delItem('+cc+','+ck+')">✕</span>'          +'<span class="pi-handle" ontouchstart="piHold(event,'+si+','+itemIdx+')">⠿</span>'          +'</div>');
       }
     });
     flushGrp();
-    var sid='pi_'+s.cat.replace(/\W/g,'_');
+    var sid='pi_'+si;
     h+='<div class="pack-add">'
-      +'<input class="pack-input" id="'+sid+'" placeholder="항목 추가..." onkeydown="if(event.key===\'Enter\'){addItem('+JSON.stringify(s.cat)+',this.value);this.value=\'\'}">'
-      +'<button class="pack-addbtn" onclick="var el=document.getElementById(\''+sid+'\');addItem('+JSON.stringify(s.cat)+',el.value);el.value=\'\'">+ 추가</button>'
+      +'<input class="pack-input" id="'+sid+'" placeholder="항목 추가..." onkeydown="if(event.key===\'Enter\'){addItemByIdx('+si+',this.value);this.value=\'\'}">'
+      +'<button class="pack-addbtn" onclick="var el=document.getElementById(\''+sid+'\');addItemByIdx('+si+',el.value);el.value=\'\'">+ 추가</button>'
       +'</div>';
     h+='</div>';
   });
@@ -722,11 +724,11 @@ function budgetHTML(){
     +'<div class="pax2c" style="background:#FFF0F6;border-color:#FCD7E8"><div class="p2n">은지 납부</div><div class="p2a">'+krw(eP)+'</div><div class="p2s">항공·숙박·렌터카·다이아</div></div>'
     +'<div class="pax2c" style="background:#FFFBEB;border-color:#FDE68A"><div class="p2n">민영 납부</div><div class="p2a">'+krw(nP)+'</div><div class="p2s">오아후숙박</div></div>'
     +'</div>'
-    +'<div style="background:#EEF3FF;border-radius:12px;padding:10px 14px;margin-top:8px;display:flex;justify-content:space-between;align-items:center">'
-    +'<div><div style="font-size:9px;font-weight:700;text-transform:uppercase;color:#0066FF;margin-bottom:2px">공금 사용</div>'
+    +'<div style="background:#E8F6FA;border-radius:12px;padding:10px 14px;margin-top:8px;display:flex;justify-content:space-between;align-items:center">'
+    +'<div><div style="font-size:9px;font-weight:700;text-transform:uppercase;color:#5BB8D4;margin-bottom:2px">공금 사용</div>'
     +'<div style="font-size:12px;font-weight:600">대한항공 KE053/KE054</div>'
     +'<div style="font-size:10px;color:#9CA3AF">ICN↔HNL · EJ35G3</div></div>'
-    +'<div style="text-align:right"><div style="font-size:15px;font-weight:800;color:#0066FF">'+krw(gP)+'</div><div style="font-size:10px;color:#9CA3AF">공동 기금</div></div>'
+    +'<div style="text-align:right"><div style="font-size:15px;font-weight:800;color:#5BB8D4">'+krw(gP)+'</div><div style="font-size:10px;color:#9CA3AF">공동 기금</div></div>'
     +'</div>'
     +'</div>';
   h+='<div class="bsect"><div class="bslbl">확정 지출 (결제 완료)</div>';
@@ -846,13 +848,105 @@ function setTab(i){TAB=i;EDIT_TIP=null;render();}
 function toggleDay(k){OPEN_DAYS[k]=OPEN_DAYS[k]===true?false:true;render();}
 function toggleTip(k){OPEN_TIPS[k]=OPEN_TIPS[k]?0:1;render();}
 
+
+/* ── 인덱스 기반 추가 ── */
+function addChildByIdx(si,pii,val){var v=(val||"").trim();if(!v)return;var s=sects[si];if(!s)return;var p=s.items[pii];if(!p||!p.children)return;var nc={t:v,id:"cc_"+Date.now(),done:false};sects[si].items[pii].children=p.children.concat([nc]);save();render();}
+function addItemByIdx(si,val){var s=sects[si];if(s)addItem(s.cat,val);}
+
+/* ── 터치 드래그 정렬 ── */
+var _dg=null;
+var _dgBlock=false;
+function _startDrag(e,si,fromIdx,isChild,pii){
+  e.stopPropagation();
+  e.preventDefault();
+  var _el=e.currentTarget?e.currentTarget.parentElement:null;
+  var _t=e.touches&&e.touches[0]?e.touches[0]:null;
+  if(!_el||!_t)return;
+  var _tx=_t.clientX,_ty=_t.clientY;
+  var active=true;
+  var timer=setTimeout(function(){
+    if(!active)return;
+    _dgBlock=true;
+    var rect=_el.getBoundingClientRect();
+    var ghost=_el.cloneNode(true);
+    ghost.style.cssText='position:fixed;left:'+rect.left+'px;top:'+rect.top+'px;width:'+rect.width+'px;z-index:9999;opacity:0.92;box-shadow:0 8px 24px rgba(0,0,0,.22);border-radius:10px;pointer-events:none;background:#fff;';
+    document.body.appendChild(ghost);
+    _el.style.opacity='0.25';
+    _dg={si:si,from:fromIdx,to:fromIdx,el:_el,ghost:ghost,baseTop:rect.top,startY:_ty};
+    document.addEventListener('touchmove',_dgMove,{passive:false});
+    document.addEventListener('touchend',_dgEnd,{once:true});
+  },250);
+  var cancel=function(){active=false;clearTimeout(timer);};
+  e.currentTarget.addEventListener('touchend',cancel,{once:true});
+  e.currentTarget.addEventListener('touchmove',cancel,{once:true});
+}
+function piHold(e,si,ii){_startDrag(e,si,ii,false,null);}
+function piChildHold(e,si,pii,ci){_startDrag(e,si,ci,true,pii);}
+function _dgMove(e){
+  if(!_dg)return;
+  e.preventDefault();
+  var t=e.touches[0];
+  var dy=t.clientY-_dg.startY;
+  _dg.ghost.style.top=(_dg.baseTop+dy)+'px';
+  var gMid=_dg.baseTop+dy+(_dg.el.offsetHeight||40)/2;
+  var sel=_dg.isChild
+    ?'[data-si="'+_dg.si+'"][data-pii="'+_dg.pii+'"][data-cii]'
+    :'[data-si="'+_dg.si+'"][data-ii]:not([data-pii])';
+  var els=document.querySelectorAll(sel);
+  var best=_dg.from,bestD=9999;
+  els.forEach(function(el){
+    var r=el.getBoundingClientRect();
+    var d=Math.abs(r.top+r.height/2-gMid);
+    if(d<bestD){bestD=d;best=+el.dataset[_dg.isChild?'cii':'ii'];}
+  });
+  if(best!==_dg.to){
+    if(_dg._over)_dg._over.classList.remove('drag-over');
+    _dg.to=best;
+    var tsel=_dg.isChild
+      ?'[data-si="'+_dg.si+'"][data-pii="'+_dg.pii+'"][data-cii="'+best+'"]'
+      :'[data-si="'+_dg.si+'"][data-ii="'+best+'"]:not([data-pii])';
+    var tgt=document.querySelector(tsel);
+    if(tgt){tgt.classList.add('drag-over');_dg._over=tgt;}
+  }
+}
+function _dgEnd(){
+  if(!_dg)return;
+  _dg.ghost.remove();
+  _dg.el.classList.remove('dragging');
+  _dg.el.style.opacity='';
+  setTimeout(function(){_dgBlock=false;},50);
+  if(_dg._over)_dg._over.classList.remove('drag-over');
+  if(_dg.from!==_dg.to){
+    var s=sects[_dg.si];
+    if(s){
+      if(_dg.isChild){
+        var parent=s.items[_dg.pii];
+        if(parent&&parent.children){
+          var ch=parent.children.slice();
+          var mv=ch.splice(_dg.from,1)[0];
+          ch.splice(_dg.to,0,mv);
+          sects[_dg.si].items[_dg.pii].children=ch;
+          save();render();
+        }
+      } else {
+        var items=s.items.slice();
+        var mv=items.splice(_dg.from,1)[0];
+        items.splice(_dg.to,0,mv);
+        sects[_dg.si]={cat:s.cat,items:items};
+        save();render();
+      }
+    }
+  }
+  document.removeEventListener('touchmove',_dgMove);
+  _dg=null;
+}
 function addTodo(v){var t=(v||'').trim();if(!t)return;todos.push(t);save();render();}
 function delTodo(i){todos.splice(i,1);save();render();}
-function chkItem(cat,id){sects=sects.map(function(s){return s.cat===cat?{cat:s.cat,items:s.items.map(function(it){return it.id===id?Object.assign({},it,{done:!it.done}):it;})}:s;});save();render();}
+function chkItem(cat,id){if(_dgBlock)return;sects=sects.map(function(s){return s.cat===cat?{cat:s.cat,items:s.items.map(function(it){return it.id===id?Object.assign({},it,{done:!it.done}):it;})}:s;});save();render();}
 function delItem(cat,id){sects=sects.map(function(s){return s.cat===cat?{cat:s.cat,items:s.items.filter(function(it){return it.id!==id;})}:s;});save();render();}
 function addItem(cat,val){var v=(val||'').trim();if(!v)return;var ni={t:v,id:'c_'+Date.now(),done:false,cust:true};sects=sects.map(function(s){return s.cat===cat?{cat:s.cat,items:s.items.concat([ni])}:s;});save();render();}
 function toggleGrp(cat,id){sects=sects.map(function(s){return s.cat===cat?{cat:s.cat,items:s.items.map(function(it){return it.id===id?Object.assign({},it,{open:it.open===false?true:false}):it;})}:s;});render();}
-function chkChild(cat,pid,cid){sects=sects.map(function(s){return s.cat===cat?{cat:s.cat,items:s.items.map(function(it){return it.id===pid?Object.assign({},it,{children:it.children.map(function(c){return c.id===cid?Object.assign({},c,{done:!c.done}):c;})}):it;})}:s;});save();render();}
+function chkChild(cat,pid,cid){if(_dgBlock)return;sects=sects.map(function(s){return s.cat===cat?{cat:s.cat,items:s.items.map(function(it){return it.id===pid?Object.assign({},it,{children:it.children.map(function(c){return c.id===cid?Object.assign({},c,{done:!c.done}):c;})}):it;})}:s;});save();render();}
 function delChild(cat,pid,cid){sects=sects.map(function(s){return s.cat===cat?{cat:s.cat,items:s.items.map(function(it){return it.id===pid?Object.assign({},it,{children:it.children.filter(function(c){return c.id!==cid;})}):it;})}:s;});save();render();}
 function editTip(cat,id){EDIT_TIP={cat:cat,id:id};render();}
 function cancelTip(){EDIT_TIP=null;render();}
