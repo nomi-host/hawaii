@@ -869,5 +869,15 @@ document.getElementById('H').innerHTML=hero();
 render();
 
 </script>
+
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load', function(){
+    navigator.serviceWorker.register('./sw.js')
+      .then(function(){ console.log('SW 등록 완료 — 오프라인 사용 가능'); })
+      .catch(function(e){ console.log('SW 등록 실패:', e); });
+  });
+}
+</script>
 </body>
 </html>
