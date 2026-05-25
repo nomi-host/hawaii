@@ -2,12 +2,12 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<title>2026 하와이여행 🌺</title>
+<meta name="apple-mobile-web-app-title" content="하와이여행">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<title>하와이여행</title>
 <style>
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
@@ -163,11 +163,9 @@ html,body{background:#F5F5F5;font-family:-apple-system,BlinkMacSystemFont,'Helve
 .hw-def{font-size:12px;color:#333;line-height:1.5}
 a{color:#5BB8D4}
 
+
 </style>
 
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-title" content="하와이여행">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 </head>
 <body>
 <div class="app">
@@ -215,7 +213,7 @@ const FLIGHTS=[
 ];
 const SCHED=[
   {island:"빅아일랜드",pillBg:"#E8F6FA",pillTxt:"#5BB8D4",days:[
-    {emoji:"✈️",date:"5월 28일 목",title:"도착 · 코나 탐방",weather:{emoji:"⛅",desc:"29°C · 구름 개고 맑음 · 스노클링 최적"},
+    {emoji:"✈️",date:"5월 28일 목",title:"도착 · 코나 탐방",weather:{emoji:"⛅",desc:"30°C/22°C · 대체로 흐림, 소나기 가능 · 자외선 높음 (UV7)"},
      acts:[
       {t:"10:35 HNL 도착 · 환승 준비 (AS1108 13:10 탑승)",n:"수하물 픽업 → 출국장 이동"},
       {t:"14:01 코나 공항(KOA) 도착",n:"셔틀: 터미널 밖 'Rental Car Shuttle' 표지판 앞 (10분 간격) → SIXT 렌터카 픽업"},
@@ -231,7 +229,7 @@ const SCHED=[
       {name:"Daylight Mind Coffee",type:"오션뷰 브런치 카페",map:"https://maps.google.com/?q=Daylight+Mind+Coffee+Kona"},
       {name:"Jackie Rey's Ohana Grill",type:"하와이안 아메리칸 다이닝",map:"https://maps.google.com/?q=Jackie+Rey%27s+Ohana+Grill+Kona"},
      ]},
-    {emoji:"🔭",date:"5월 29일 금",title:"북부 드라이브 · 마우나케아",weather:{emoji:"☀️",desc:"코나 29°C · 마우나케아 정상 4°C — 방한복 필수"},
+    {emoji:"🔭",date:"5월 29일 금",title:"북부 드라이브 · 마우나케아",weather:{emoji:"🌤",desc:"30°C/22°C · 점차 맑아짐 · 마우나케아 정상 4°C — 방한복 필수"},
      acts:[
       {t:"힐튼 출발"},
       {t:"포케·무스비 픽업 — 케아우호우 KTA 마트 or Umeke's",tran:{dist:"25km",time:"약 28분"},n:"투스텝비치 주변 식당 없음 — 이동 전 반드시 식사 준비",park:"🅿 KTA 마트 무료"},
@@ -253,7 +251,7 @@ const SCHED=[
       {name:"Village Burger Waimea",type:"수제버거 · 현지인 맛집",map:"https://maps.google.com/?q=Village+Burger+Waimea+Hawaii"},
       {name:"Kohala Burger & Burritos",type:"캐주얼 · 가성비",map:"https://maps.google.com/?q=Kohala+Burger+and+Burritos+Hawaii"},
      ]},
-    {emoji:"⚫",date:"5월 30일 토",title:"블랙샌드 · 힐로 탐방",weather:{emoji:"🌦",desc:"코나 29°C / 힐로 26°C · 동쪽 이동 시 소나기 가능 — 우비 챙길 것"},
+    {emoji:"⚫",date:"5월 30일 토",title:"블랙샌드 · 힐로 탐방",weather:{emoji:"⛅",desc:"코나 30°C / 힐로 25°C · 동부 이동 시 소나기 가능 · 자외선 높음"},
      warn:"⚠️ 총 주행 약 350km · 순수 운전 7시간 이상. 7:00am 이른 출발 필수. 그린샌드는 도보(왕복 8km·2.5hr) 대신 현지 지프 택시($15–20/인) 강력 권장. 시간 부족 시 아카카 폭포·오네카하카하 비치는 포기.",
      acts:[
       {t:"힐튼 이른 출발 (7:00 권장)"},
@@ -274,7 +272,7 @@ const SCHED=[
       {name:"Two Ladies Kitchen",type:"모찌 · 힐로 명물 디저트",map:"https://maps.google.com/?q=Two+Ladies+Kitchen+Hilo+Hawaii"},
       {name:"Poke to the Maxx",type:"포케볼 · 힐로 맛집",map:"https://maps.google.com/?q=Poke+to+the+Maxx+Hilo+Hawaii"},
      ]},
-    {emoji:"🌋",date:"5월 31일 일",title:"하와이 화산국립공원 (하루종일)",weather:{emoji:"🌫",desc:"화산 지역 20–24°C · 아침 안개·구름 잦음 — 우비·방한 레이어 필수"},
+    {emoji:"🌋",date:"5월 31일 일",title:"하와이 화산국립공원 (하루종일)",weather:{emoji:"🌫",desc:"화산 20–24°C / 코나 30°C · 아침 안개 잦음 — 레이어·우비 필수"},
      acts:[
       {t:"힐튼 이른 출발 (7:00 권장)"},
       {t:"도시락·간식 픽업 — 케아우호우 KTA",tran:{dist:"25km",time:"약 28분"},n:"공원 내 식당 거의 없음 · 물·간식 충분히",park:"🅿 KTA 마트 무료"},
@@ -296,7 +294,7 @@ const SCHED=[
      ]},
   ]},
   {island:"오아후",pillBg:"rgba(212,165,116,0.12)",pillTxt:"#A0724A",days:[
-    {emoji:"🏝️",date:"6월 1일 월",title:"이동일 · 와이키키 도착",weather:{emoji:"☀️",desc:"코나 29°C → 호놀룰루 30°C · 맑고 쾌청"},
+    {emoji:"🏝️",date:"6월 1일 월",title:"이동일 · 와이키키 도착",weather:{emoji:"☀️",desc:"코나 30°C → 호놀룰루 29°C · 맑고 쾌청 · 자외선 강함"},
      acts:[
       {t:"힐튼 체크아웃 → SIXT 렌터카 반납"},
       {t:"14:06 KOA → HNL (AS 1087)",n:"14:57 도착 · 확인번호 WDLXHU"},
@@ -311,7 +309,7 @@ const SCHED=[
       {name:"Rainbow Drive-In",type:"로컬 플레이트런치 · 현지 명물",map:"https://maps.google.com/?q=Rainbow+Drive-In+Honolulu"},
       {name:"Duke's Waikiki",type:"오션뷰 하와이안 씨푸드",map:"https://maps.google.com/?q=Duke%27s+Waikiki+Honolulu"},
      ]},
-    {emoji:"🗺️",date:"6월 2일 화 (렌터카 호텔 픽업)",title:"72번 국도 · 남동부 드라이브",weather:{emoji:"⛅",desc:"30°C · 무역풍 시원 · 동부 해안 간간이 구름"},
+    {emoji:"🗺️",date:"6월 2일 화 (렌터카 호텔 픽업)",title:"72번 국도 · 남동부 드라이브",weather:{emoji:"☀️",desc:"30°C/23°C · 대체로 맑음 · 무역풍 시원 · 자외선 강함 (UV8)"},
      acts:[
       {t:"렌터카 픽업 — 알로힐라니 호텔 (SIXT)",n:"3일간 이용 시작"},
       {t:"라나이 전망대 → 할로나 블로우홀",tran:{dist:"18km",time:"약 25분"},type:"main",info:"라나이: 오아후 남동부 파노라마 · 블로우홀: 해수 분출 용암 구멍",park:"🅿 할로나 전망대 무료"},
@@ -326,7 +324,7 @@ const SCHED=[
       {name:"Kalapawai Market Kailua",type:"샌드위치·커피 · 현지인 카페",map:"https://maps.google.com/?q=Kalapawai+Market+Kailua"},
       {name:"Agnes' Portuguese Bake",type:"로컬 베이커리 · 카일루아",map:"https://maps.google.com/?q=Agnes+Portuguese+Bake+Shop+Kailua"},
      ]},
-    {emoji:"🌊",date:"6월 3일 수 (렌터카)",title:"83번 국도 · 노스쇼어 & 쿠알로아랜치",weather:{emoji:"☀️",desc:"30°C · 대체로 맑음 · 스노클링 최적 조건"},
+    {emoji:"🌊",date:"6월 3일 수 (렌터카)",title:"83번 국도 · 노스쇼어 & 쿠알로아랜치",weather:{emoji:"☀️",desc:"29°C/23°C · 맑음 · 스노클링 최적 · 자외선 매우 강함 (UV9)"},
      warn:"⏱ 타이밍: 돌(8:30오픈) + 샤크스코브 2시간 + 쿠알로아 2:45 도착 목표. 권장: 7:30 출발 → 돌(8:30–9:00) → 와이메아베이 → 샤크스코브 9:50–11:50 → 점심 → 선셋비치 → Matsumoto → 라니아케아 → 쿠알로아 ~2:20 도착 ✓",
      acts:[
       {t:"알로힐라니 출발 (7:30 권장)"},
@@ -348,7 +346,7 @@ const SCHED=[
       {name:"Matsumoto Shave Ice",type:"빙수 원조 · 줄 필수",map:"https://maps.google.com/?q=Matsumoto+Shave+Ice+Haleiwa"},
       {name:"Ted's Bakery",type:"바나나 브레드·파이 · 노스쇼어 명물",map:"https://maps.google.com/?q=Ted%27s+Bakery+Sunset+Beach+Hawaii"},
      ]},
-    {emoji:"💎",date:"6월 4일 목 (렌터카 호텔 반납)",title:"다이아몬드헤드 & 와이키키 쇼핑",weather:{emoji:"☀️",desc:"30°C · 맑고 화창 · 트레킹은 이른 아침 권장"},
+    {emoji:"💎",date:"6월 4일 목 (렌터카 호텔 반납)",title:"다이아몬드헤드 & 와이키키 쇼핑",weather:{emoji:"☀️",desc:"29°C/24°C · 맑고 화창 · 다이아헤드 트레킹 이른 아침 권장"},
      acts:[
       {t:"다이아몬드헤드 트레일 ✅ 6:00–7:00am",tran:{dist:"4km",time:"약 10분"},type:"main",info:"18만 년 전 화산 분화구 · 정상 360° 와이키키 파노라마",n:"✅ 예약완료 $11.27/인 · 왕복 3km · 1.5h · 일출 직후 가장 선선",park:"🅿 공원 내 무료 (예약 포함)"},
       {t:"호놀룰루 미술관",tran:{dist:"6km",time:"약 12분"},type:"main",info:"1927년 개관 · 하와이 최대 미술관 · 현대미술·동양미술",n:"입장료 $20/인 · 월요일 휴관",park:"🅿 미술관 옆 무료"},
@@ -368,7 +366,7 @@ const SCHED=[
       {name:"Liliha Bakery",type:"코코퍼프 · 현지 베이커리 명물",map:"https://maps.google.com/?q=Liliha+Bakery+Honolulu"},
       {name:"Nico's at Pier 38",type:"항구 씨푸드 · 현지인 맛집",map:"https://maps.google.com/?q=Nico%27s+Pier+38+Honolulu"},
      ]},
-    {emoji:"🛫",date:"6월 5일 금",title:"귀국 — 13:05 출발",weather:{emoji:"☀️",desc:"29°C · 맑음 · 공항 이동"},
+    {emoji:"🛫",date:"6월 5일 금",title:"귀국 — 13:05 출발",weather:{emoji:"☀️",desc:"29°C/22°C · 맑음 · 출발 전 여유롭게"},
      acts:[
       {t:"알로힐라니 체크아웃 (10:00 이전)"},
       {t:"공항 이동 — 우버·택시",n:"13:05 출발 → 10:00 공항 도착 권장"},
@@ -412,11 +410,9 @@ const PAID=[
   {name:"대한항공 (국제선)",sub:"KE053/KE054 · ICN↔HNL · EJ35G3",krw:1697000,payer:"공금",pc:{bg:"#EEF3FF",tc:"#0066FF"}},
   {name:"하와이안항공 (국내선)",sub:"AS1108/AS1087 · HNL↔KOA · WDLXHU",krw:u2k(369.90),usd:369.90,payer:"은지",pc:{bg:"#FCE7F3",tc:"#DB2777"}},
   {name:"힐튼 와이콜로아 4박",sub:"5/28–6/1 · agoda",krw:1503680,payer:"은지",pc:{bg:"#FCE7F3",tc:"#DB2777"}},
-  {name:"알로힐라니 리조트 4박",sub:"6/1–6/5 · agoda",krw:1527193,payer:"노미",pc:{bg:"#FEF3C7",tc:"#B45309"}},
-  {name:"SIXT 빅아일랜드",sub:"렌터카 · 후불",krw:u2k(366.77),usd:366.77,payer:"은지",pc:{bg:"#FCE7F3",tc:"#DB2777"}},
-  {name:"SIXT 오아후",sub:"렌터카 · 6/2–4 · 호텔 픽업반납",krw:u2k(123.63),usd:123.63,payer:"은지",pc:{bg:"#FCE7F3",tc:"#DB2777"}},
+  {name:"알로힐라니 리조트 4박",sub:"6/1–6/5 · agoda",krw:1527193,payer:"민영",pc:{bg:"#FEF3C7",tc:"#B45309"}},
   {name:"비자 신청",sub:"$40.27/인",krw:u2k(40.27),usd:40.27,payer:"각자",pc:{bg:"#F0FDF4",tc:"#15803D"}},
-  {name:"다이아몬드헤드 입장권",sub:"6/4 6:00–7:00am · 2인 예약완료",krw:u2k(11.27*2),usd:22.54,payer:"은지",pc:{bg:"#FCE7F3",tc:"#DB2777"}},
+  {name:"다이아몬드헤드 입장권",sub:"6/4 6:00–7:00am · 2인 합계",krw:u2k(11.27),usd:11.27,payer:"민영",pc:{bg:"#FEF3C7",tc:"#B45309"}},
 ];
 const PENDING=[
   {name:"유심/로밍",sub:"출국 전 설정 필요",amt:"미정"},
@@ -424,6 +420,8 @@ const PENDING=[
   {name:"여행자보험",sub:"출국 전",amt:"미정"},
 ];
 const ONSITE=[
+  {name:"SIXT 빅아일랜드",sub:"렌터카 · 현지 후불 결제",amt:`~${krw(u2k(366.77))}`,usd:"~$367"},
+  {name:"SIXT 오아후",sub:"렌터카 · 6/2–4 · 현지 후불 결제",amt:`~${krw(u2k(123.63))}`,usd:"~$124"},
   {name:"리조트 피",sub:"빅아일랜드 ₩277,000 + 오아후 ₩400,000",amt:krw(677000),usd:"~$436"},
   {name:"주차비",sub:"빅아일랜드 $48×5 + 알로힐라니 $50×3 + 일정 $40",amt:`~${krw(u2k(430))}`,usd:"~$430"},
   {name:"국내선 수하물",sub:"$30 × 4개",amt:`~${krw(u2k(120))}`,usd:"~$120"},
@@ -534,7 +532,7 @@ var CAT_BG={'기내 캐리':'#F9F9F9','의류 & 신발':'#EEF3FF','액티비티 
 /* ── state ── */
 var TAB=0;
 var OPEN_DAYS={};
-var OPEN_TIPS={tr:0,li:0,sn:0,en:0,cu:0,cb:0,hw:0};
+var OPEN_TIPS={wx:0,tr:0,li:0,sn:0,en:0,cu:0,cb:0,hw:0};
 var EDIT_TIP=null;
 var todos=[].concat(DEF_TODOS);
 var sects=initPack();
@@ -553,8 +551,8 @@ function load(){
     if(d.tr)tr=d.tr;
     if(d.li)li=d.li;
     if(d.sn)sn=d.sn;
-  }catch(e){}
-}
+  }catch(e){}}
+
 
 /* ── hero ── */
 function hero(){
@@ -572,7 +570,7 @@ function hero(){
     +'<div class="hero-top">'
     +'<div><div class="eyebrow">Travel Planner</div>'
     +'<div class="htitle">2026<br>하와이여행</div>'
-    +'<div class="hdate">5/28 (목) — 6/5 (금) &nbsp;\u00b7&nbsp; 은지 &amp; 노미</div>'
+    +'<div class="hdate">5/28 (목) — 6/5 (금) &nbsp;\u00b7&nbsp; 은지 &amp; 민영</div>'
     +'<div class="badge" style="margin-top:8px;display:inline-block">빅아일랜드 4박&nbsp;&nbsp;·&nbsp;&nbsp;오아후 4박</div></div>'
     +'</div>'
     +'<div class="flights">'+cards+'</div>'
@@ -705,19 +703,22 @@ function packingHTML(){
 
 /* ── budget ── */
 function budgetHTML(){
-  var eP=u2k(369.90)+1503680+u2k(366.77)+u2k(123.63);
-  var nP=1527193+u2k(22.54)+u2k(324.5),gP=1697000,tF=eP+nP+gP;
-  var tO=677000+u2k(430+120+1080+270+60+200);
+  var eP=PAID.filter(function(r){return r.payer==='은지';}).reduce(function(s,r){return s+r.krw;},0);
+  var mP=PAID.filter(function(r){return r.payer==='민영';}).reduce(function(s,r){return s+r.krw;},0);
+  var gP=PAID.filter(function(r){return r.payer==='공금';}).reduce(function(s,r){return s+r.krw;},0);
+  var nP=mP;
+  var tF=eP+nP+gP;
+  var tO=677000+u2k(430+120+1080+270+60+200)+u2k(366.77+123.63);
   var grand=tF+tO;
   var h='<div class="gap">';
   h+='<div class="bhero">'
     +'<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px">'
-    +'<div><div class="bh-lbl">총 예상 여행 비용</div><div class="bh-amt">'+krw(grand)+'</div><div class="bh-sub">은지 · 노미 2인 기준</div></div>'
+    +'<div><div class="bh-lbl">총 예상 여행 비용</div><div class="bh-amt">'+krw(grand)+'</div><div class="bh-sub">은지 · 민영 2인 기준</div></div>'
     +'<div class="bh-badge">'+krw(Math.round(grand/2))+'<br><span style="font-size:9px;opacity:.7">인당 추정</span></div>'
     +'</div>'
     +'<div class="pax2">'
-    +'<div class="pax2c" style="background:#FFF0F6;border-color:#FCD7E8"><div class="p2n">은지 납부</div><div class="p2a">'+krw(eP)+'</div><div class="p2s">항공·빅아일숙박·렌터카</div></div>'
-    +'<div class="pax2c" style="background:#FFFBEB;border-color:#FDE68A"><div class="p2n">노미 납부</div><div class="p2a">'+krw(nP)+'</div><div class="p2s">오아후숙박·다이아·쿠알로아</div></div>'
+    +'<div class="pax2c" style="background:#FFF0F6;border-color:#FCD7E8"><div class="p2n">은지 납부</div><div class="p2a">'+krw(eP)+'</div><div class="p2s">항공·숙박·렌터카·다이아</div></div>'
+    +'<div class="pax2c" style="background:#FFFBEB;border-color:#FDE68A"><div class="p2n">민영 납부</div><div class="p2a">'+krw(nP)+'</div><div class="p2s">오아후숙박</div></div>'
     +'</div>'
     +'<div style="background:#EEF3FF;border-radius:12px;padding:10px 14px;margin-top:8px;display:flex;justify-content:space-between;align-items:center">'
     +'<div><div style="font-size:9px;font-weight:700;text-transform:uppercase;color:#0066FF;margin-bottom:2px">공금 사용</div>'
@@ -745,7 +746,8 @@ function budgetHTML(){
       +'<div class="brr"><div class="bramt">'+r.amt+'</div>'+(r.usd?'<div class="brusd">'+r.usd+'</div>':'')+'</div></div>';
   });
   h+='</div>';
-  h+='<div class="cashcard"><div class="ccl">현금 환전 권장</div><div class="cca">$200 / 인</div>'
+
+    h+='<div class="cashcard"><div class="ccl">현금 환전 권장</div><div class="cca">$200 / 인</div>'
     +'<div class="ccn">카드 결제 대부분 가능 · 팁·푸드트럭·주차 미터기는 현금 필요</div>'
     +'<div style="margin-top:12px">'
     +'<div class="ccrow"><span>식비 팁 (18–20%)</span><span>~$120</span></div>'
@@ -780,6 +782,26 @@ function tipItems(cat,items){
 }
 function tipsHTML(){
   var h='<div class="gap">';
+
+  h+=tipSect('wx','☀️ 날씨 & 옷차림','5/28–6/5 예보 기반 · AccuWeather',function(){
+    var rows=[
+      {t:'빅아일랜드 기온',d:'낮 최고 30°C / 밤 최저 22°C · 자외선 UV 7–9 (강함)'},
+      {t:'오아후 기온',d:'낮 최고 29–30°C / 밤 최저 22–24°C · 자외선 UV 8–9 (매우 강함)'},
+      {t:'기본 옷차림',d:'얇은 반소매 + 반바지·원피스 · 샌들 OK'},
+      {t:'실내·저녁 대비',d:'얇은 가디건·후드 필수 (식당·쇼핑몰 에어컨 강함)'},
+      {t:'마우나케아 (5/29)',d:'정상 4°C — 두꺼운 자켓·장갑·비니 필수'},
+      {t:'화산공원 (5/31)',d:'20–24°C · 레이어링 권장 · 접이식 우비 챙길 것'},
+      {t:'다이아몬드헤드 (6/4)',d:'이른 아침 등반 권장 · 운동화 필수 · 물 500mL 이상'},
+      {t:'자외선 차단',d:'SPF 50+ 선크림 필수 · 모자·썬글라스 · 리프세이프 선크림만'},
+      {t:'비 대비',d:'5/28 초반 소나기 가능 · 접이식 우산 or 레인재킷 1개'},
+      {t:'스노클링 시',d:'래시가드 권장 (산호 긁힘·자외선 차단) · 수영화 있으면 좋음'},
+    ];
+    var h2='';
+    rows.forEach(function(r){
+      h2+='<div style="display:flex;gap:8px;padding:7px 0;border-bottom:1px dashed #F3F4F6">'        +'<div style="font-size:11px;font-weight:700;color:#5BB8D4;min-width:110px;flex-shrink:0">'+r.t+'</div>'        +'<div style="font-size:11px;color:#374151;line-height:1.5">'+r.d+'</div>'        +'</div>';
+    });
+    return h2;
+  });
   h+=tipSect('tr','교통 & 렌터카','주유 · 속도 · 주차 · TheBus · 정체',function(){return tipItems('tr',tr);});
   h+=tipSect('li','생활 & 매너','팁 문화 · 자연 예절 · 화산 현황',function(){return tipItems('li',li);});
   h+=tipSect('sn','🤿 스노클링 가이드','리프컷 · 투스텝 · 샥스코브',function(){return tipItems('sn',sn);});
@@ -821,6 +843,7 @@ function render(){
 function setTab(i){TAB=i;EDIT_TIP=null;render();}
 function toggleDay(k){OPEN_DAYS[k]=OPEN_DAYS[k]===true?false:true;render();}
 function toggleTip(k){OPEN_TIPS[k]=OPEN_TIPS[k]?0:1;render();}
+
 function addTodo(v){var t=(v||'').trim();if(!t)return;todos.push(t);save();render();}
 function delTodo(i){todos.splice(i,1);save();render();}
 function chkItem(cat,id){sects=sects.map(function(s){return s.cat===cat?{cat:s.cat,items:s.items.map(function(it){return it.id===id?Object.assign({},it,{done:!it.done}):it;})}:s;});save();render();}
