@@ -122,14 +122,14 @@ html,body{background:#F5F5F5;font-family:-apple-system,BlinkMacSystemFont,'Helve
 .brl{flex:1;min-width:0}.brname{font-size:13px;font-weight:600}
 .brsub{font-size:10px;color:#9CA3AF;margin-top:2px}
 .brr{text-align:right;flex-shrink:0}
-.bramt{font-size:13px;font-weight:700}
-.brusd{font-size:10px;color:#9CA3AF;margin-top:1px}
+.bramt{font-size:13px;font-weight:700;text-align:right}
+.brusd{font-size:10px;color:#9CA3AF;margin-top:1px;text-align:right}
 .ptag{font-size:9px;font-weight:700;padding:2px 7px;border-radius:99px;margin-top:3px;display:inline-block}
 .cashcard{background:linear-gradient(135deg,#5BB8D4,#8DCFE8);border-radius:18px;padding:20px;color:#fff;box-shadow:0 4px 16px rgba(91,184,212,.3)}
-.ccl{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.55)}
+.ccl{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#fff}
 .cca{font-size:24px;font-weight:800;letter-spacing:-.5px;margin:8px 0 4px}
-.ccn{font-size:11px;color:rgba(255,255,255,.65);line-height:1.6}
-.ccrow{display:flex;justify-content:space-between;padding:6px 0;border-top:1px solid rgba(255,255,255,.12);font-size:11px;color:rgba(255,255,255,.65)}
+.ccn{font-size:11px;color:#fff;line-height:1.6}
+.ccrow{display:flex;justify-content:space-between;padding:6px 0;border-top:1px solid rgba(255,255,255,.15);font-size:11px;color:#fff}
 .ccrow span:last-child{font-weight:700;color:#fff}
 /* TIPS */
 .tip-sect{background:#fff;border-radius:18px;box-shadow:0 2px 8px rgba(212,165,116,0.15);overflow:hidden}
@@ -214,7 +214,7 @@ const initPack=()=>PACK_INIT.map(s=>({cat:s.cat,items:s.items.map((it,i)=>({
   ...it, id:`b_${s.cat}_${i}`, done:false, open:true,
   children:it.children?it.children.map((c,j)=>({...c,id:`b_${s.cat}_${i}_${j}`,done:false})):undefined,
 }))}));
-const DEF_TODOS=["유심/로밍","다이아몬드헤드 D-30 예약!","쿠알로아랜치 랩터","여행자보험"];
+const DEF_TODOS=["다이아몬드헤드 D-30 예약!"];
 const FLIGHTS=[
   {label:"인천 출발",   route:"ICN → HNL", time:"21:05 → 10:35",   sub:"KE053 · 대한항공 · 8h 30m · 5/28",   airline:"ke", conf:"EJ35G3"},
   {label:"코나 도착",   route:"HNL → KOA", time:"13:10 → 14:01",   sub:"AS 1108 · 하와이안항공 · 5/28",       airline:"ha", conf:"WDLXHU"},
@@ -429,23 +429,21 @@ const PAID=[
   {name:"비자 신청",sub:"$40.27/인",krw:u2k(40.27),usd:40.27,payer:"각자",pc:{bg:"#F0FDF4",tc:"#15803D"}},
   {name:"다이아몬드헤드 입장권",sub:"6/4 6:00–7:00am · 2인 합계",krw:u2k(11.27),usd:11.27,payer:"민영",pc:{bg:"#FEF3C7",tc:"#B45309"}},
     {name:"쿠알로아랜치 랩터",sub:"klook · 민영 납부",krw:392904,usd:253.5,payer:"민영",pc:{bg:"#FEF3C7",tc:"#B45309"}},
+  {name:"여행자보험",sub:"민영 납부",krw:19180,payer:"민영",pc:{bg:"#FEF3C7",tc:"#B45309"}},
+  {name:"유심/로밍",sub:"각자 지불",krw:0,payer:"각자",pc:{bg:"#F3F4F6",tc:"#6B7280"}},
 ];
-const PENDING=[
-  {name:"유심/로밍",sub:"출국 전 설정 필요",amt:"미정"},
-
-  {name:"여행자보험",sub:"출국 전",amt:"미정"},
-];
+const PENDING=[];
 const ONSITE=[
-  {name:"SIXT 빅아일랜드",sub:"렌터카 · 현지 후불 결제",amt:`~${krw(u2k(366.77))}`,usd:"~$367"},
-  {name:"SIXT 오아후",sub:"렌터카 · 6/2–4 · 현지 후불 결제",amt:`~${krw(u2k(123.63))}`,usd:"~$124"},
-  {name:"리조트 피",sub:"빅아일랜드 ₩277,000 + 오아후 ₩400,000",amt:krw(677000),usd:"~$436"},
-  {name:"주차비",sub:"빅아일랜드 $48×5 + 알로힐라니 $50×3 + 일정 $40",amt:`~${krw(u2k(430))}`,usd:"~$430"},
-  {name:"국내선 수하물",sub:"$30 × 4개",amt:`~${krw(u2k(120))}`,usd:"~$120"},
-  {name:"식비",sub:"$120/일 × 9일",amt:`~${krw(u2k(1080))}`,usd:"~$1,080"},
-  {name:"기름값",sub:"렌터카 주유",amt:`~${krw(u2k(270))}`,usd:"~$270"},
-  {name:"입장료",sub:"화산 $35 + 미술관 $20 + 아카카 $5 (다이아 별도확정)",amt:`~${krw(u2k(60))}`,usd:"~$60"},
-  {name:"공동 쇼핑·기념품",sub:"",amt:`~${krw(u2k(200))}`,usd:"~$200"},
-];
+  {name:"SIXT 빅아일랜드",sub:"렌터카 · 현지 후불 결제",amt:`~${krw(u2k(366.77))}`,usd:"~$367",raw:367,pay:"card"},
+  {name:"SIXT 오아후",sub:"렌터카 · 6/2–4 · 현지 후불 결제",amt:`~${krw(u2k(123.63))}`,usd:"~$124",raw:124,pay:"card"},
+  {name:"리조트 피",sub:"빅아일랜드 ₩277,000 + 오아후 ₩400,000",amt:krw(677000),usd:"~$436",raw:436,pay:"card"},
+  {name:"주차비",sub:"빅아일랜드 $48×5 + 알로힐라니 $50×3 + 일정 $40",amt:`~${krw(u2k(430))}`,usd:"~$430",raw:430,pay:"cash"},
+  {name:"국내선 수하물",sub:"$30 × 4개",amt:`~${krw(u2k(120))}`,usd:"~$120",raw:120,pay:"cash"},
+  {name:"식비",sub:"$120/일 × 9일",amt:`~${krw(u2k(1080))}`,usd:"~$1,080",raw:1080,pay:"cash"},
+  {name:"기름값",sub:"렌터카 주유",amt:`~${krw(u2k(270))}`,usd:"~$270",raw:270,pay:"cash"},
+  {name:"입장료",sub:"화산 $35 + 미술관 $20 + 아카카 $5 (다이아 별도확정)",amt:`~${krw(u2k(60))}`,usd:"~$60",raw:60,pay:"cash"},
+  {name:"공동 쇼핑·기념품",sub:"",amt:`~${krw(u2k(200))}`,usd:"~$200",raw:200,pay:"cash"},
+]
 const TIPS_T=[
   {id:1,ico:"⛽",txt:"주유: 셀프 주유소 신용카드 → Zip Code 입력란에 '00000'. 안 되면 카운터 현금. 주유 전 캡 위치 확인."},
   {id:2,ico:"🚗",txt:"속도: 하이웨이 55mph(88km/h), 도심 25–35mph. 과속 카메라 많음. 교차로 정지 후 확인."},
@@ -798,8 +796,8 @@ function budgetHTML(){
     +'<div class="bh-badge">'+krw(Math.round(grand/2))+'<br><span style="font-size:9px;opacity:.7">인당 추정</span></div>'
     +'</div>'
     +'<div class="pax2">'
-    +'<div class="pax2c" style="background:#FFF0F6;border-color:#FCD7E8"><div class="p2n">은지 납부</div><div class="p2a">'+krw(eP)+'</div><div class="p2s">항공·숙박·렌터카·다이아</div></div>'
-    +'<div class="pax2c" style="background:#FFFBEB;border-color:#FDE68A"><div class="p2n">민영 납부</div><div class="p2a">'+krw(nP)+'</div><div class="p2s">오아후숙박</div></div>'
+    +'<div class="pax2c" style="background:#FFF0F6;border-color:#FCD7E8"><div class="p2n">은지 납부</div><div class="p2a">'+krw(eP)+'</div><div class="p2s">항공·숙박</div></div>'
+    +'<div class="pax2c" style="background:#FFFBEB;border-color:#FDE68A"><div class="p2n">민영 납부</div><div class="p2a">'+krw(nP)+'</div><div class="p2s">오아후숙박·클룩·다이아</div></div>'
     +'</div>'
     +'<div style="background:#E8F6FA;border-radius:12px;padding:10px 14px;margin-top:8px;display:flex;justify-content:space-between;align-items:center">'
     +'<div><div style="font-size:9px;font-weight:700;text-transform:uppercase;color:#5BB8D4;margin-bottom:2px">공금 사용</div>'
@@ -815,30 +813,49 @@ function budgetHTML(){
       +'<span class="ptag" style="background:'+r.pc.bg+';color:'+r.pc.tc+'">'+r.payer+'</span></div></div>';
   });
   h+='</div>';
-  h+='<div class="bsect"><div class="bslbl">예약·결제 필요</div>';
-  PENDING.forEach(function(r){
-    h+='<div class="brow"><div class="brl"><div class="brname">'+esc(r.name)+'</div>'+(r.sub?'<div class="brsub">'+esc(r.sub)+'</div>':'')+'</div>'
-      +'<div class="bramt" style="color:#9CA3AF">'+r.amt+'</div></div>';
+      h+='<div class="bsect"><div class="bslbl">현지 예상 경비</div>';
+  var _cd=ONSITE.filter(function(r){return r.pay==='card';});
+  var _cs=ONSITE.filter(function(r){return r.pay==='cash';});
+  var _ct=_cd.reduce(function(s,r){return s+r.raw;},0);
+  var _ht=_cs.reduce(function(s,r){return s+r.raw;},0);
+  h+='<div style="font-size:11px;font-weight:700;color:#5BB8D4;margin:4px 0">💳 신용카드</div>';
+  _cd.forEach(function(r){
+    h+='<div class="brow"><div class="brl"><div class="brname">'+esc(r.name)+'</div>'+(r.sub?'<div class="brsub">'+esc(r.sub)+'</div>':'')+'</div>'      +'<div class="bra" style="text-align:right"><div class="bram">'+esc(r.amt)+'</div><div class="brusd">'+esc(r.usd)+'</div></div></div>';
   });
-  h+='</div>';
-  h+='<div class="bsect"><div class="bslbl">현지 예상 경비</div>';
-  ONSITE.forEach(function(r){
-    h+='<div class="brow"><div class="brl"><div class="brname">'+esc(r.name)+'</div>'+(r.sub?'<div class="brsub">'+esc(r.sub)+'</div>':'')+'</div>'
-      +'<div class="brr"><div class="bramt">'+r.amt+'</div>'+(r.usd?'<div class="brusd">'+r.usd+'</div>':'')+'</div></div>';
+  h+='<div class="brow" style="background:#E8F6FA;border-radius:8px;margin:2px 0 10px;padding:8px 10px"><div class="brl"><div class="brname" style="font-weight:700">소계</div></div>'    +'<div class="bra"><div class="bram" style="font-weight:700">~'+krw(Math.round(_ct*R))+'</div><div class="brusd" style="font-weight:700">~$'+_ct+'</div></div></div>';
+  h+='<div style="font-size:11px;font-weight:700;color:#5BB8D4;margin:4px 0">💵 현금 & 트래블로그</div>';
+  _cs.forEach(function(r){
+    h+='<div class="brow"><div class="brl"><div class="brname">'+esc(r.name)+'</div>'+(r.sub?'<div class="brsub">'+esc(r.sub)+'</div>':'')+'</div>'      +'<div class="bra" style="text-align:right"><div class="bram">'+esc(r.amt)+'</div><div class="brusd">'+esc(r.usd)+'</div></div></div>';
   });
+  h+='<div class="brow" style="background:#E8F6FA;border-radius:8px;margin:2px 0;padding:8px 10px"><div class="brl"><div class="brname" style="font-weight:700">소계</div></div>'    +'<div class="bra"><div class="bram" style="font-weight:700">~'+krw(Math.round(_ht*R))+'</div><div class="brusd" style="font-weight:700">~$'+_ht.toLocaleString()+'</div></div></div>';
   h+='</div>';
 
-    h+='<div class="cashcard"><div class="ccl">현지 지출 수단</div><div class="cca">환전 완료 ✓</div>'
-    +'<div class="ccn">카드 결제 대부분 가능 · 팁·푸드트럭·주차 미터기는 현금 필요</div>'
-    +'<div style="margin-top:12px">'
-    +'<div class="ccrow"><span>민영 현금 환전</span><span>$200</span></div>'
-    +'<div class="ccrow"><span>민영 트래블로그 카드</span><span>₩2,000,000</span></div>'
-    +'<div class="ccrow" style="opacity:.5"><span>은지 현금 환전</span><span>미정</span></div>'
-    +'<div style="height:8px"></div>'
-    +'<div class="ccrow"><span>식비 팁 (18–20%)</span><span>~$120</span></div>'
-    +'<div class="ccrow"><span>주차·잡비</span><span>~$30</span></div>'
-    +'<div class="ccrow"><span>푸드트럭·파머스마켓</span><span>~$50</span></div>'
-    +'</div></div>';
+  /* ── 현금 카드 섹션 ── */
+  var eunjiCash = 200;
+    h+='<div class="cashcard">'
+    +'<div class="ccl">현지 결제 수단</div>'
+    +'<div class="cca">현지결제수단</div>'
+    +'<div style="height:1px;background:rgba(255,255,255,.25);margin:14px 0 12px"></div>'
+    +'<div style="font-size:10px;font-weight:700;letter-spacing:1px;color:#fff;margin-bottom:10px">💵 현금 & 트래블로그</div>'
+    +'<div style="display:flex;justify-content:space-between;align-items:flex-start;padding:8px 0;border-top:1px solid rgba(255,255,255,.15)">'
+    +'<div style="font-size:12px;color:#fff">민영 현금 환전</div>'
+    +'<div style="text-align:right"><div style="font-size:18px;font-weight:800;color:#fff">$200</div><div style="font-size:10px;color:#fff">'+krw(200*R)+'</div></div>'
+    +'</div>'
+    +'<div style="display:flex;justify-content:space-between;align-items:flex-start;padding:8px 0;border-top:1px solid rgba(255,255,255,.15)">'
+    +'<div style="font-size:12px;color:#fff">민영 트래블로그</div>'
+    +'<div style="text-align:right"><div style="font-size:18px;font-weight:800;color:#fff">$1,335</div><div style="font-size:10px;color:#fff">'+krw(1335*R)+'</div></div>'
+    +'</div>'
+    +'<div style="height:1px;background:rgba(255,255,255,.25);margin:14px 0 12px"></div>'
+    +'<div style="font-size:10px;font-weight:700;letter-spacing:1px;color:#fff;margin-bottom:10px">💳 신용카드</div>'
+    +'<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-top:1px solid rgba(255,255,255,.15)">'
+    +'<div style="font-size:12px;color:#fff">은지 신용카드</div>'
+    +'<div style="font-size:11px;color:#fff">렌터카 · 숙박 · 쇼핑</div>'
+    +'</div>'
+    +'<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-top:1px solid rgba(255,255,255,.15)">'
+    +'<div style="font-size:12px;color:#fff">민영 신용카드</div>'
+    +'<div style="font-size:11px;color:#fff">백업 · 온라인 결제</div>'
+    +'</div>'
+    +'</div>';
   h+='<div style="font-size:10px;color:#9CA3AF;padding:0 4px 8px;line-height:1.7">* 환율 $1 = ₩1,550 · 렌터카 후불·리조트피 카드 결제 예정</div>';
   return h+'</div>';
 }
@@ -846,187 +863,69 @@ function budgetHTML(){
 /* ── tips ── */
 function tipSect(key,title,sub,bodyFn){
   var open=OPEN_TIPS[key];
-  return '<div class="tip-sect">'
-    +'<div class="tip-hd" onclick="toggleTip(\''+key+'\')">'
-    +'<div class="tip-hd-left"><div class="tip-ttl">'+title+'</div><div class="tip-sub">'+sub+'</div></div>'
-    +'<span class="tip-chev'+(open?' op':'')+'">▼</span>'
-    +'</div>'
-    +(open?'<div class="tip-body">'+bodyFn()+'</div>':'')
-    +'</div>';
+  var qk="'"+key+"'";
+  var h='<div class="tip-sect"><div class="tip-hd" onclick="toggleTip('+qk+')"><div class="tip-hd-left"><div class="tip-ttl">'+title+'</div><div class="tip-sub">'+sub+'</div></div><span class="tip-chev'+(open?' op':'')+'">&#9660;</span></div>';
+  if(open)h+='<div class="tip-body">'+bodyFn()+'</div>';
+  return h+'</div>';
 }
 function tipItems(cat,items){
   return items.map(function(it){
     var isEd=EDIT_TIP&&EDIT_TIP.cat===cat&&EDIT_TIP.id===it.id;
     var ck=JSON.stringify(cat),id=JSON.stringify(it.id);
-    return '<div class="tip-item"><div class="ti-head"><span class="ti-ico">'+esc(it.ico||'•')+'</span><div class="ti-body-inner">'
-      +(isEd?'<textarea class="ti-ta" id="tta_'+it.id+'">'+esc(it.txt)+'</textarea><div class="ti-acts"><button class="ti-btn" onclick="saveTip('+ck+','+id+')">저장</button><button class="ti-btn" onclick="cancelTip()">취소</button></div>'
-          :'<div class="ti-txt" style="white-space:pre-line">'+linkify(it.txt)+'</div><div class="ti-acts"><button class="ti-btn" onclick="editTip('+ck+','+id+')">수정</button><button class="ti-btn del" onclick="delTip('+ck+','+id+')">삭제</button></div>')
-      +'</div></div></div>';
+    var inner=isEd?('<textarea class="ti-ta" id="tta_'+it.id+'">'+esc(it.txt)+'</textarea><div class="ti-acts"><button class="ti-btn" onclick="saveTip('+ck+','+id+')">저장</button><button class="ti-btn" onclick="cancelTip()">취소</button></div>'):('<div class="ti-txt" style="white-space:pre-line">'+linkify(it.txt)+'</div><div class="ti-acts"><button class="ti-btn" onclick="editTip('+ck+','+id+')">수정</button><button class="ti-btn del" onclick="delTip('+ck+','+id+')">삭제</button></div>');
+    return '<div class="tip-item"><div class="ti-head"><span class="ti-ico">'+esc(it.ico||'•')+'</span><div class="ti-body-inner">'+inner+'</div></div></div>';
   }).join('');
 }
 function tipsHTML(){
   var h='<div class="gap">';
-
-  h+=tipSect('wx','☀️ 날씨 & 옷차림','5/28–6/5 예보 기반 · AccuWeather',function(){
-    var rows=[
-      {t:'빅아일랜드 기온',d:'낮 최고 30°C / 밤 최저 22°C · 자외선 UV 7–9 (강함)'},
-      {t:'오아후 기온',d:'낮 최고 29–30°C / 밤 최저 22–24°C · 자외선 UV 8–9 (매우 강함)'},
-      {t:'기본 옷차림',d:'얇은 반소매 + 반바지·원피스 · 샌들 OK'},
-      {t:'실내·저녁 대비',d:'얇은 가디건·후드 필수 (식당·쇼핑몰 에어컨 강함)'},
-      {t:'마우나케아 (5/29)',d:'정상 4°C — 두꺼운 자켓·장갑·비니 필수'},
-      {t:'화산공원 (5/31)',d:'20–24°C · 레이어링 권장 · 접이식 우비 챙길 것'},
-      {t:'다이아몬드헤드 (6/4)',d:'이른 아침 등반 권장 · 운동화 필수 · 물 500mL 이상'},
-      {t:'자외선 차단',d:'SPF 50+ 선크림 필수 · 모자·썬글라스 · 리프세이프 선크림만'},
-      {t:'비 대비',d:'5/28 초반 소나기 가능 · 접이식 우산 or 레인재킷 1개'},
-      {t:'스노클링 시',d:'래시가드 권장 (산호 긁힘·자외선 차단) · 수영화 있으면 좋음'},
-    ];
-    var h2='';
-    rows.forEach(function(r){
-      h2+='<div style="display:flex;gap:8px;padding:7px 0;border-bottom:1px dashed #F3F4F6">'        +'<div style="font-size:11px;font-weight:700;color:#5BB8D4;min-width:110px;flex-shrink:0">'+r.t+'</div>'        +'<div style="font-size:11px;color:#374151;line-height:1.5">'+r.d+'</div>'        +'</div>';
-    });
-    return h2;
-  });
-  h+=tipSect('tr','교통 & 렌터카','주유 · 속도 · 주차 · TheBus · 정체',function(){return tipItems('tr',tr);});
-  h+=tipSect('li','생활 & 매너','팁 문화 · 자연 예절 · 화산 현황',function(){return tipItems('li',li);});
-  h+=tipSect('sn','🤿 스노클링 가이드','리프컷 · 투스텝 · 샥스코브',function(){return tipItems('sn',sn);});
-  h+=tipSect('en','필수 영어 표현','렌터카 · 호텔 · 식당 · 액티비티',function(){
-    return [['렌터카',ENG.rentalcar],['호텔',ENG.hotel],['식당',ENG.restaurant],['액티비티',ENG.activity]].map(function(sec){
-      return '<div class="eng-sect"><div class="eng-hd">'+sec[0]+'</div>'
+  h+=tipSect('tr','\uad50\ud1b5 & \ub80c\ud130\uce74','\uc8fc\uc720 \u00b7 \uc18d\ub3c4 \u00b7 \uc8fc\ucc28 \u00b7 TheBus \u00b7 \uc815\uccb4',function(){return tipItems('tr',tr);});
+  h+=tipSect('li','\uc0dd\ud65c & \ub9e4\ub108','\ud301 \ubb38\ud654 \u00b7 \uc790\uc5f0 \uc608\uc808 \u00b7 \ud654\uc0b0 \ud604\ud669',function(){return tipItems('li',li);});
+  h+=tipSect('sn','\ud83e\udd3f \uc2a4\ub178\ud074\ub9c1 \uac00\uc774\ub4dc','\ub9ac\ud504\ucef7 \u00b7 \ud22c\uc2a4\ud15d \u00b7 \uc0e5\uc2a4\ucf54\ube0c',function(){return tipItems('sn',sn);});
+  h+=tipSect('en','\ud544\uc218 \uc601\uc5b4 \ud45c\ud604','\ub80c\ud130\uce74 \u00b7 \ud638\ud154 \u00b7 \uc2dd\ub2f9 \u00b7 \uc561\ud2f0\ube44\ud2f0',function(){
+    return [['\\ub80c\\ud130\\uce74',ENG.rentalcar],['\\ud638\\ud154',ENG.hotel],['\\uc2dd\\ub2f9',ENG.restaurant],['\\uc561\\ud2f0\\ube44\\ud2f0',ENG.activity]].map(function(sec){
+      return '<div class="eng-sect"><div class="eng-hd">'+esc(sec[0])+'</div>'+
         +sec[1].map(function(it){return '<div class="eng-item"><div class="eng-phrase">"'+esc(it.p)+'"</div><div class="eng-tr">'+esc(it.t)+'</div>'+(it.n?'<div class="eng-note">'+esc(it.n)+'</div>':'')+'</div>';}).join('')
         +'</div>';
     }).join('');
   });
-  h+=tipSect('cu','입국심사 & 세관 Q&A','출입국 시 예상 질문·답변',function(){
-    return '<div style="padding-top:4px">'+ENG.customs.map(function(it){
+  h+=tipSect('cu','\uc785\uad6d\uc2ec\uc0ac & \uc138\uad00 Q&A','\ucd9c\uc785\uad6d \uc2dc \uc608\uc0c1 \uc9c8\ubb38\u00b7\ub2f5\ubcc0',function(){
+    return ENG.customs.map(function(it){
       return '<div class="eng-item"><div class="eng-phrase">"'+esc(it.p)+'"</div><div class="eng-tr">'+esc(it.t)+'</div>'+(it.n?'<div class="eng-note">'+esc(it.n)+'</div>':'')+'</div>';
-    }).join('')+'</div>';
+    }).join('');
   });
-  h+=tipSect('cb','세관신고서 (CBP Form 6059B)','입국 시 작성 항목',function(){
+  h+=tipSect('cb','\uc138\uad00\uc2e0\uace0\uc11c (CBP Form 6059B)','\uc785\uad6d \uc2dc \uc791\uc131 \ud56d\ubaa9',function(){
     return CBP_FIELDS.map(function(f){
       return '<div style="display:flex;gap:10px;padding:8px 0;border-bottom:1px solid #F5F5F5"><div style="font-size:10px;color:#9CA3AF;min-width:130px;flex-shrink:0">'+esc(f.label)+'</div><div style="font-size:12px;font-weight:600;flex:1;line-height:1.4">'+esc(f.value)+'</div></div>';
     }).join('');
   });
-  h+=tipSect('hw','하와이에서만 쓰는 표현','Aloha · Mahalo · Shaka 외',function(){
+  h+=tipSect('hw','\ud558\uc640\uc774\uc5d0\uc11c\ub9cc \uc4f0\ub294 \ud45c\ud604','Aloha \u00b7 Mahalo \u00b7 Shaka \uc678',function(){
     return HAWAII_WORDS.map(function(w){return '<div class="hawaii-word"><div class="hw-word">'+esc(w.word)+'</div><div class="hw-def">'+esc(w.def)+'</div></div>';}).join('');
   });
   return h+'</div>';
 }
-
-/* ── render ── */
 function render(){
   var c=document.getElementById('C');
+  if(!c)return;
   if(TAB===0)c.innerHTML=scheduleHTML();
   else if(TAB===1)c.innerHTML=packingHTML();
   else if(TAB===2)c.innerHTML=budgetHTML();
   else c.innerHTML=tipsHTML();
-  renderTabs();
+  var tabs=['\ud83d\uddd3 \uc77c\uc815','\ud83c\udf92 \uc900\ube44\ubb3c','\ud83d\udcb0 \uc608\uc0b0','\ud83d\udca1 \ud301'];
+  document.getElementById('T').innerHTML=tabs.map(function(t,i){
+    return '<button class="tbtn'+(TAB===i?' on':'')+'\" onclick=\"setTab('+i+')\">'+t+'</button>';
+  }).join('');
   if(EDIT_TIP){var ta=document.getElementById('tta_'+EDIT_TIP.id);if(ta)ta.focus();}
 }
-
-/* ── handlers ── */
 function setTab(i){TAB=i;EDIT_TIP=null;render();}
 function toggleDay(k){OPEN_DAYS[k]=OPEN_DAYS[k]===true?false:true;render();}
 function toggleTip(k){OPEN_TIPS[k]=OPEN_TIPS[k]?0:1;render();}
-
-
-/* ── 인덱스 기반 추가 ── */
-function addChildByIdx(si,pii,val){var v=(val||"").trim();if(!v)return;var s=sects[si];if(!s)return;var p=s.items[pii];if(!p||!p.children)return;var nc={t:v,id:"cc_"+Date.now(),done:false};sects[si].items[pii].children=p.children.concat([nc]);save();render();}
-function addItemByIdx(si,val){var s=sects[si];if(s)addItem(s.cat,val);}
-
-/* ── 터치 드래그 정렬 ── */
-var _dg=null;
-var _dgBlock=false;
-function _startDrag(e,si,fromIdx,isChild,pii){
-  e.stopPropagation();
-  e.preventDefault();
-  var _el=e.currentTarget?e.currentTarget.parentElement:null;
-  var _t=e.touches&&e.touches[0]?e.touches[0]:null;
-  if(!_el||!_t)return;
-  var _tx=_t.clientX,_ty=_t.clientY;
-  var active=true;
-  var timer=setTimeout(function(){
-    if(!active)return;
-    _dgBlock=true;
-    var rect=_el.getBoundingClientRect();
-    var ghost=_el.cloneNode(true);
-    ghost.style.cssText='position:fixed;left:'+rect.left+'px;top:'+rect.top+'px;width:'+rect.width+'px;z-index:9999;opacity:0.92;box-shadow:0 8px 24px rgba(0,0,0,.22);border-radius:10px;pointer-events:none;background:#fff;';
-    document.body.appendChild(ghost);
-    _el.style.opacity='0.25';
-    _dg={si:si,from:fromIdx,to:fromIdx,el:_el,ghost:ghost,baseTop:rect.top,startY:_ty};
-    document.addEventListener('touchmove',_dgMove,{passive:false});
-    document.addEventListener('touchend',_dgEnd,{once:true});
-  },250);
-  var cancel=function(){active=false;clearTimeout(timer);};
-  e.currentTarget.addEventListener('touchend',cancel,{once:true});
-  e.currentTarget.addEventListener('touchmove',cancel,{once:true});
-}
-function piHold(e,si,ii){_startDrag(e,si,ii,false,null);}
-function piChildHold(e,si,pii,ci){_startDrag(e,si,ci,true,pii);}
-function _dgMove(e){
-  if(!_dg)return;
-  e.preventDefault();
-  var t=e.touches[0];
-  var dy=t.clientY-_dg.startY;
-  _dg.ghost.style.top=(_dg.baseTop+dy)+'px';
-  var gMid=_dg.baseTop+dy+(_dg.el.offsetHeight||40)/2;
-  var sel=_dg.isChild
-    ?'[data-si="'+_dg.si+'"][data-pii="'+_dg.pii+'"][data-cii]'
-    :'[data-si="'+_dg.si+'"][data-ii]:not([data-pii])';
-  var els=document.querySelectorAll(sel);
-  var best=_dg.from,bestD=9999;
-  els.forEach(function(el){
-    var r=el.getBoundingClientRect();
-    var d=Math.abs(r.top+r.height/2-gMid);
-    if(d<bestD){bestD=d;best=+el.dataset[_dg.isChild?'cii':'ii'];}
-  });
-  if(best!==_dg.to){
-    if(_dg._over)_dg._over.classList.remove('drag-over');
-    _dg.to=best;
-    var tsel=_dg.isChild
-      ?'[data-si="'+_dg.si+'"][data-pii="'+_dg.pii+'"][data-cii="'+best+'"]'
-      :'[data-si="'+_dg.si+'"][data-ii="'+best+'"]:not([data-pii])';
-    var tgt=document.querySelector(tsel);
-    if(tgt){tgt.classList.add('drag-over');_dg._over=tgt;}
-  }
-}
-function _dgEnd(){
-  if(!_dg)return;
-  _dg.ghost.remove();
-  _dg.el.classList.remove('dragging');
-  _dg.el.style.opacity='';
-  setTimeout(function(){_dgBlock=false;},50);
-  if(_dg._over)_dg._over.classList.remove('drag-over');
-  if(_dg.from!==_dg.to){
-    var s=sects[_dg.si];
-    if(s){
-      if(_dg.isChild){
-        var parent=s.items[_dg.pii];
-        if(parent&&parent.children){
-          var ch=parent.children.slice();
-          var mv=ch.splice(_dg.from,1)[0];
-          ch.splice(_dg.to,0,mv);
-          sects[_dg.si].items[_dg.pii].children=ch;
-          save();render();
-        }
-      } else {
-        var items=s.items.slice();
-        var mv=items.splice(_dg.from,1)[0];
-        items.splice(_dg.to,0,mv);
-        sects[_dg.si]={cat:s.cat,items:items};
-        save();render();
-      }
-    }
-  }
-  document.removeEventListener('touchmove',_dgMove);
-  _dg=null;
-}
 function addTodo(v){var t=(v||'').trim();if(!t)return;todos.push(t);save();render();}
 function delTodo(i){todos.splice(i,1);save();render();}
-function chkItem(cat,id){if(_dgBlock)return;sects=sects.map(function(s){return s.cat===cat?{cat:s.cat,items:s.items.map(function(it){return it.id===id?Object.assign({},it,{done:!it.done}):it;})}:s;});save();render();}
+function chkItem(cat,id){sects=sects.map(function(s){return s.cat===cat?{cat:s.cat,items:s.items.map(function(it){return it.id===id?Object.assign({},it,{done:!it.done}):it;})}:s;});save();render();}
 function delItem(cat,id){sects=sects.map(function(s){return s.cat===cat?{cat:s.cat,items:s.items.filter(function(it){return it.id!==id;})}:s;});save();render();}
 function addItem(cat,val){var v=(val||'').trim();if(!v)return;var ni={t:v,id:'c_'+Date.now(),done:false,cust:true};sects=sects.map(function(s){return s.cat===cat?{cat:s.cat,items:s.items.concat([ni])}:s;});save();render();}
 function toggleGrp(cat,id){sects=sects.map(function(s){return s.cat===cat?{cat:s.cat,items:s.items.map(function(it){return it.id===id?Object.assign({},it,{open:it.open===false?true:false}):it;})}:s;});render();}
-function chkChild(cat,pid,cid){if(_dgBlock)return;sects=sects.map(function(s){return s.cat===cat?{cat:s.cat,items:s.items.map(function(it){return it.id===pid?Object.assign({},it,{children:it.children.map(function(c){return c.id===cid?Object.assign({},c,{done:!c.done}):c;})}):it;})}:s;});save();render();}
+function chkChild(cat,pid,cid){sects=sects.map(function(s){return s.cat===cat?{cat:s.cat,items:s.items.map(function(it){return it.id===pid?Object.assign({},it,{children:it.children.map(function(c){return c.id===cid?Object.assign({},c,{done:!c.done}):c;})}):it;})}:s;});save();render();}
 function delChild(cat,pid,cid){sects=sects.map(function(s){return s.cat===cat?{cat:s.cat,items:s.items.map(function(it){return it.id===pid?Object.assign({},it,{children:it.children.filter(function(c){return c.id!==cid;})}):it;})}:s;});save();render();}
 function editTip(cat,id){EDIT_TIP={cat:cat,id:id};render();}
 function cancelTip(){EDIT_TIP=null;render();}
@@ -1038,55 +937,25 @@ function delTip(cat,id){
   function rm(arr){return arr.filter(function(i){return i.id!==id;});}
   if(cat==='tr')tr=rm(tr);else if(cat==='li')li=rm(li);else sn=rm(sn);
   save();render();}
-
-/* ── init ── */
-load();
-document.getElementById('H').innerHTML=hero();
-render();
-
+document.addEventListener('DOMContentLoaded',function(){
+  try{load();var h=document.getElementById('H');if(h)h.innerHTML=hero();render();fetchWeather();}
+  catch(e){var c=document.getElementById('C');if(c)c.innerHTML='<div style="padding:20px;color:red;font-size:12px">\uc624\ub958: '+e.message+'</div>';}
+});
 </script>
-
 <script>
 if('serviceWorker' in navigator){
-  window.addEventListener('load', function(){
-    navigator.serviceWorker.register('./sw.js')
-      .then(function(){ console.log('SW 등록 완료 — 오프라인 사용 가능'); })
-      .catch(function(e){ console.log('SW 등록 실패:', e); });
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('./sw.js').then(function(){}).catch(function(){});
   });
 }
 </script>
-
-
-
 <script>
 (function(){
-  var sy=0,top=false,threshold=90;
-  var bar=document.getElementById('ptrBar');
-  var toast=document.getElementById('ptrToast');
-  document.addEventListener('touchstart',function(e){
-    var st=window.pageYOffset||document.documentElement.scrollTop||document.body.scrollTop||0;
-    top=(st<=0);
-    sy=e.touches[0].pageY;
-  },{passive:true});
-  document.addEventListener('touchmove',function(e){
-    if(!top)return;
-    var dy=e.touches[0].pageY-sy;
-    if(dy>0&&bar){
-      bar.style.transform='scaleX('+Math.min(dy/threshold,1)+')';
-    }
-  },{passive:true});
-  document.addEventListener('touchend',function(e){
-    if(!bar)return;
-    bar.style.transform='scaleX(0)';
-    if(!top)return;
-    var dy=e.changedTouches[0].pageY-sy;
-    if(dy>=threshold){
-      toast.classList.add('show');
-      setTimeout(function(){location.reload();},600);
-    }
-  },{passive:true});
+  var sy=0,top=false,thr=65,bar=document.getElementById('ptrBar'),toast=document.getElementById('ptrToast');
+  document.addEventListener('touchstart',function(e){var st=window.pageYOffset||0;top=(st<=0);sy=e.touches[0].pageY;},{passive:true});
+  document.addEventListener('touchmove',function(e){if(!top||!bar)return;var dy=e.touches[0].pageY-sy;if(dy>0)bar.style.transform='scaleX('+Math.min(dy/thr,1)+')';},{passive:true});
+  document.addEventListener('touchend',function(e){if(bar)bar.style.transform='scaleX(0)';if(!top)return;var dy=e.changedTouches[0].pageY-sy;if(dy>=thr){if(toast)toast.classList.add('show');setTimeout(function(){location.reload();},600);}},{passive:true});
 })();
 </script>
-
 </body>
 </html>
