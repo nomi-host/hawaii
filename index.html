@@ -428,10 +428,11 @@ const PAID=[
   {name:"알로힐라니 리조트 4박",sub:"6/1–6/5 · agoda",krw:1527193,payer:"민영",pc:{bg:"#FEF3C7",tc:"#B45309"}},
   {name:"비자 신청",sub:"$40.27/인",krw:u2k(40.27),usd:40.27,payer:"각자",pc:{bg:"#F0FDF4",tc:"#15803D"}},
   {name:"다이아몬드헤드 입장권",sub:"6/4 6:00–7:00am · 2인 합계",krw:u2k(11.27),usd:11.27,payer:"민영",pc:{bg:"#FEF3C7",tc:"#B45309"}},
+    {name:"쿠알로아랜치 랩터",sub:"klook · 민영 납부",krw:392904,usd:253.5,payer:"민영",pc:{bg:"#FEF3C7",tc:"#B45309"}},
 ];
 const PENDING=[
   {name:"유심/로밍",sub:"출국 전 설정 필요",amt:"미정"},
-  {name:"쿠알로아랜치 랩터",sub:"klook",amt:"미정"},
+
   {name:"여행자보험",sub:"출국 전",amt:"미정"},
 ];
 const ONSITE=[
@@ -628,7 +629,6 @@ function scheduleHTML(){
       var body='';
       if(open){
         if(day.warn)body+='<div class="warn">'+esc(day.warn)+'</div>';
-        if(day.opt2)body+='<div class="opt-div">'+esc(day.opt2)+'</div>';
         day.acts.forEach(function(a){
           if(a.tran)body+='<div class="tran">📍 <span style="font-weight:500">'+esc(a.tran.dist)+' · '+esc(a.tran.time)+'</span></div>';
           var dc=a.type==='shop'?' shop':a.type==='main'?' blue':a.type==='ret'?' ret':'';
@@ -641,7 +641,11 @@ function scheduleHTML(){
         });
         if(day.opt2&&day.opt2.length){
           body+='<div class="opt-div">🧺 옵션 2 — 자연 & 피크닉 코스</div>';
-          day.opt2.forEach(function(a){ body+=actHTML(a); });
+          day.opt2.forEach(function(a){
+            if(a.tran)body+='<div class="tran">📍 <span style="font-weight:500">'+esc(a.tran.dist)+' · '+esc(a.tran.time)+'</span></div>';
+            var dc=a.type==='shop'?' shop':a.type==='main'?' blue':a.type==='ret'?' ret':'';
+            body+='<div class="act"><div class="adot'+dc+'"></div><div class="abody">'              +'<div class="atxt'+(a.type==='ret'?' ret-txt':'')+'">' +esc(a.t)+'</div>'              +(a.info?'<div class="ainfo">'+esc(a.info)+'</div>':'')              +(a.n?'<div class="anote">'+esc(a.n)+'</div>':'')              +(a.park?'<div class="apark">'+esc(a.park)+'</div>':'')              +'</div></div>';
+          });
         }
         if(day.rests&&day.rests.length){
           body+='<div class="rest-box"><div class="rlbl">근처 맛집</div>';
