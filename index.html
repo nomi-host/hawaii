@@ -172,6 +172,7 @@ a{color:#5BB8D4}
 .ptr-bar{position:fixed;top:0;left:0;right:0;height:3px;background:#5BB8D4;transform:scaleX(0);transform-origin:left;transition:transform .3s;z-index:9999}
 .ptr-toast{position:fixed;top:16px;left:50%;transform:translateX(-50%) translateY(-60px);background:#5BB8D4;color:#fff;padding:8px 20px;border-radius:99px;font-size:13px;font-weight:700;z-index:9999;transition:transform .3s;white-space:nowrap;box-shadow:0 4px 12px rgba(91,184,212,.4)}
 .ptr-toast.show{transform:translateX(-50%) translateY(0)}
+.opt-div{background:#F0FDF4;border:1px solid #86EFAC;border-radius:10px;padding:7px 12px;margin:8px 0 4px;font-size:11px;font-weight:700;color:#166534}
 </style>
 
 </head>
@@ -261,7 +262,7 @@ const SCHED=[
       {name:"Kohala Burger & Burritos",type:"캐주얼 · 가성비",map:"https://maps.google.com/?q=Kohala+Burger+and+Burritos+Hawaii"},
      ]},
     {emoji:"⚫",date:"5월 30일 토",title:"블랙샌드 · 힐로 탐방",weather:{emoji:"⛅",desc:"코나 30°C / 힐로 25°C · 동부 이동 시 소나기 가능 · 자외선 높음"},
-     warn:"⚠️ 총 주행 약 350km · 순수 운전 7시간 이상. 7:00am 이른 출발 필수. 그린샌드는 도보(왕복 8km·2.5hr) 대신 현지 지프 택시($15–20/인) 강력 권장. 시간 부족 시 아카카 폭포·오네카하카하 비치는 포기.",
+     warn:"⚠️ 옵션 1 (힐로 풀코스): 총 350km · 운전 7시간+. 7:00am 출발 필수. 시간 부족 시 아카카폭포·오네카하카하 생략.\n옵션 2 (자연 피크닉): 블랙샌드 → 사우스포인트 → 그린샌드 → 하푸나 비치 피크닉 → 복귀. 약 240km · 느긋하게.",
      acts:[
       {t:"힐튼 이른 출발 (7:00 권장)"},
       {t:"푸나루우 블랙샌드 비치",tran:{dist:"80km",time:"약 1시간 30분"},type:"main",info:"하와이 대표 검은 모래 해변 · 녹색 바다거북 낮잠 서식지",n:"거북이 6피트 이내 접근 금지 · $10,000 벌금",park:"🅿 비치 입구 무료"},
@@ -275,6 +276,14 @@ const SCHED=[
       {t:"🛍 Big Island Candies",n:"마카다미아 초콜릿 · 무료 시식",type:"shop",park:"🅿 매장 앞 무료"},
       {t:"🛍 Sig Zane Designs",tran:{dist:"4km",time:"약 8분"},type:"shop",info:"하와이 문화 패턴 의류 · 힐로 본점",park:"🅿 도로변 무료"},
       {t:"힐튼 와이콜로아 복귀",tran:{dist:"130km",time:"약 2시간"},type:"ret"},
+     ],
+     opt2:[
+      {t:"힐튼 이른 출발 (7:00am)"},
+      {t:"푸나루우 블랙샌드 비치",tran:{dist:"80km",time:"약 1시간 30분"},type:"main",info:"검은 모래 해변 · 녹색 바다거북 서식지",n:"거북이 6피트 이내 접근 금지",park:"🅿 비치 입구 무료"},
+      {t:"사우스포인트 (Ka Lae) — 미국 최남단",tran:{dist:"20km",time:"약 25분"},type:"main",info:"미국 최남단 지점 · 강한 바람 · 절벽 점프 명소",park:"🅿 비포장도로 끝 무료"},
+      {t:"그린샌드 비치 (파파코레아)",tran:{dist:"8km",time:"약 30분 비포장"},type:"main",info:"감람석 성분 올리브그린 모래 · 세계 4곳 뿐인 희귀 비치",n:"⚠ 지프 택시($15–20/인) 권장 · 도보 왕복 8km·2.5hr"},
+      {t:"하푸나 비치 피크닉 🧺",tran:{dist:"110km",time:"약 1시간 30분"},type:"main",info:"하와이 최고 백사장 · 넓고 파도 잔잔 · 피크닉 최적",n:"도시락/마트 들러서 먹거리 챙기기 · 화장실·샤워실 완비",park:"🅿 주립공원 내 $10"},
+      {t:"힐튼 와이콜로아 복귀",tran:{dist:"30km",time:"약 30분"},type:"ret"},
      ],
      rests:[
       {name:"Cafe Pesto Hilo",type:"파스타·피자 · 힐로 현지 명소",map:"https://maps.google.com/?q=Cafe+Pesto+Hilo+Hawaii"},
@@ -334,21 +343,18 @@ const SCHED=[
       {name:"Agnes' Portuguese Bake",type:"로컬 베이커리 · 카일루아",map:"https://maps.google.com/?q=Agnes+Portuguese+Bake+Shop+Kailua"},
      ]},
     {emoji:"🌊",date:"6월 3일 수 (렌터카)",title:"83번 국도 · 노스쇼어 & 쿠알로아랜치",weather:{emoji:"☀️",desc:"29°C/23°C · 맑음 · 스노클링 최적 · 자외선 매우 강함 (UV9)"},
-     warn:"⏱ 타이밍: 돌(8:30오픈) + 샤크스코브 2시간 + 쿠알로아 2:45 도착 목표. 권장: 7:30 출발 → 돌(8:30–9:00) → 와이메아베이 → 샤크스코브 9:50–11:50 → 점심 → 선셋비치 → Matsumoto → 라니아케아 → 쿠알로아 ~2:20 도착 ✓",
+     warn:"⏱ 타이밍: 쿠알로아 8:00am 투어 → 노스쇼어. 권장: 6:30 출발 → 쿠알로아 7:30 체크인 → 8:00am 랩터 (90분) → 라니아케아(거북이) → 할레이와·Matsumoto → 샤크스코브 스노클링 → 와이메아 → 선셋비치 → 돌 파인애플(복귀길)",
      acts:[
-      {t:"알로힐라니 출발 (7:30 권장)"},
-      {t:"🛍 돌 파인애플 플랜테이션 (H2 경유)",tran:{dist:"40km",time:"약 40분"},type:"shop",info:"파인애플 아이스크림·기념품 · 오전 방문 필수",n:"8:30am 오픈 · 7:30 출발 시 8:10 도착, 20분 대기",park:"🅿 플랜테이션 내 무료"},
-      {t:"와이메아 베이 (Waimea Bay)",tran:{dist:"15km",time:"약 15분"},info:"노스쇼어 대표 파도 명소 · 여름 잔잔할 때 스노클링 가능",park:"🅿 베이 앞 무료 (이른 도착 필수)"},
-      {t:"샤크스코브 스노클링 (2시간 이상 예정)",tran:{dist:"3km",time:"약 5분"},type:"main",
-       info:"오아후 북부 최고 스노클링 · 열대어·바다거북 풍부",
-       n:"⚠ 여름(5–9월) 파도 잔잔 최적 · 화장실·샤워실 있음(Pupukea Beach Park) · 수심 3–9m 중급",
-       park:"🅿 Pupukea Beach Park 무료"},
-      {t:"선셋 비치 파크",tran:{dist:"5km",time:"약 8분"},info:"세계적 서핑 대회 개최지 · 여름엔 수영 가능",park:"🅿 비치 앞 갓길 무료"},
-      {t:"Matsumoto Shave Ice",tran:{dist:"5km",time:"약 8분"},info:"빙수 원조 · 70년 역사 노포",park:"🅿 할레이와 타운 무료"},
-      {t:"라니아케아 비치 — 야생 거북이",tran:{dist:"5km",time:"약 8분"},type:"main",info:"오전~정오 거북이 낮잠 · 자원봉사자 상주",park:"🅿 도로변 갓길 무료"},
-      {t:"쿠알로아 랜치 — 2:45pm 도착 필수",tran:{dist:"38km",time:"약 40분"},type:"main",info:"쥬라기 공원 촬영지 · 계곡·바다 파노라마",park:"🅿 구내 무료"},
-      {t:"쿠알로아 랜치 랩터 체험 (3:30pm, 약 90분)",type:"main",n:"klook 예약 확인 · 2:45pm까지 체크인"},
-      {t:"알로힐라니 복귀 (H3 고속도로)",tran:{dist:"50km",time:"약 45분"},type:"ret"},
+      {t:"알로힐라니 출발 (6:30am)"},
+      {t:"쿠알로아 랜치 — 7:30am 체크인",tran:{dist:"40km",time:"약 45분"},type:"main",info:"쥬라기 공원 촬영지 · 계곡·바다 파노라마",n:"7:30am 체크인 → 8:00am 투어 시작",park:"🅿 구내 무료"},
+      {t:"🦖 쿠알로아 랜치 랩터 체험 (8:00am, 약 90분)",type:"main",n:"klook 예약 확인 · 7:30am까지 체크인"},
+      {t:"라니아케아 비치 — 야생 거북이",tran:{dist:"30km",time:"약 30분"},type:"main",info:"오전~정오 거북이 낮잠 · 자원봉사자 상주",park:"🅿 도로변 갓길 무료"},
+      {t:"Matsumoto Shave Ice & 할레이와 타운",tran:{dist:"3km",time:"약 5분"},info:"빙수 원조 · 70년 역사 노포 · 기념품 쇼핑",park:"🅿 할레이와 타운 무료"},
+      {t:"샤크스코브 스노클링 (2시간)",tran:{dist:"5km",time:"약 8분"},type:"main",info:"오아후 북부 최고 스노클링 · 열대어·바다거북 풍부",n:"⚠ 여름 파도 잔잔 최적 · 화장실·샤워실 있음 · 수심 3–9m 중급",park:"🅿 Pupukea Beach Park 무료"},
+      {t:"와이메아 베이 (Waimea Bay)",tran:{dist:"3km",time:"약 5분"},info:"노스쇼어 대표 파도 명소 · 여름 잔잔할 때 수영 가능",park:"🅿 베이 앞 무료"},
+      {t:"선셋 비치 파크",tran:{dist:"8km",time:"약 12분"},info:"세계적 서핑 대회 개최지 · 사진 명소",park:"🅿 비치 앞 갓길 무료"},
+      {t:"🛍 돌 파인애플 플랜테이션 (복귀길 H2)",tran:{dist:"28km",time:"약 30분"},type:"shop",info:"파인애플 아이스크림·기념품",park:"🅿 플랜테이션 내 무료"},
+      {t:"알로힐라니 복귀 (H1 경유)",tran:{dist:"40km",time:"약 40분"},type:"ret"},
      ],
      rests:[
       {name:"Giovanni's Shrimp Truck",type:"새우트럭 원조 · 노스쇼어 명물",map:"https://maps.google.com/?q=Giovanni%27s+Shrimp+Truck+Haleiwa"},
@@ -622,6 +628,7 @@ function scheduleHTML(){
       var body='';
       if(open){
         if(day.warn)body+='<div class="warn">'+esc(day.warn)+'</div>';
+        if(day.opt2)body+='<div class="opt-div">'+esc(day.opt2)+'</div>';
         day.acts.forEach(function(a){
           if(a.tran)body+='<div class="tran">📍 <span style="font-weight:500">'+esc(a.tran.dist)+' · '+esc(a.tran.time)+'</span></div>';
           var dc=a.type==='shop'?' shop':a.type==='main'?' blue':a.type==='ret'?' ret':'';
@@ -632,6 +639,10 @@ function scheduleHTML(){
             +(a.park?'<div class="apark">'+esc(a.park)+'</div>':'')
             +'</div></div>';
         });
+        if(day.opt2&&day.opt2.length){
+          body+='<div class="opt-div">🧺 옵션 2 — 자연 & 피크닉 코스</div>';
+          day.opt2.forEach(function(a){ body+=actHTML(a); });
+        }
         if(day.rests&&day.rests.length){
           body+='<div class="rest-box"><div class="rlbl">근처 맛집</div>';
           day.rests.forEach(function(r){
