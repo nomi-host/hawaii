@@ -603,6 +603,14 @@ function fetchWeather(){
   var base='https://api.open-meteo.com/v1/forecast?daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max,weathercode&timezone=Pacific%2FHonolulu&forecast_days=16';
   var biUrl=base+'&latitude=19.9241&longitude=-155.8701&start_date=2026-05-28&end_date=2026-05-31';
   var oaUrl=base+'&latitude=21.2816&longitude=-157.8371&start_date=2026-06-01&end_date=2026-06-05';
+  var done=0;
+  function showToast(ok){
+    var t=document.createElement('div');
+    t.style.cssText='position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:'+(ok?'#5BB8D4':'#9CA3AF')+';color:#fff;padding:8px 18px;border-radius:99px;font-size:12px;font-weight:700;z-index:9999;box-shadow:0 4px 12px rgba(0,0,0,.15);pointer-events:none';
+    t.textContent=ok?'🌤 날씨 업데이트됨':'📡 날씨 업데이트 실패';
+    document.body.appendChild(t);
+    setTimeout(function(){t.remove();},2500);
+  }
   function parse(data){
     data.daily.time.forEach(function(dk,i){
       LIVE_WX[dk]={
@@ -611,10 +619,13 @@ function fetchWeather(){
         live:true
       };
     });
+    done++;
     render();
+    if(done===2)showToast(true);
   }
-  fetch(biUrl).then(function(r){return r.json();}).then(parse).catch(function(){});
-  fetch(oaUrl).then(function(r){return r.json();}).then(parse).catch(function(){});
+  function fail(){done++;if(done===2&&Object.keys(LIVE_WX).length===0)showToast(false);}
+  fetch(biUrl).then(function(r){return r.json();}).then(parse).catch(fail);
+  fetch(oaUrl).then(function(r){return r.json();}).then(parse).catch(fail);
 }
 
 /* ── hero ── */
@@ -817,13 +828,16 @@ function budgetHTML(){
   });
   h+='</div>';
 
-    h+='<div class="cashcard"><div class="ccl">현금 환전 권장</div><div class="cca">$200 / 인</div>'
+    h+='<div class="cashcard"><div class="ccl">현지 지출 수단</div><div class="cca">환전 완료 ✓</div>'
     +'<div class="ccn">카드 결제 대부분 가능 · 팁·푸드트럭·주차 미터기는 현금 필요</div>'
     +'<div style="margin-top:12px">'
+    +'<div class="ccrow"><span>민영 현금 환전</span><span>$200</span></div>'
+    +'<div class="ccrow"><span>민영 트래블로그 카드</span><span>₩2,000,000</span></div>'
+    +'<div class="ccrow" style="opacity:.5"><span>은지 현금 환전</span><span>미정</span></div>'
+    +'<div style="height:8px"></div>'
     +'<div class="ccrow"><span>식비 팁 (18–20%)</span><span>~$120</span></div>'
     +'<div class="ccrow"><span>주차·잡비</span><span>~$30</span></div>'
     +'<div class="ccrow"><span>푸드트럭·파머스마켓</span><span>~$50</span></div>'
-    +'<div class="ccrow"><span>권장 합계</span><span>$200</span></div>'
     +'</div></div>';
   h+='<div style="font-size:10px;color:#9CA3AF;padding:0 4px 8px;line-height:1.7">* 환율 $1 = ₩1,550 · 렌터카 후불·리조트피 카드 결제 예정</div>';
   return h+'</div>';
