@@ -473,29 +473,34 @@ const ENG={
     {p:"Where's the fuel door release?",t:"연료 캡 레버가 어디 있나요?"},
     {p:"Can I get a full-to-full fuel option?",t:"풀탱크 옵션 있나요?"},
     {p:"Can I extend the rental by one day?",t:"하루 연장 가능한가요?"},
+    {p:"Does this car have CarPlay?",t:"이 차에 카플레이 기능이 있나요?",n:"Apple CarPlay 사용 가능 여부 확인"},
+    {p:"Can I rent a phone mount?",t:"휴대폰 거치대를 빌릴 수 있나요?",n:"없으면 'I'll need to purchase one.' (구매 필요)"},
   ],
   hotel:[
     {p:"Could we get an ocean view room?",t:"오션뷰 룸으로 주실 수 있나요?"},
     {p:"Is late checkout available?",t:"레이트 체크아웃 가능한가요?"},
     {p:"The A/C isn't working properly.",t:"에어컨이 제대로 안 돼요."},
     {p:"Can we get extra towels / pillows?",t:"타올/베개 더 주실 수 있나요?"},
-    {p:"Is the resort fee already included?",t:"리조트 피 포함된 금액인가요?"},
+    {p:"Can we take beach towels/chairs outside the resort?",t:"비치 타올/체어를 빌려서 밖으로 나가도 되나요?"},
+    {p:"Can we rent paddleboards or life jackets?",t:"패들보드/구명조끼 등을 빌릴 수 있나요?"},
     {p:"Any good restaurant recommendations nearby?",t:"근처 괜찮은 식당 추천해 주실 수 있나요?"},
   ],
   restaurant:[
     {p:"A table for two, please.",t:"2인 자리 부탁드려요."},
     {p:"What's your most popular dish?",t:"가장 인기 있는 메뉴가 뭔가요?"},
     {p:"Is the tip included?",t:"팁이 포함된 가격인가요?"},
-    {p:"Can we split the check?",t:"계산서 따로 받을 수 있나요?"},
+    {p:"Dressing/sauce on the side, please.",t:"소스는 따로 주세요.",n:"샐러드 드레싱, 디핑소스 등"},
+    {p:"Can I get this without cilantro/pickles?",t:"고수/피클 빼고 주세요.",n:"주문 시 미리 요청"},
+    {p:"Does this dish have cilantro or pickles in it?",t:"혹시 이 메뉴에 고수/피클이 들어있나요?"},
     {p:"Could we get this to go?",t:"포장해 주실 수 있나요?"},
-    {p:"I'm allergic to shellfish / nuts.",t:"조개류/견과류 알레르기가 있어요."},
   ],
   activity:[
-    {p:"Where are the life jackets?",t:"구명조끼가 어디 있나요?"},
     {p:"Is this area safe for snorkeling?",t:"이 구역 스노클링해도 안전한가요?"},
     {p:"How difficult is this trail?",t:"이 트레일 난이도가 어떻게 되나요?"},
     {p:"We have a reservation under Kim.",t:"Kim 이름으로 예약했어요."},
     {p:"Is the park / trail open today?",t:"오늘 공원/트레일 개방됐나요?"},
+    {p:"How long does it take to reach the summit?",t:"정상까지 얼마나 걸리나요?",n:"다이아몬드헤드 등반 시 활용"},
+    {p:"Can I add a tip with a card?",t:"팁을 카드로 결제할 수 있나요?"},
   ],
   customs:[
     {p:"What's the purpose of your visit?",          t:"방문 목적이 무엇인가요?",           n:"→ Tourism. / Sightseeing."},
@@ -505,6 +510,7 @@ const ENG={
     {p:"Do you have anything to declare?",           t:"신고할 물품이 있나요?",             n:"→ No, I don't."},
     {p:"Did you visit a farm or bring any food?",    t:"농장을 방문했거나 음식물을 가져왔나요?", n:"→ No."},
     {p:"Do you have more than $10,000 in cash?",     t:"현금 $10,000 이상 소지하고 있나요?",  n:"→ No."},
+    {p:"How are you funding this trip?",t:"무슨 돈으로 여행하나요?",n:"→ I have my credit card and some cash. I budgeted about $2,000 for this trip. (신용카드와 현금이 있어요. 이번 여행 예산은 약 2,000달러입니다.)"},
   ],
 };
 const CBP_FIELDS=[
@@ -882,10 +888,8 @@ function tipsHTML(){
   h+=tipSect('li','\uc0dd\ud65c & \ub9e4\ub108','\ud301 \ubb38\ud654 \u00b7 \uc790\uc5f0 \uc608\uc808 \u00b7 \ud654\uc0b0 \ud604\ud669',function(){return tipItems('li',li);});
   h+=tipSect('sn','\ud83e\udd3f \uc2a4\ub178\ud074\ub9c1 \uac00\uc774\ub4dc','\ub9ac\ud504\ucef7 \u00b7 \ud22c\uc2a4\ud15d \u00b7 \uc0e5\uc2a4\ucf54\ube0c',function(){return tipItems('sn',sn);});
   h+=tipSect('en','\ud544\uc218 \uc601\uc5b4 \ud45c\ud604','\ub80c\ud130\uce74 \u00b7 \ud638\ud154 \u00b7 \uc2dd\ub2f9 \u00b7 \uc561\ud2f0\ube44\ud2f0',function(){
-    return [['\\ub80c\\ud130\\uce74',ENG.rentalcar],['\\ud638\\ud154',ENG.hotel],['\\uc2dd\\ub2f9',ENG.restaurant],['\\uc561\\ud2f0\\ube44\\ud2f0',ENG.activity]].map(function(sec){
-      return '<div class="eng-sect"><div class="eng-hd">'+esc(sec[0])+'</div>'+
-        +sec[1].map(function(it){return '<div class="eng-item"><div class="eng-phrase">"'+esc(it.p)+'"</div><div class="eng-tr">'+esc(it.t)+'</div>'+(it.n?'<div class="eng-note">'+esc(it.n)+'</div>':'')+'</div>';}).join('')
-        +'</div>';
+    return [['렌터카',ENG.rentalcar],['호텔',ENG.hotel],['식당',ENG.restaurant],['액티비티',ENG.activity]].map(function(sec){
+      return '<div class="eng-sect"><div class="eng-hd">'+esc(sec[0])+'</div>'+sec[1].map(function(it){return '<div class="eng-item"><div class="eng-phrase">"'+esc(it.p)+'"</div><div class="eng-tr">'+esc(it.t)+'</div>'+(it.n?'<div class="eng-note">'+esc(it.n)+'</div>':'')+'</div>';}).join('')+'</div>';
     }).join('');
   });
   h+=tipSect('cu','\uc785\uad6d\uc2ec\uc0ac & \uc138\uad00 Q&A','\ucd9c\uc785\uad6d \uc2dc \uc608\uc0c1 \uc9c8\ubb38\u00b7\ub2f5\ubcc0',function(){
