@@ -1,5 +1,5 @@
 /* ── 하와이여행 Service Worker ── */
-const CACHE = 'hw26-v5';
+const CACHE = 'hw26-v6';
 
 self.addEventListener('install', e => {
   self.skipWaiting();
