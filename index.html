@@ -239,7 +239,7 @@ const SCHED=[
       {name:"Daylight Mind Coffee",type:"오션뷰 브런치 카페",map:"https://maps.google.com/?q=Daylight+Mind+Coffee+Kona"},
       {name:"Jackie Rey's Ohana Grill",type:"하와이안 아메리칸 다이닝",map:"https://maps.google.com/?q=Jackie+Rey%27s+Ohana+Grill+Kona"},
      ]},
-    {emoji:"🔭",dk:"2026-05-29",date:"5월 29일 금",title:"북부 드라이브 · 마우나케아",weather:{emoji:"🌤",desc:"30°C/22°C · 점차 맑아짐 · 마우나케아 정상 4°C — 방한복 필수"},
+    {emoji:"🔭",dk:"2026-05-29",wnote:"🏔 마우나케아 정상 4°C — 두꺼운 자켓·장갑·비니 필수",date:"5월 29일 금",title:"북부 드라이브 · 마우나케아",weather:{emoji:"🌤",desc:"30°C/22°C · 점차 맑아짐 · 마우나케아 정상 4°C — 방한복 필수"},
      acts:[
       {t:"힐튼 출발"},
       {t:"포케·무스비 픽업 — 케아우호우 KTA 마트 or Umeke's",tran:{dist:"25km",time:"약 28분"},n:"투스텝비치 주변 식당 없음 — 이동 전 반드시 식사 준비",park:"🅿 KTA 마트 무료"},
@@ -261,7 +261,7 @@ const SCHED=[
       {name:"Village Burger Waimea",type:"수제버거 · 현지인 맛집",map:"https://maps.google.com/?q=Village+Burger+Waimea+Hawaii"},
       {name:"Kohala Burger & Burritos",type:"캐주얼 · 가성비",map:"https://maps.google.com/?q=Kohala+Burger+and+Burritos+Hawaii"},
      ]},
-    {emoji:"⚫",dk:"2026-05-30",date:"5월 30일 토",title:"블랙샌드 · 힐로 탐방",weather:{emoji:"⛅",desc:"코나 30°C / 힐로 25°C · 동부 이동 시 소나기 가능 · 자외선 높음"},
+    {emoji:"⚫",dk:"2026-05-30",wnote:"🌧 힐로(동부) 이동 시 소나기 가능 — 우비 챙길 것",date:"5월 30일 토",title:"블랙샌드 · 힐로 탐방",weather:{emoji:"⛅",desc:"코나 30°C / 힐로 25°C · 동부 이동 시 소나기 가능 · 자외선 높음"},
      warn:"⚠️ 옵션 1 (힐로 풀코스): 총 350km · 운전 7시간+. 7:00am 출발 필수. 시간 부족 시 아카카폭포·오네카하카하 생략.\n옵션 2 (자연 피크닉): 블랙샌드 → 사우스포인트 → 그린샌드 → 하푸나 비치 피크닉 → 복귀. 약 240km · 느긋하게.",
      acts:[
       {t:"힐튼 이른 출발 (7:00 권장)"},
@@ -290,7 +290,7 @@ const SCHED=[
       {name:"Two Ladies Kitchen",type:"모찌 · 힐로 명물 디저트",map:"https://maps.google.com/?q=Two+Ladies+Kitchen+Hilo+Hawaii"},
       {name:"Poke to the Maxx",type:"포케볼 · 힐로 맛집",map:"https://maps.google.com/?q=Poke+to+the+Maxx+Hilo+Hawaii"},
      ]},
-    {emoji:"🌋",dk:"2026-05-31",date:"5월 31일 일",title:"하와이 화산국립공원 (하루종일)",weather:{emoji:"🌫",desc:"화산 20–24°C / 코나 30°C · 아침 안개 잦음 — 레이어·우비 필수"},
+    {emoji:"🌋",dk:"2026-05-31",wnote:"🌫 화산 지역 20–24°C · 레이어링·우비 필수",date:"5월 31일 일",title:"하와이 화산국립공원 (하루종일)",weather:{emoji:"🌫",desc:"화산 20–24°C / 코나 30°C · 아침 안개 잦음 — 레이어·우비 필수"},
      acts:[
       {t:"힐튼 이른 출발 (7:00 권장)"},
       {t:"도시락·간식 픽업 — 케아우호우 KTA",tran:{dist:"25km",time:"약 28분"},n:"공원 내 식당 거의 없음 · 물·간식 충분히",park:"🅿 KTA 마트 무료"},
@@ -626,9 +626,24 @@ function fetchWeather(){
     render();
     if(done===2)showToast(true);
   }
-  function fail(e){done++;console.log('날씨 fetch 실패:',e);if(done===2&&Object.keys(LIVE_WX).length===0)showToast(false);}
-  fetch(biUrl).then(function(r){return r.json();}).then(parse).catch(fail);
-  fetch(oaUrl).then(function(r){return r.json();}).then(parse).catch(fail);
+  function fail(e){
+    done++;
+    if(done===2&&Object.keys(LIVE_WX).length===0)showToast(false);
+  }
+  function doXHR(url){
+    var xhr=new XMLHttpRequest();
+    xhr.open('GET',url,true);
+    xhr.onreadystatechange=function(){
+      if(xhr.readyState!==4)return;
+      if(xhr.status===200){
+        try{parse(JSON.parse(xhr.responseText));}catch(e){fail(e);}
+      } else {fail(new Error('HTTP '+xhr.status));}
+    };
+    xhr.onerror=function(){fail(new Error('XHR error'));};
+    xhr.send();
+  }
+  doXHR(biUrl);
+  doXHR(oaUrl);
 }
 
 /* ── hero ── */
@@ -686,7 +701,8 @@ function scheduleHTML(){
       var open=OPEN_DAYS[key]===true; /* 기본 닫힘 */
       var _lw=day.dk&&LIVE_WX[day.dk];
       var _w=_lw||day.weather;
-      var wea=_w?'<div class="dweather">'+_w.emoji+' '+esc(_w.desc)+(_lw?'<span style="font-size:9px;opacity:.5;margin-left:4px">live</span>':'')+'</div>':'';
+      var _note=day.wnote?'<div style="font-size:10px;color:#E8448A;margin-top:2px">'+esc(day.wnote)+'</div>':'';
+      var wea=_w?'<div class="dweather">'+_w.emoji+' '+esc(_w.desc)+(_lw?'<span style="font-size:9px;opacity:.5;margin-left:4px">live</span>':'')+'</div>'+_note:'';
       var body='';
       if(open){
         if(day.warn)body+='<div class="warn">'+esc(day.warn)+'</div>';
@@ -883,6 +899,25 @@ function tipItems(cat,items){
 }
 function tipsHTML(){
   var h='<div class="gap">';
+  h+=tipSect('wx','☀️ 날씨 & 옷차림','5/28–6/5 예보 · 현지 주의사항',function(){
+    var rows=[
+      {t:'빅아일랜드 기온',d:'낙 최고 30°C / 밤 최저 22°C · 자외선 UV 7–9'},
+      {t:'오아후 기온',d:'낙 최고 29–30°C / 밤 최저 22–24°C · 자외선 UV 8–9'},
+      {t:'기본 옷차림',d:'얼은 반소매 + 반바지·원피스 · 새빗 OK'},
+      {t:'실내·저녀 대비',d:'얼은 가디건·후드 필수 (에어콘 강함)'},
+      {t:'한리케아 정상 (5/29)',d:'4°C — 두꺼운 자켓·장갑·비니 필수'},
+      {t:'화산공원 (5/31)',d:'화산 지역 20–24°C · 레이어링+우비 필수'},
+      {t:'다이아모드헤드 (6/4)',d:'이른 아침 등반 권장 · 운동화 필수 · 물 500mL+'},
+      {t:'자외선 차단',d:'SPF 50+ 선크림 필수 · 모자·썬글라스 · 리프세이프만'},
+      {t:'비 대비',d:'5/28 소나기 가능 · 접이식 우산 or 레인재킷 1개'},
+      {t:'스노클링 시',d:'래시가드 권장 · 수영화 있으면 좋음'},
+    ];
+    var out='';
+    rows.forEach(function(r){
+      out+='<div style="display:flex;gap:8px;padding:7px 0;border-bottom:1px dashed #F3F4F6"><div style="font-size:11px;font-weight:700;color:#5BB8D4;min-width:110px;flex-shrink:0">'+esc(r.t)+'</div><div style="font-size:11px;color:#374151;line-height:1.5">'+esc(r.d)+'</div></div>';
+    });
+    return out;
+  });
   h+=tipSect('tr','\uad50\ud1b5 & \ub80c\ud130\uce74','\uc8fc\uc720 \u00b7 \uc18d\ub3c4 \u00b7 \uc8fc\ucc28 \u00b7 TheBus \u00b7 \uc815\uccb4',function(){return tipItems('tr',tr);});
   h+=tipSect('li','\uc0dd\ud65c & \ub9e4\ub108','\ud301 \ubb38\ud654 \u00b7 \uc790\uc5f0 \uc608\uc808 \u00b7 \ud654\uc0b0 \ud604\ud669',function(){return tipItems('li',li);});
   h+=tipSect('sn','\ud83e\udd3f \uc2a4\ub178\ud074\ub9c1 \uac00\uc774\ub4dc','\ub9ac\ud504\ucef7 \u00b7 \ud22c\uc2a4\ud15d \u00b7 \uc0e5\uc2a4\ucf54\ube0c',function(){return tipItems('sn',sn);});
