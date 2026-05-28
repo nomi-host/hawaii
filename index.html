@@ -604,9 +604,8 @@ function _wmoDesc(c,mn,mx,pp){
   return t+' · '+s+(pp>20?' · 강수확률 '+pp+'%':'');
 }
 function fetchWeather(){
-  var base='https://api.open-meteo.com/v1/forecast?daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max,weathercode&timezone=Pacific%2FHonolulu&forecast_days=16';
-  var biUrl=base+'&latitude=19.9241&longitude=-155.8701&start_date=2026-05-28&end_date=2026-05-31';
-  var oaUrl=base+'&latitude=21.2816&longitude=-157.8371&start_date=2026-06-01&end_date=2026-06-05';
+  var biUrl='https://api.open-meteo.com/v1/forecast?daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max,weathercode&timezone=Pacific%2FHonolulu&latitude=19.9241&longitude=-155.8701&start_date=2026-05-28&end_date=2026-05-31';
+  var oaUrl='https://api.open-meteo.com/v1/forecast?daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max,weathercode&timezone=Pacific%2FHonolulu&latitude=21.2816&longitude=-157.8371&start_date=2026-06-01&end_date=2026-06-05';
   var done=0;
   function showToast(ok){
     var t=document.createElement('div');
@@ -627,7 +626,7 @@ function fetchWeather(){
     render();
     if(done===2)showToast(true);
   }
-  function fail(){done++;if(done===2&&Object.keys(LIVE_WX).length===0)showToast(false);}
+  function fail(e){done++;console.log('날씨 fetch 실패:',e);if(done===2&&Object.keys(LIVE_WX).length===0)showToast(false);}
   fetch(biUrl).then(function(r){return r.json();}).then(parse).catch(fail);
   fetch(oaUrl).then(function(r){return r.json();}).then(parse).catch(fail);
 }
