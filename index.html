@@ -322,12 +322,16 @@ const SCHED=[
   {island:"오아후",pillBg:"rgba(212,165,116,0.12)",pillTxt:"#A0724A",days:[
     {emoji:"🏝️",dk:"2026-06-01",date:"6월 1일 월",title:"이동일 · 와이키키 도착",weather:{emoji:"☀️",desc:"코나 30°C → 호놀룰루 29°C · 맑고 쾌청 · 자외선 강함"},
      acts:[
-      {t:"힐튼 체크아웃 (10:00)",n:"⏰ 역산: 탑승 14:06 → 공항 12:05 도착 → 셔틀 30분 → 11:35 렌터카 반납 → 비치 1시간 → 10:30 출발"},
-      {t:"아나에호오말루 비치 (A-Bay) 🐢",tran:{dist:"3km",time:"약 5분"},type:"main",
-       info:"힐튼 바로 옆 · 야자수 그늘·피크닉 테이블 완비 · 거북이 모래사장 낮잠 자주 출몰 · 뭉크씰 가끔 등장 · 힐튼 라군 인근 돌고래 출몰 가능",
-       n:"10:00~11:15 약 1시간 피크닉 · 수영 안해도 야생동물 구경으로 충분 · 공항 방향 남쪽 길목",
+      {t:"힐튼 체크아웃 (10:00)"},
+      {t:"옵션 A — 아나에호오말루 비치 (A-Bay) 🐢 피크닉",tran:{dist:"3km",time:"약 5분"},type:"main",
+       info:"힐튼 바로 옆 · 야자수 그늘·피크닉 테이블 완비 · 거북이 낮잠 자주 출몰 · 뭉크씰 가끔 · 돌고래 출몰 가능",
+       n:"10:00~11:00 피크닉 1시간 → 11:00 출발 → 렌터카 반납 20분 → 11:20 반납 → 셔틀 30분 → 11:50 공항 ✅",
        park:"🅿 Lava Lava Beach Club 앞 무료"},
-      {t:"SIXT 렌터카 반납 (11:35까지)",tran:{dist:"16km",time:"약 20분"},n:"반납 후 공항 셔틀 약 30분 → 12:05 공항 도착"},
+      {t:"옵션 B — 쿠아 베이 (Kua Bay) 🤿 스노클링",tran:{dist:"20km",time:"약 20분"},type:"main",
+       info:"공항 바로 북쪽 7분 거리 · 에메랄드빛 백사장 · 바위 가장자리 산호·열대어·거북이 · 스피너 돌고래 아침 출몰",
+       n:"10:20~11:20 스노클링 1시간 → 샤워·탈의 15분 → 11:35 출발 → 렌터카 반납 7분 → 11:42 반납 → 셔틀 30분 → 12:12 공항 ✅\n샤워·화장실·피크닉 테이블 완비 · 그늘 없음 — 우산 필수 · 게이트 9am~7pm",
+       park:"🅿 무료 (주말 일찍 만차)"},
+      {t:"SIXT 렌터카 반납",n:"A-Bay: 11:20까지 / 쿠아 베이: 11:42까지"},
       {t:"14:06 KOA → HNL (AS 1087)",n:"14:57 도착 · 확인번호 WDLXHU"},
       {t:"알로힐라니 리조트 체크인 · 짐 정리",tran:{dist:"16km",time:"약 40분 (우버)"},n:"💡 렌터카 없는 날 — 도보·우버 이용 · 6/2부터 렌터카 픽업"},
       {t:"칼라카우아 애비뉴 도보 쇼핑 🛍",info:"ABC Store (호텔 내부+거리 곳곳) · International Market Place · Royal Hawaiian Center · DFS T Galleria",n:"💡 Lululemon·ALO·Patagonia는 알라모아나 센터(차로 10분)에 있어 우버 필요 — 6/2 렌터카 이후 들를 것"},
@@ -338,7 +342,7 @@ const SCHED=[
       {name:"Rainbow Drive-In",type:"로컬 플레이트런치 · 현지 명물 · 우버 10분",map:"https://maps.google.com/?q=Rainbow+Drive-In+Honolulu"},
       {name:"Duke's Waikiki",type:"오션뷰 하와이안 씨푸드 · 도보 10분",map:"https://maps.google.com/?q=Duke%27s+Waikiki+Honolulu"},
      ]},
-    {emoji:"🗺️",date:"6월 2일 화 (렌터카 호텔 픽업)",title:"72번 국도 · 남동부 드라이브",weather:{emoji:"☀️",desc:"30°C/23°C · 대체로 맑음 · 무역풍 시원 · 자외선 강함 (UV8)"},
+    {emoji:"🗺️",dk:"2026-06-02",date:"6월 2일 화 (렌터카 호텔 픽업)",title:"72번 국도 · 남동부 드라이브",weather:{emoji:"☀️",desc:"30°C/23°C · 대체로 맑음 · 무역풍 시원 · 자외선 강함 (UV8)"},
      acts:[
       {t:"렌터카 픽업 — 알로힐라니 호텔 (SIXT)",n:"3일간 이용 시작"},
       {t:"라나이 전망대 → 할로나 블로우홀",tran:{dist:"18km",time:"약 25분"},type:"main",info:"라나이: 오아후 남동부 파노라마 · 블로우홀: 해수 분출 용암 구멍",park:"🅿 할로나 전망대 무료"},
@@ -353,7 +357,7 @@ const SCHED=[
       {name:"Kalapawai Market Kailua",type:"샌드위치·커피 · 현지인 카페",map:"https://maps.google.com/?q=Kalapawai+Market+Kailua"},
       {name:"Agnes' Portuguese Bake",type:"로컬 베이커리 · 카일루아",map:"https://maps.google.com/?q=Agnes+Portuguese+Bake+Shop+Kailua"},
      ]},
-    {emoji:"🌊",date:"6월 3일 수 (렌터카)",title:"83번 국도 · 노스쇼어 & 쿠알로아랜치",weather:{emoji:"☀️",desc:"29°C/23°C · 맑음 · 스노클링 최적 · 자외선 매우 강함 (UV9)"},
+    {emoji:"🌊",dk:"2026-06-03",date:"6월 3일 수 (렌터카)",title:"83번 국도 · 노스쇼어 & 쿠알로아랜치",weather:{emoji:"☀️",desc:"29°C/23°C · 맑음 · 스노클링 최적 · 자외선 매우 강함 (UV9)"},
      warn:"⏱ 타이밍: 쿠알로아 8:00am 투어 → 노스쇼어. 권장: 6:30 출발 → 쿠알로아 7:30 체크인 → 8:00am 랩터 (90분) → 라니아케아(거북이) → 할레이와·Matsumoto → 샤크스코브 스노클링 → 와이메아 → 선셋비치 → 돌 파인애플(복귀길)",
      acts:[
       {t:"알로힐라니 출발 (6:30am)"},
@@ -372,7 +376,7 @@ const SCHED=[
       {name:"Matsumoto Shave Ice",type:"빙수 원조 · 줄 필수",map:"https://maps.google.com/?q=Matsumoto+Shave+Ice+Haleiwa"},
       {name:"Ted's Bakery",type:"바나나 브레드·파이 · 노스쇼어 명물",map:"https://maps.google.com/?q=Ted%27s+Bakery+Sunset+Beach+Hawaii"},
      ]},
-    {emoji:"💎",date:"6월 4일 목 (렌터카 호텔 반납)",title:"다이아몬드헤드 & 와이키키 쇼핑",weather:{emoji:"☀️",desc:"29°C/24°C · 맑고 화창 · 다이아헤드 트레킹 이른 아침 권장"},
+    {emoji:"💎",dk:"2026-06-04",date:"6월 4일 목 (렌터카 호텔 반납)",title:"다이아몬드헤드 & 와이키키 쇼핑",weather:{emoji:"☀️",desc:"29°C/24°C · 맑고 화창 · 다이아헤드 트레킹 이른 아침 권장"},
      acts:[
       {t:"다이아몬드헤드 트레일 ✅ 6:00–7:00am",tran:{dist:"4km",time:"약 10분"},type:"main",info:"18만 년 전 화산 분화구 · 정상 360° 와이키키 파노라마",n:"✅ 예약완료 $11.27/인 · 왕복 3km · 1.5h · 일출 직후 가장 선선",park:"🅿 공원 내 무료 (예약 포함)"},
       {t:"호놀룰루 미술관",tran:{dist:"6km",time:"약 12분"},type:"main",info:"1927년 개관 · 하와이 최대 미술관 · 현대미술·동양미술",n:"입장료 $20/인 · 월요일 휴관",park:"🅿 미술관 옆 무료"},
@@ -630,9 +634,18 @@ function _wmoDesc(c,mn,mx,pp){
   return t+' · '+s+(pp>20?' · 강수확률 '+pp+'%':'');
 }
 function fetchWeather(){
-  var biUrl='https://api.open-meteo.com/v1/forecast?daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max,weathercode&timezone=Pacific%2FHonolulu&latitude=19.9241&longitude=-155.8701&start_date=2026-05-28&end_date=2026-05-31';
-  var oaUrl='https://api.open-meteo.com/v1/forecast?daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max,weathercode&timezone=Pacific%2FHonolulu&latitude=21.2816&longitude=-157.8371&start_date=2026-06-01&end_date=2026-06-05';
-  var done=0;
+  var days=[
+    {dk:'2026-05-28',lat:19.7388,lon:-156.0456},
+    {dk:'2026-05-29',lat:19.4239,lon:-155.9069},
+    {dk:'2026-05-30',lat:18.9117,lon:-155.6830},
+    {dk:'2026-05-31',lat:19.4313,lon:-155.2571},
+    {dk:'2026-06-01',lat:21.2816,lon:-157.8371},
+    {dk:'2026-06-02',lat:21.3927,lon:-157.7401},
+    {dk:'2026-06-03',lat:21.5955,lon:-158.1040},
+    {dk:'2026-06-04',lat:21.2793,lon:-157.8293},
+    {dk:'2026-06-05',lat:21.3245,lon:-157.9251},
+  ];
+  var total=days.length,done=0,anyOk=false;
   function showToast(ok){
     var t=document.createElement('div');
     t.style.cssText='position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:'+(ok?'#5BB8D4':'#9CA3AF')+';color:#fff;padding:8px 18px;border-radius:99px;font-size:12px;font-weight:700;z-index:9999;box-shadow:0 4px 12px rgba(0,0,0,.15);pointer-events:none';
@@ -640,36 +653,32 @@ function fetchWeather(){
     document.body.appendChild(t);
     setTimeout(function(){t.remove();},2500);
   }
-  function parse(data){
-    data.daily.time.forEach(function(dk,i){
-      LIVE_WX[dk]={
-        emoji:_wmoEmoji(data.daily.weathercode[i]),
-        desc:_wmoDesc(data.daily.weathercode[i],data.daily.temperature_2m_min[i],data.daily.temperature_2m_max[i],data.daily.precipitation_probability_max[i]),
-        live:true
-      };
-    });
-    done++;
-    render();
-    if(done===2)showToast(true);
-  }
-  function fail(e){
-    done++;
-    if(done===2&&Object.keys(LIVE_WX).length===0)showToast(false);
-  }
-  function doXHR(url){
+  days.forEach(function(d){
+    var url='https://api.open-meteo.com/v1/forecast?daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max,weathercode&timezone=Pacific%2FHonolulu&latitude='+d.lat+'&longitude='+d.lon+'&start_date='+d.dk+'&end_date='+d.dk;
     var xhr=new XMLHttpRequest();
     xhr.open('GET',url,true);
     xhr.onreadystatechange=function(){
       if(xhr.readyState!==4)return;
+      done++;
       if(xhr.status===200){
-        try{parse(JSON.parse(xhr.responseText));}catch(e){fail(e);}
-      } else {fail(new Error('HTTP '+xhr.status));}
+        try{
+          var data=JSON.parse(xhr.responseText);
+          if(data.daily&&data.daily.time&&data.daily.time.length){
+            LIVE_WX[d.dk]={
+              emoji:_wmoEmoji(data.daily.weathercode[0]),
+              desc:_wmoDesc(data.daily.weathercode[0],data.daily.temperature_2m_min[0],data.daily.temperature_2m_max[0],data.daily.precipitation_probability_max[0]),
+              live:true
+            };
+            anyOk=true;
+          }
+        }catch(e){}
+      }
+      render();
+      if(done===total)showToast(anyOk);
     };
-    xhr.onerror=function(){fail(new Error('XHR error'));};
+    xhr.onerror=function(){done++;if(done===total&&!anyOk)showToast(false);};
     xhr.send();
-  }
-  doXHR(biUrl);
-  doXHR(oaUrl);
+  });
 }
 
 /* ── hero ── */
