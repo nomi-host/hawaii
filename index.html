@@ -322,7 +322,7 @@ const SCHED=[
   {island:"오아후",pillBg:"rgba(212,165,116,0.12)",pillTxt:"#A0724A",days:[
     {emoji:"🏝️",dk:"2026-06-01",date:"6월 1일 월",title:"이동일 · 와이키키 도착",weather:{emoji:"☀️",desc:"코나 30°C → 호놀룰루 29°C · 맑고 쾌청 · 자외선 강함"},
      acts:[
-      {t:"힐튼 체크아웃 (10:00)"},
+      {t:"힐튼 체크아웃 (10:00)",n:"⚠ 14:06 KOA 비행 → 12:30까지 공항 도착 필수 · 짐 챙긴 채 이동"},
       {t:"옵션 A — 아나에호오말루 비치 (A-Bay) 🐢 피크닉",tran:{dist:"3km",time:"약 5분"},type:"main",
        info:"힐튼 바로 옆 · 야자수 그늘·피크닉 테이블 완비 · 거북이 낮잠 자주 출몰 · 뭉크씰 가끔 · 돌고래 출몰 가능",
        n:"10:00~11:00 피크닉 1시간 → 11:00 출발 → 렌터카 반납 20분 → 11:20 반납 → 셔틀 30분 → 11:50 공항 ✅",
@@ -346,11 +346,12 @@ const SCHED=[
      wnote:"☀️ 자외선 UV8 강함 — SPF50+ 선크림 필수 · 마카푸 트레일 이른 아침 권장 · 래니카이 비치 물놀이 준비",
      acts:[
       {t:"렌터카 픽업 — 알로힐라니 호텔 (SIXT)",n:"3일간 이용 시작"},
-      {t:"라나이 전망대 → 할로나 블로우홀",tran:{dist:"18km",time:"약 25분"},type:"main",info:"라나이: 오아후 남동부 파노라마 · 블로우홀: 해수 분출 용암 구멍",park:"🅿 할로나 전망대 무료"},
-      {t:"샌디 비치 → 마카푸 등대 트레일",tran:{dist:"4km",time:"약 7분"},type:"main",info:"마카푸: 오아후 동남단 절경 · 고래 시즌 전망",n:"왕복 3.5km · 약 1시간",park:"🅿 마카푸 비치 무료"},
-      {t:"벨로우즈 필드 → 래니카이 → 카일루아 비치",tran:{dist:"8km",time:"약 12분"},type:"main",info:"래니카이: 투명도 최고 · 카일루아: 카약 명소",park:"🅿 카일루아 비치 공원 무료"},
-      {t:"호오말루히아 식물원",tran:{dist:"5km",time:"약 10분"},info:"코올라우 산맥 배경 무료 식물원",park:"🅿 식물원 내 무료"},
-      {t:"탄탈루스 전망대 선셋",tran:{dist:"25km",time:"약 35분"},type:"main",info:"와이키키·호놀룰루 야경 명소",park:"🅿 전망대 앞 소규모 무료"},
+      {t:"마우나루아 베이 (Portlock) 스노클링 🤿",tran:{dist:"13km",time:"약 20분"},type:"main",info:"현지인 즐겨찾는 로컬 스팟 · 수심 8–10m → Portlock Reef 12–18m · 이글레이·거북이·리프 상어",n:"할로나 직전 ·  장비 지참 필수 · 수상 조건 좋은 날만 권장 · 입수: Hawaii Kai 드라이브 해안"},
+      {t:"라나이 전망대 → 할로나 블로우홀",tran:{dist:"5km",time:"약 10분"},type:"main",info:"라나이: 오아후 남동부 파노라마 · 블로우홀: 해수 분출 용암 구멍",park:"🅿 할로나 전망대 무료"},
+      {t:"샌디 비치 → 마카푸 등대 트레일",tran:{dist:"4km",time:"약 10분"},type:"main",info:"마카푸: 오아후 동남단 절경 · 고래 시즌 전망",n:"왕복 3.5km · 약 1시간",park:"🅿 마카푸 비치 무료"},
+      {t:"래니카이 → 카일루아 비치",tran:{dist:"8km",time:"약 20분"},type:"main",info:"래니카이: 투명도 최고 · 카일루아: 카약 명소",park:"🅿 카일루아 비치 공원 무료"},
+      {t:"호오말루히아 식물원",tran:{dist:"5km",time:"약 15분"},info:"코올라우 산맥 배경 무료 식물원",park:"🅿 식물원 내 무료"},
+      {t:"탄탈루스 전망대 선셋",n:"⚠ 카일루아→탄탈루스 약 35km · 저녁 교통 감안 1시간 이상 · 선셋 1시간 전 출발 필수",tran:{dist:"25km",time:"약 35분"},type:"main",info:"와이키키·호놀룰루 야경 명소",park:"🅿 전망대 앞 소규모 무료"},
       {t:"알로힐라니 복귀",tran:{dist:"10km",time:"약 20분"},type:"ret"},
      ],
      rests:[
@@ -364,14 +365,14 @@ const SCHED=[
      acts:[
       {t:"알로힐라니 출발 (6:30am)"},
       {t:"쿠알로아 랜치 — 7:30am 체크인",tran:{dist:"40km",time:"약 45분"},type:"main",info:"쥬라기 공원 촬영지 · 계곡·바다 파노라마",n:"7:30am 체크인 → 8:00am 투어 시작",park:"🅿 구내 무료"},
-      {t:"🦖 쿠알로아 랜치 랩터 체험 (8:00am, 약 90분)",type:"main",n:"klook 예약 확인 · 7:30am까지 체크인"},
-      {t:"라니아케아 비치 — 야생 거북이",tran:{dist:"30km",time:"약 30분"},type:"main",info:"오전~정오 거북이 낮잠 · 자원봉사자 상주",park:"🅿 도로변 갓길 무료"},
-      {t:"Matsumoto Shave Ice & 할레이와 타운",tran:{dist:"3km",time:"약 5분"},info:"빙수 원조 · 70년 역사 노포 · 기념품 쇼핑",park:"🅿 할레이와 타운 무료"},
-      {t:"샤크스코브 스노클링 (2시간)",tran:{dist:"5km",time:"약 8분"},type:"main",info:"오아후 북부 최고 스노클링 · 열대어·바다거북 풍부",n:"⚠ 여름 파도 잔잔 최적 · 화장실·샤워실 있음 · 수심 3–9m 중급",park:"🅿 Pupukea Beach Park 무료"},
-      {t:"와이메아 베이 (Waimea Bay)",tran:{dist:"3km",time:"약 5분"},info:"노스쇼어 대표 파도 명소 · 여름 잔잔할 때 수영 가능",park:"🅿 베이 앞 무료"},
-      {t:"선셋 비치 파크",tran:{dist:"8km",time:"약 12분"},info:"세계적 서핑 대회 개최지 · 사진 명소",park:"🅿 비치 앞 갓길 무료"},
-      {t:"🛍 돌 파인애플 플랜테이션 (복귀길 H2)",tran:{dist:"28km",time:"약 30분"},type:"shop",info:"파인애플 아이스크림·기념품",park:"🅿 플랜테이션 내 무료"},
-      {t:"알로힐라니 복귀 (H1 경유)",tran:{dist:"40km",time:"약 40분"},type:"ret"},
+      {t:"🦖 쿠알로아 랜치 랩터 체험 (8:00am, 2시간)",type:"main",n:"klook 예약 확인 · 7:30am까지 체크인 · 10:00am 완료"},
+      {t:"샤크스코브 스노클링 & 프리다이빙 (2시간) 🌊",tran:{dist:"33km",time:"약 35분"},type:"main",info:"오아후 최고 스노클링 · 열대어·바다거북 · 용암 동굴·블루룸",n:"10:35 도착 → 10:40 입수 → 12:40 완료 · 코브 내 2–5m / 외부 7–13m",park:"🅿 Pupukea Beach Park 무료 · 화장실·샤워실 완비"},
+      {t:"와이메아 베이 (Waimea Bay)",tran:{dist:"3km",time:"약 5분"},info:"노스쇼어 대표 파도 명소 · 여름 잔잔할 때 수영 가능",n:"12:45 도착 · 20–30분",park:"🅿 베이 앞 무료"},
+      {t:"선셋 비치 파크 (드라이브스루)",tran:{dist:"5km",time:"약 8분"},info:"세계적 서핑 대회 개최지 · 노스쇼어 절경 · 사진만",n:"13:15 도착 · 10–15분만 — 할레이와로 돌아가야 역방향, 사진 후 바로 이동",park:"🅿 갓길 무료"},
+      {t:"라니아케아 비치 — 야생 거북이",tran:{dist:"28km",time:"약 32분"},type:"main",info:"정오~오후 거북이 낮잠 · 자원봉사자 상주",n:"13:55 도착 · 20–30분",park:"🅿 도로변 갓길 무료"},
+      {t:"Matsumoto Shave Ice & 할레이와 타운",tran:{dist:"3km",time:"약 5분"},info:"빙수 원조 · 70년 역사 노포 · 기념품 쇼핑",n:"14:25 도착 · 30–45분",park:"🅿 할레이와 타운 무료"},
+      {t:"🛍 돌 파인애플 플랜테이션 (복귀길 H-2)",tran:{dist:"15km",time:"약 20분"},type:"shop",info:"파인애플 아이스크림·기념품",n:"15:10 도착",park:"🅿 플랜테이션 내 무료"},
+      {t:"알로힐라니 복귀 (H-2→H-1)",tran:{dist:"45km",time:"약 55분"},type:"ret",n:"16:05 도착 예상"},
      ],
      rests:[
       {name:"Giovanni's Shrimp Truck",type:"새우트럭 원조 · 노스쇼어 명물",map:"https://maps.google.com/?q=Giovanni%27s+Shrimp+Truck+Haleiwa"},
@@ -481,7 +482,9 @@ const TIPS_L=[
 const TIPS_SNORKEL=[
   {id:2,ico:"🌀",txt:"해류(Rip Current · 리프 컷): 리프 컷(Reef Cut)은 빠른 해류 구간. 끌려가면 해안과 평행하게 수영 후 빠져나올 것. 흰 거품 없는 틈새 구간은 특히 주의."},
   {id:7,ico:"⚠️",txt:"투스텝비치(빅아일랜드): 바위 계단에서 직접 입수. 파도 강할 때 금지. 샤워실 없음. 편의시설 없어 식음료 필수 지참."},
-  {id:8,ico:"⚠️",txt:"샤크스코브(오아후): 여름(5–9월) 파도 잔잔 최적. 화장실·샤워실 있음(Pupukea Beach Park). 수심 3–9m 중급 이상."},
+  {id:8,ico:"🤿",txt:"샤크스코브(오아후): 여름(5–9월) 파도 잔잔 최적. 수심: 코브 내부 2–5m · 코브 입구 최대 6m · 외부 7–9m · 최대 13m. 코브 내부는 시야 보통, 외부로 나갈수록 시야 개선. 화장실·샤워실 있음(Pupukea Beach Park)."},
+  {id:10,ico:"🌊",txt:"마우나루아 베이 · 포틀록 리프 (오아후 6/2 동선): 와이키키 동남쪽 20분 · 할로나 블로우홀 바로 전 · 현지인 로컬 스팟. 얕은 리프(2–3m)에서 Portlock Reef(12–18m) 드롭오프까지. 거북이·이글레이·리프상어. 해안 직접 입수 가능(수상 조건 좋은 날만). 화장실 O · 샤워실 제한적. 장비 지참 필수."},
+  {id:9,ico:"🌊",txt:"샥스코브 프리다이빙: 코브 북서쪽 끝에 용암 동굴 있음 — 'Blue Room'(블루룸) 포함. 외부 리프 20–25m 수심에 암벽·동굴·터널. 코브 오른쪽 '두 번째 손가락' 방향으로 수영 후 벽을 따라 이동. 조류는 코브 외부에서 발생 가능 — 서지(Surge) 주의. 암벽에 성게(Sea urchin) 있으니 수영화 필수."},
 ];
 const ENG={
   rentalcar:[
@@ -636,6 +639,28 @@ function _wmoDesc(c,mn,mx,pp){
   else s='뇌우';
   return t+' · '+s+(pp>20?' · 강수확률 '+pp+'%':'');
 }
+function _autoWnote(day,lw){
+  var notes=[];
+  var code=lw._code||0;
+  var pp=lw._pp||0;
+  var tmax=lw._tmax||30;
+  var rain=lw._rain||0;
+  /* 강수 — 확률+강수량 함께 판단 */
+  if(pp>=70||rain>=5)notes.push('🌧 비 예보 (강수확률 '+pp+'%·'+rain.toFixed(1)+'mm) — 우비·우산 필수');
+  else if(pp>=40||rain>=2)notes.push('🌦 소나기 가능 ('+pp+'%·'+rain.toFixed(1)+'mm) — 우산 챙기기');
+  /* 기온 */
+  if(tmax>=32)notes.push('🥵 최고 '+tmax+'°C — 물 충분히·그늘 휴식');
+  else if(tmax<=22)notes.push('🧥 최고 '+tmax+'°C — 가디건·레이어링 권장');
+  /* 자외선: 맑고 강수 낮을 때만 */
+  if(pp<40&&rain<2&&(code<=3||code===0))notes.push('☀️ 맑음 — SPF50+ 선크림 필수');
+  /* 날짜별 액티비티 고정 주의사항 */
+  if(day.dk==='2026-05-29')notes.push('🏔 마우나케아 정상 4°C — 두꺼운 자켓·장갑·비니 필수');
+  if(day.dk==='2026-05-30')notes.push('💨 사우스포인트 바람 강함 — 바람막이 필수');
+  if(day.dk==='2026-05-31')notes.push('🌫 화산공원 레이어링·우비 필수 · 마스크 권장');
+  if(day.dk==='2026-06-03')notes.push('🤿 스노클링 래시가드 · 쿠알로아 운동화·긴바지 권장');
+  if(day.dk==='2026-06-04')notes.push('🥾 다이아몬드헤드 6am — 운동화·물·모자 필수');
+  return notes.join(' · ');
+}
 function fetchWeather(){
   var days=[
     {dk:'2026-05-28',lat:19.7388,lon:-156.0456},
@@ -657,7 +682,7 @@ function fetchWeather(){
     setTimeout(function(){t.remove();},2500);
   }
   days.forEach(function(d){
-    var url='https://api.open-meteo.com/v1/forecast?daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max,weathercode&timezone=Pacific%2FHonolulu&latitude='+d.lat+'&longitude='+d.lon+'&start_date='+d.dk+'&end_date='+d.dk;
+    var url='https://api.open-meteo.com/v1/forecast?daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max,precipitation_sum,weathercode&timezone=Pacific%2FHonolulu&latitude='+d.lat+'&longitude='+d.lon+'&start_date='+d.dk+'&end_date='+d.dk;
     var xhr=new XMLHttpRequest();
     xhr.open('GET',url,true);
     xhr.onreadystatechange=function(){
@@ -670,6 +695,10 @@ function fetchWeather(){
             LIVE_WX[d.dk]={
               emoji:_wmoEmoji(data.daily.weathercode[0]),
               desc:_wmoDesc(data.daily.weathercode[0],data.daily.temperature_2m_min[0],data.daily.temperature_2m_max[0],data.daily.precipitation_probability_max[0]),
+              _code:data.daily.weathercode[0],
+              _pp:data.daily.precipitation_probability_max[0],
+              _tmax:data.daily.temperature_2m_max[0],
+              _rain:data.daily.precipitation_sum?data.daily.precipitation_sum[0]:0,
               live:true
             };
             anyOk=true;
@@ -739,7 +768,8 @@ function scheduleHTML(){
       var open=OPEN_DAYS[key]===true; /* 기본 닫힘 */
       var _lw=day.dk&&LIVE_WX[day.dk];
       var _w=_lw||day.weather;
-      var _note=day.wnote?'<div style="font-size:10px;color:#E8448A;margin-top:2px">'+esc(day.wnote)+'</div>':'';
+      var _noteStr=_lw?_autoWnote(day,_lw):day.wnote;
+      var _note=_noteStr?'<div style="font-size:10px;color:#E8448A;margin-top:2px">'+esc(_noteStr)+'</div>':'';
       var wea=_w?'<div class="dweather">'+_w.emoji+' '+esc(_w.desc)+(_lw?'<span style="font-size:9px;opacity:.5;margin-left:4px">live</span>':'')+'</div>'+_note:'';
       var body='';
       if(open){
